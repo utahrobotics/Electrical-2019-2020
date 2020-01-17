@@ -307,7 +307,9 @@ Wire Wire Line
 Wire Wire Line
 	6600 4400 6000 4400
 Wire Wire Line
-	5700 4400 4800 4400
+	5700 4400 4700 4400
+Wire Wire Line
+	4700 4400 4700 4300
 Wire Wire Line
 	4700 3400 5300 3400
 Wire Wire Line
@@ -800,8 +802,4 @@ F 3 "" H 5700 2300 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	6500 5300 8200 5300
-Wire Wire Line
-	4800 4300 4800 4400
-Wire Wire Line
-	4700 4300 4800 4300
 $EndSCHEMATC
