@@ -1,0 +1,7 @@
+# KiCAD backup files
+**/*-bak
+**/*-cache.*
+# emacs backup files
+**/*~
+# other backup files
+**/*.bak

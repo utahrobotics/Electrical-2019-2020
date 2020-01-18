@@ -1,0 +1,11 @@
+PDB,,,,,Power Distribution Board
+Pin,Name,Side,Type,Style,
+1,19VBUCK,right,out,,
+2,12VBUCK,right,out,,
+3,5VBUCK,right,out,,
+4,OUT4,right,out,,
+5,OUT3,right,out,,
+6,OUT2,right,out,,
+7,OUT1,right,out,,
+8,VBAT,right,in,,
+9,GND,right,in,,

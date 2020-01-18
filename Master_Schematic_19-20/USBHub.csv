@@ -1,0 +1,12 @@
+USBHub,,,,,USB Hub
+Pin,Name,Side,Type,Style,
+1,USB1,right,io,,
+2,USB2,right,io,,
+3,USB3,right,io,,
+4,USB4,right,io,,
+5,USB5,right,io,,
+6,USB6,right,io,,
+7,USB7,right,io,,
+8,USB8,right,io,,
+9,USB9,right,io,,
+10,USB10,right,io,,
