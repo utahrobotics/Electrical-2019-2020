@@ -196,17 +196,6 @@ F 6 "Y" H 3950 1000 50  0001 C CNN "Spice_Netlist_Enabled"
 	0    1    1    0   
 $EndComp
 $Comp
-L MCU_Module:Arduino_Nano_v3.x A1
-U 1 1 5E1E7F79
-P 1750 5800
-F 0 "A1" H 1750 4711 50  0000 C CNN
-F 1 "Arduino_Nano_v3.x" H 1750 4620 50  0000 C CNN
-F 2 "Module:Arduino_Nano" H 1750 5800 50  0001 C CIN
-F 3 "http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf" H 1750 5800 50  0001 C CNN
-	1    1750 5800
-	1    0    0    -1  
-$EndComp
-$Comp
 L Master_Schematic_19-20:BB U3
 U 1 1 5E247EAB
 P 6600 2050
@@ -568,4 +557,248 @@ F21 "B-" I R 7450 9100 50
 F22 "RX0" B L 6250 8400 50 
 F23 "TX0" B L 6250 8500 50 
 $EndSheet
+$Comp
+L Motor:Motor_DC M2
+U 1 1 5E27DD06
+P 8250 9700
+F 0 "M2" H 8092 9604 50  0000 R CNN
+F 1 "Phidgets_3273" H 8092 9695 50  0000 R CNN
+F 2 "" H 8250 9610 50  0001 C CNN
+F 3 "~" H 8250 9610 50  0001 C CNN
+	1    8250 9700
+	-1   0    0    1   
+$EndComp
+$Comp
+L Motor:Motor_DC M1
+U 1 1 5E27D3D0
+P 8250 8400
+F 0 "M1" H 8408 8396 50  0000 L CNN
+F 1 "Maxon_353295" H 8408 8305 50  0000 L CNN
+F 2 "" H 8250 8310 50  0001 C CNN
+F 3 "~" H 8250 8310 50  0001 C CNN
+	1    8250 8400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8250 9400 8250 9300
+Wire Wire Line
+	8250 9300 7450 9300
+Wire Wire Line
+	7450 8800 8250 8800
+Wire Wire Line
+	8250 8800 8250 8700
+Wire Wire Line
+	7450 8700 8050 8700
+Wire Wire Line
+	8050 8700 8050 8100
+Wire Wire Line
+	8050 8100 8250 8100
+Wire Wire Line
+	8250 8100 8250 8200
+Wire Wire Line
+	8250 9900 8250 10000
+Wire Wire Line
+	8250 10000 8050 10000
+Wire Wire Line
+	8050 10000 8050 9400
+Wire Wire Line
+	8050 9400 7450 9400
+$Comp
+L MCU_Module:Arduino_Nano_v3.x A1
+U 1 1 5E1E7F79
+P 4100 9100
+F 0 "A1" H 4100 7950 50  0000 C CNN
+F 1 "Arduino_Nano_v3.x" H 4100 7850 50  0000 C CNN
+F 2 "Module:Arduino_Nano" H 4100 9100 50  0001 C CIN
+F 3 "http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf" H 4100 9100 50  0001 C CNN
+	1    4100 9100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4100 10100 4100 10150
+Wire Wire Line
+	4100 10150 4150 10150
+Wire Wire Line
+	4200 10150 4200 10100
+$Comp
+L pspice:0 #GND?
+U 1 1 5E29567D
+P 4150 10200
+F 0 "#GND?" H 4150 10100 50  0001 C CNN
+F 1 "0" H 4150 10100 50  0000 C CNN
+F 2 "" H 4150 10200 50  0001 C CNN
+F 3 "~" H 4150 10200 50  0001 C CNN
+	1    4150 10200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4150 10200 4150 10150
+Connection ~ 4150 10150
+Wire Wire Line
+	4150 10150 4200 10150
+$Comp
+L pspice:0 #GND?
+U 1 1 5E29BBBC
+P 6150 8750
+F 0 "#GND?" H 6150 8650 50  0001 C CNN
+F 1 "0" H 6150 8850 50  0000 C CNN
+F 2 "" H 6150 8750 50  0001 C CNN
+F 3 "~" H 6150 8750 50  0001 C CNN
+	1    6150 8750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6150 8700 6150 8750
+Wire Wire Line
+	6150 8700 6250 8700
+Wire Wire Line
+	4300 8100 4300 8050
+Wire Wire Line
+	4300 8050 6100 8050
+Wire Wire Line
+	6100 8050 6100 8600
+Wire Wire Line
+	6100 8600 6250 8600
+Wire Wire Line
+	7650 2150 7650 2200
+Wire Wire Line
+	7600 2150 7650 2150
+$Comp
+L pspice:0 #GND?
+U 1 1 5E2A82DC
+P 7650 2200
+F 0 "#GND?" H 7650 2100 50  0001 C CNN
+F 1 "0" H 7650 2289 50  0000 C CNN
+F 2 "" H 7650 2200 50  0001 C CNN
+F 3 "~" H 7650 2200 50  0001 C CNN
+	1    7650 2200
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	7650 1550 7650 1600
+Wire Wire Line
+	7600 1550 7650 1550
+$Comp
+L pspice:0 #GND?
+U 1 1 5E2A9846
+P 7650 1600
+F 0 "#GND?" H 7650 1500 50  0001 C CNN
+F 1 "0" H 7650 1689 50  0000 C CNN
+F 2 "" H 7650 1600 50  0001 C CNN
+F 3 "~" H 7650 1600 50  0001 C CNN
+	1    7650 1600
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	7650 950  7650 1000
+Wire Wire Line
+	7600 950  7650 950 
+$Comp
+L pspice:0 #GND?
+U 1 1 5E2AAE22
+P 7650 1000
+F 0 "#GND?" H 7650 900 50  0001 C CNN
+F 1 "0" H 7650 1089 50  0000 C CNN
+F 2 "" H 7650 1000 50  0001 C CNN
+F 3 "~" H 7650 1000 50  0001 C CNN
+	1    7650 1000
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	7600 2050 7750 2050
+Wire Wire Line
+	7600 1450 7750 1450
+Wire Wire Line
+	7600 850  7750 850 
+Text Label 7750 850  0    50   ~ 0
+19V
+Text Label 7750 1450 0    50   ~ 0
+12V
+Text Label 7750 2050 0    50   ~ 0
+5V
+Wire Wire Line
+	4000 8100 4000 8000
+Text Label 4000 8000 0    50   ~ 0
+12V
+$Comp
+L pspice:0 #GND?
+U 1 1 5E2B3B9E
+P 7550 9150
+F 0 "#GND?" H 7550 9050 50  0001 C CNN
+F 1 "0" H 7550 9250 50  0000 C CNN
+F 2 "" H 7550 9150 50  0001 C CNN
+F 3 "~" H 7550 9150 50  0001 C CNN
+	1    7550 9150
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	7550 9100 7550 9150
+Wire Wire Line
+	7550 9100 7450 9100
+Wire Wire Line
+	5150 1700 5300 1700
+Text Label 5300 1700 0    50   ~ 0
+RCB+
+Wire Wire Line
+	7450 9000 7550 9000
+Text Label 7550 8950 0    50   ~ 0
+RCB+
+NoConn ~ 6150 8400
+NoConn ~ 6150 8500
+NoConn ~ 6150 8900
+NoConn ~ 6150 9000
+NoConn ~ 6150 9150
+NoConn ~ 6150 9250
+NoConn ~ 6150 9600
+NoConn ~ 6150 9700
+NoConn ~ 6150 9800
+NoConn ~ 7550 9800
+NoConn ~ 7550 9700
+NoConn ~ 7550 8400
+Wire Wire Line
+	7550 9800 7450 9800
+Wire Wire Line
+	7550 9700 7450 9700
+Wire Wire Line
+	6150 9800 6250 9800
+Wire Wire Line
+	6150 9700 6250 9700
+Wire Wire Line
+	6150 9600 6250 9600
+Wire Wire Line
+	6150 9250 6250 9250
+Wire Wire Line
+	6150 9150 6250 9150
+Wire Wire Line
+	6150 9000 6250 9000
+Wire Wire Line
+	6150 8900 6250 8900
+Wire Wire Line
+	6150 8500 6250 8500
+Wire Wire Line
+	6150 8400 6250 8400
+Wire Wire Line
+	7550 9000 7550 8950
+Wire Wire Line
+	3300 7900 6000 7900
+Wire Wire Line
+	6000 7900 6000 9400
+Wire Wire Line
+	6000 9400 6250 9400
+Wire Wire Line
+	6250 9500 5900 9500
+Wire Wire Line
+	5900 9500 5900 7800
+Wire Wire Line
+	5900 7800 3200 7800
+Wire Wire Line
+	3300 7900 3300 8700
+Wire Wire Line
+	3200 7800 3200 8800
+Wire Wire Line
+	3300 8700 3600 8700
+Wire Wire Line
+	3200 8800 3600 8800
+Wire Wire Line
+	7550 8400 7450 8400
 $EndSCHEMATC
