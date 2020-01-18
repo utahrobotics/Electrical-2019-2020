@@ -1,0 +1,15 @@
+.subckt BB5V 1 2 3 4
+* vin gnd vout gnd
+VOUT 3 4 5V
+.ends BB5V
+
+.subckt BB12V 1 2 3 4
+* vin gnd vout gnd
+VOUT 3 4 12V
+.ends BB12V
+
+.subckt BB19V 1 2 3 4
+* vin gnd vout gnd
+VOUT 3 4 19V
+.ends BB19V
+
