@@ -564,7 +564,7 @@ P 8250 9700
 F 0 "M2" H 8092 9604 50  0000 R CNN
 F 1 "Phidgets_3273" H 8092 9695 50  0000 R CNN
 F 2 "" H 8250 9610 50  0001 C CNN
-F 3 "~" H 8250 9610 50  0001 C CNN
+F 3 "https://www.phidgets.com/?tier=3&catid=19&pcid=16&prodid=1129" H 8250 9610 50  0001 C CNN
 	1    8250 9700
 	-1   0    0    1   
 $EndComp
@@ -575,7 +575,7 @@ P 8250 8400
 F 0 "M1" H 8408 8396 50  0000 L CNN
 F 1 "Maxon_353295" H 8408 8305 50  0000 L CNN
 F 2 "" H 8250 8310 50  0001 C CNN
-F 3 "~" H 8250 8310 50  0001 C CNN
+F 3 "https://www.maxongroup.com/maxon/view/product/motor/dcmotor/re/re65/353295" H 8250 8310 50  0001 C CNN
 	1    8250 8400
 	1    0    0    -1  
 $EndComp
@@ -604,39 +604,6 @@ Wire Wire Line
 Wire Wire Line
 	8050 9400 7450 9400
 $Comp
-L MCU_Module:Arduino_Nano_v3.x A1
-U 1 1 5E1E7F79
-P 4100 9100
-F 0 "A1" H 4100 7950 50  0000 C CNN
-F 1 "Arduino_Nano_v3.x" H 4100 7850 50  0000 C CNN
-F 2 "Module:Arduino_Nano" H 4100 9100 50  0001 C CIN
-F 3 "http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf" H 4100 9100 50  0001 C CNN
-	1    4100 9100
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4100 10100 4100 10150
-Wire Wire Line
-	4100 10150 4150 10150
-Wire Wire Line
-	4200 10150 4200 10100
-$Comp
-L pspice:0 #GND?
-U 1 1 5E29567D
-P 4150 10200
-F 0 "#GND?" H 4150 10100 50  0001 C CNN
-F 1 "0" H 4150 10100 50  0000 C CNN
-F 2 "" H 4150 10200 50  0001 C CNN
-F 3 "~" H 4150 10200 50  0001 C CNN
-	1    4150 10200
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4150 10200 4150 10150
-Connection ~ 4150 10150
-Wire Wire Line
-	4150 10150 4200 10150
-$Comp
 L pspice:0 #GND?
 U 1 1 5E29BBBC
 P 6150 8750
@@ -651,14 +618,6 @@ Wire Wire Line
 	6150 8700 6150 8750
 Wire Wire Line
 	6150 8700 6250 8700
-Wire Wire Line
-	4300 8100 4300 8050
-Wire Wire Line
-	4300 8050 6100 8050
-Wire Wire Line
-	6100 8050 6100 8600
-Wire Wire Line
-	6100 8600 6250 8600
 Wire Wire Line
 	7650 2150 7650 2200
 Wire Wire Line
@@ -716,10 +675,6 @@ Text Label 7750 1450 0    50   ~ 0
 12V
 Text Label 7750 2050 0    50   ~ 0
 5V
-Wire Wire Line
-	4000 8100 4000 8000
-Text Label 4000 8000 0    50   ~ 0
-12V
 $Comp
 L pspice:0 #GND?
 U 1 1 5E2B3B9E
@@ -780,25 +735,318 @@ Wire Wire Line
 Wire Wire Line
 	7550 9000 7550 8950
 Wire Wire Line
-	3300 7900 6000 7900
-Wire Wire Line
-	6000 7900 6000 9400
-Wire Wire Line
-	6000 9400 6250 9400
-Wire Wire Line
-	6250 9500 5900 9500
-Wire Wire Line
-	5900 9500 5900 7800
-Wire Wire Line
-	5900 7800 3200 7800
-Wire Wire Line
-	3300 7900 3300 8700
-Wire Wire Line
-	3200 7800 3200 8800
-Wire Wire Line
-	3300 8700 3600 8700
-Wire Wire Line
-	3200 8800 3600 8800
-Wire Wire Line
 	7550 8400 7450 8400
+$Comp
+L pspice:0 #GND?
+U 1 1 5E3433AF
+P 13450 9400
+F 0 "#GND?" H 13450 9300 50  0001 C CNN
+F 1 "0" H 13450 9489 50  0000 C CNN
+F 2 "" H 13450 9400 50  0001 C CNN
+F 3 "~" H 13450 9400 50  0001 C CNN
+	1    13450 9400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	13550 9350 13450 9350
+Wire Wire Line
+	13450 9350 13450 9400
+Wire Wire Line
+	14750 10250 14850 10250
+Wire Wire Line
+	14750 10150 14850 10150
+Wire Wire Line
+	14750 10050 14850 10050
+Wire Wire Line
+	14750 9950 14850 9950
+Wire Wire Line
+	13550 10150 13450 10150
+NoConn ~ 13450 10150
+NoConn ~ 14850 10250
+NoConn ~ 14850 10150
+NoConn ~ 14850 10050
+NoConn ~ 14850 9950
+Wire Wire Line
+	13550 9150 13450 9150
+NoConn ~ 13450 9150
+Wire Wire Line
+	5150 1600 5300 1600
+Text Label 5300 1600 0    50   ~ 0
+STEPVIN
+Wire Wire Line
+	14750 9150 14850 9150
+Text Label 14850 9150 0    50   ~ 0
+STEPVIN
+Text Label 4000 8000 0    50   ~ 0
+12V
+Wire Wire Line
+	4000 8100 4000 8000
+Wire Wire Line
+	4150 10150 4200 10150
+Connection ~ 4150 10150
+Wire Wire Line
+	4150 10200 4150 10150
+$Comp
+L pspice:0 #GND?
+U 1 1 5E29567D
+P 4150 10200
+F 0 "#GND?" H 4150 10100 50  0001 C CNN
+F 1 "0" H 4150 10100 50  0000 C CNN
+F 2 "" H 4150 10200 50  0001 C CNN
+F 3 "~" H 4150 10200 50  0001 C CNN
+	1    4150 10200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4200 10150 4200 10100
+Wire Wire Line
+	4100 10150 4150 10150
+Wire Wire Line
+	4100 10100 4100 10150
+$Comp
+L MCU_Module:Arduino_Nano_v3.x A1
+U 1 1 5E1E7F79
+P 4100 9100
+F 0 "A1" H 4100 7950 50  0000 C CNN
+F 1 "Arduino_Nano_v3.x" H 4100 7850 50  0000 C CNN
+F 2 "Module:Arduino_Nano" H 4100 9100 50  0001 C CIN
+F 3 "http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf" H 4100 9100 50  0001 C CNN
+	1    4100 9100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Motor:Stepper_Motor_bipolar MS1
+U 1 1 5E3870C7
+P 15450 9850
+F 0 "MS1" H 15638 9974 50  0000 L CNN
+F 1 "Stepper_Motor_bipolar" H 15638 9883 50  0000 L CNN
+F 2 "" H 15460 9840 50  0001 C CNN
+F 3 "https://www.amazon.com/Planetary-Gearbox-Stepper-Motor-Router/dp/B00WAUZ1WU" H 15460 9840 50  0001 C CNN
+	1    15450 9850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	14750 9350 15550 9350
+Wire Wire Line
+	15550 9350 15550 9550
+Wire Wire Line
+	15350 9550 15350 9450
+Wire Wire Line
+	15350 9450 14750 9450
+Wire Wire Line
+	15150 9750 15050 9750
+Wire Wire Line
+	15050 9750 15050 9550
+Wire Wire Line
+	15050 9550 14750 9550
+Wire Wire Line
+	14750 9650 14950 9650
+Wire Wire Line
+	14950 9650 14950 9950
+Wire Wire Line
+	14950 9950 15150 9950
+$Comp
+L pspice:0 #GND?
+U 1 1 5E3D1091
+P 17200 9400
+F 0 "#GND?" H 17200 9300 50  0001 C CNN
+F 1 "0" H 17200 9489 50  0000 C CNN
+F 2 "" H 17200 9400 50  0001 C CNN
+F 3 "~" H 17200 9400 50  0001 C CNN
+	1    17200 9400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	17300 9350 17200 9350
+Wire Wire Line
+	17200 9350 17200 9400
+Wire Wire Line
+	18500 10250 18600 10250
+Wire Wire Line
+	18500 10150 18600 10150
+Wire Wire Line
+	18500 10050 18600 10050
+Wire Wire Line
+	18500 9950 18600 9950
+Wire Wire Line
+	17300 10150 17200 10150
+NoConn ~ 17200 10150
+NoConn ~ 18600 10250
+NoConn ~ 18600 10150
+NoConn ~ 18600 10050
+NoConn ~ 18600 9950
+Wire Wire Line
+	17300 9150 17200 9150
+NoConn ~ 17200 9150
+Wire Wire Line
+	18500 9150 18600 9150
+Text Label 18600 9150 0    50   ~ 0
+STEPVIN
+$Comp
+L Motor:Stepper_Motor_bipolar MS2
+U 1 1 5E3D10A7
+P 19200 9850
+F 0 "MS2" H 19388 9974 50  0000 L CNN
+F 1 "Stepper_Motor_bipolar" H 19388 9883 50  0000 L CNN
+F 2 "" H 19210 9840 50  0001 C CNN
+F 3 "https://www.amazon.com/Planetary-Gearbox-Stepper-Motor-Router/dp/B00WAUZ1WU" H 19210 9840 50  0001 C CNN
+	1    19200 9850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	18500 9350 19300 9350
+Wire Wire Line
+	19300 9350 19300 9550
+Wire Wire Line
+	19100 9550 19100 9450
+Wire Wire Line
+	19100 9450 18500 9450
+Wire Wire Line
+	18900 9750 18800 9750
+Wire Wire Line
+	18800 9750 18800 9550
+Wire Wire Line
+	18800 9550 18500 9550
+Wire Wire Line
+	18500 9650 18700 9650
+Wire Wire Line
+	18700 9650 18700 9950
+Wire Wire Line
+	18700 9950 18900 9950
+$Comp
+L pspice:0 #GND?
+U 1 1 5E3D65F5
+P 13450 12850
+F 0 "#GND?" H 13450 12750 50  0001 C CNN
+F 1 "0" H 13450 12939 50  0000 C CNN
+F 2 "" H 13450 12850 50  0001 C CNN
+F 3 "~" H 13450 12850 50  0001 C CNN
+	1    13450 12850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	13550 12800 13450 12800
+Wire Wire Line
+	13450 12800 13450 12850
+Wire Wire Line
+	14750 13700 14850 13700
+Wire Wire Line
+	14750 13600 14850 13600
+Wire Wire Line
+	14750 13500 14850 13500
+Wire Wire Line
+	14750 13400 14850 13400
+Wire Wire Line
+	13550 13600 13450 13600
+NoConn ~ 13450 13600
+NoConn ~ 14850 13700
+NoConn ~ 14850 13600
+NoConn ~ 14850 13500
+NoConn ~ 14850 13400
+Wire Wire Line
+	13550 12600 13450 12600
+NoConn ~ 13450 12600
+Wire Wire Line
+	14750 12600 14850 12600
+Text Label 14850 12600 0    50   ~ 0
+STEPVIN
+$Comp
+L Motor:Stepper_Motor_bipolar MS3
+U 1 1 5E3D660B
+P 15450 13300
+F 0 "MS3" H 15638 13424 50  0000 L CNN
+F 1 "Stepper_Motor_bipolar" H 15638 13333 50  0000 L CNN
+F 2 "" H 15460 13290 50  0001 C CNN
+F 3 "https://www.amazon.com/Planetary-Gearbox-Stepper-Motor-Router/dp/B00WAUZ1WU" H 15460 13290 50  0001 C CNN
+	1    15450 13300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	14750 12800 15550 12800
+Wire Wire Line
+	15550 12800 15550 13000
+Wire Wire Line
+	15350 13000 15350 12900
+Wire Wire Line
+	15350 12900 14750 12900
+Wire Wire Line
+	15150 13200 15050 13200
+Wire Wire Line
+	15050 13200 15050 13000
+Wire Wire Line
+	15050 13000 14750 13000
+Wire Wire Line
+	14750 13100 14950 13100
+Wire Wire Line
+	14950 13100 14950 13400
+Wire Wire Line
+	14950 13400 15150 13400
+$Comp
+L pspice:0 #GND?
+U 1 1 5E3DCC75
+P 17200 12800
+F 0 "#GND?" H 17200 12700 50  0001 C CNN
+F 1 "0" H 17200 12889 50  0000 C CNN
+F 2 "" H 17200 12800 50  0001 C CNN
+F 3 "~" H 17200 12800 50  0001 C CNN
+	1    17200 12800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	17300 12750 17200 12750
+Wire Wire Line
+	17200 12750 17200 12800
+Wire Wire Line
+	18500 13650 18600 13650
+Wire Wire Line
+	18500 13550 18600 13550
+Wire Wire Line
+	18500 13450 18600 13450
+Wire Wire Line
+	18500 13350 18600 13350
+Wire Wire Line
+	17300 13550 17200 13550
+NoConn ~ 17200 13550
+NoConn ~ 18600 13650
+NoConn ~ 18600 13550
+NoConn ~ 18600 13450
+NoConn ~ 18600 13350
+Wire Wire Line
+	17300 12550 17200 12550
+NoConn ~ 17200 12550
+Wire Wire Line
+	18500 12550 18600 12550
+Text Label 18600 12550 0    50   ~ 0
+STEPVIN
+$Comp
+L Motor:Stepper_Motor_bipolar MS4
+U 1 1 5E3DCC8B
+P 19200 13250
+F 0 "MS4" H 19388 13374 50  0000 L CNN
+F 1 "Stepper_Motor_bipolar" H 19388 13283 50  0000 L CNN
+F 2 "" H 19210 13240 50  0001 C CNN
+F 3 "https://www.amazon.com/Planetary-Gearbox-Stepper-Motor-Router/dp/B00WAUZ1WU" H 19210 13240 50  0001 C CNN
+	1    19200 13250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	18500 12750 19300 12750
+Wire Wire Line
+	19300 12750 19300 12950
+Wire Wire Line
+	19100 12950 19100 12850
+Wire Wire Line
+	19100 12850 18500 12850
+Wire Wire Line
+	18900 13150 18800 13150
+Wire Wire Line
+	18800 13150 18800 12950
+Wire Wire Line
+	18800 12950 18500 12950
+Wire Wire Line
+	18500 13050 18700 13050
+Wire Wire Line
+	18700 13050 18700 13350
+Wire Wire Line
+	18700 13350 18900 13350
 $EndSCHEMATC
