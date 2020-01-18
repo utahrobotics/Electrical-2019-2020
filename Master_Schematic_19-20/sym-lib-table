@@ -1,4 +1,5 @@
 (sym_lib_table
   (lib (name Master_Schematic_19-20)(type Legacy)(uri ${KIPRJMOD}/Master_Schematic_19-20.lib)(options "")(descr ""))
   (lib (name PowerNode2)(type Legacy)(uri "${KIPRJMOD}/../PowerNode/Power Node V2.0/PowerNode2.lib")(options "")(descr ""))
+  (lib (name agg-kicad)(type Legacy)(uri ${KIPRJMOD}/../agg-kicad/agg-kicad.lib)(options "")(descr ""))
 )
