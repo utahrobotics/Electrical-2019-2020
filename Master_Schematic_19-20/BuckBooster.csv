@@ -1,0 +1,14 @@
+BB,,,,,Buck Booster
+Pin,Name,Side,Type,Style,Unit
+1,VIN,left,in,,5V
+2,GND,left,in,,5V
+3,5V,right,out,,5V
+4,GND,right,out,,5V
+1,VIN,left,in,,12V
+2,GND,left,in,,12V
+3,12V,right,out,,12V
+4,GND,right,out,,12V
+1,VIN,left,in,,19V
+2,GND,left,in,,19V
+3,19V,right,out,,19V
+4,GND,right,out,,19V
