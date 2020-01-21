@@ -370,7 +370,7 @@ Wire Wire Line
 	5400 6300 5600 6300
 Connection ~ 5600 6300
 $Comp
-L PowerNode2-eagle-import:ATTINY84ATTINY84-20PU U$1
+L PowerNode2:ATTINY84ATTINY84-20PU U$1
 U 1 1 BABD3B23
 P 3700 3700
 F 0 "U$1" H 2900 4430 59  0000 L BNN
@@ -381,7 +381,7 @@ F 3 "" H 3700 3700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:C5_3 C1
+L PowerNode2:C5_3 C1
 U 1 1 DB2CE5A6
 P 6900 5900
 F 0 "C1" H 6960 5915 59  0000 L BNN
@@ -392,7 +392,7 @@ F 3 "" H 6900 5900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:C5_3 C2
+L PowerNode2:C5_3 C2
 U 1 1 B94C3227
 P 1300 2800
 F 0 "C2" H 1360 2815 59  0000 L BNN
@@ -403,7 +403,7 @@ F 3 "" H 1300 2800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:WIREPAD1,6_0,9 VCC1
+L PowerNode2:WIREPAD1,6_0,9 VCC1
 U 1 1 D0DD1D8E
 P 800 2700
 F 0 "VCC1" H 755 2773 59  0000 L BNN
@@ -414,7 +414,7 @@ F 3 "" H 800 2700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:WIREPAD1,6_0,9 GND3
+L PowerNode2:WIREPAD1,6_0,9 GND3
 U 1 1 8E097FD0
 P 800 3000
 F 0 "GND3" H 755 3073 59  0000 L BNN
@@ -425,7 +425,7 @@ F 3 "" H 800 3000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:WIREPAD1,6_0,9 SDA1
+L PowerNode2:WIREPAD1,6_0,9 SDA1
 U 1 1 943CED1C
 P 5100 3700
 F 0 "SDA1" H 5055 3773 59  0000 L BNN
@@ -436,7 +436,7 @@ F 3 "" H 5100 3700 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:WIREPAD1,6_0,9 SCL1
+L PowerNode2:WIREPAD1,6_0,9 SCL1
 U 1 1 252148C1
 P 5100 3900
 F 0 "SCL1" H 5055 3973 59  0000 L BNN
@@ -447,7 +447,7 @@ F 3 "" H 5100 3900 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:R-US_0411_15 R1
+L PowerNode2:R-US_0411_15 R1
 U 1 1 6C31DF7B
 P 3400 2500
 F 0 "R1" H 3250 2559 59  0000 L BNN
@@ -458,7 +458,7 @@ F 3 "" H 3400 2500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:R-US_0411_15 R2
+L PowerNode2:R-US_0411_15 R2
 U 1 1 00509794
 P 4100 2500
 F 0 "R2" H 3950 2559 59  0000 L BNN
@@ -469,7 +469,7 @@ F 3 "" H 4100 2500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:WIREPAD4,16O1,6 VHIIN1
+L PowerNode2:WIREPAD4,16O1,6 VHIIN1
 U 1 1 3ABF0FC0
 P 6300 2500
 F 0 "VHIIN1" H 6255 2573 59  0000 L BNN
@@ -480,7 +480,7 @@ F 3 "" H 6300 2500 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:TRIM_US-B25P R3
+L PowerNode2:TRIM_US-B25P R3
 U 1 1 9D3B2993
 P 6300 3800
 F 0 "R3" V 6100 3700 59  0000 L BNN
@@ -491,7 +491,7 @@ F 3 "" H 6300 3800 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:WIREPAD4,16O1,6 GNDHIIN1
+L PowerNode2:WIREPAD4,16O1,6 GNDHIIN1
 U 1 1 9FE8900C
 P 1400 4300
 F 0 "GNDHIIN1" H 1355 4373 59  0000 L BNN
@@ -502,7 +502,7 @@ F 3 "" H 1400 4300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:S4301B LED1
+L PowerNode2:S4301B LED1
 U 1 1 D5D4A691
 P 9600 3400
 F 0 "LED1" H 9400 3775 59  0000 L BNN
@@ -513,7 +513,7 @@ F 3 "" H 9600 3400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:S4301B LED2
+L PowerNode2:S4301B LED2
 U 1 1 6A31474D
 P 9600 4500
 F 0 "LED2" H 9400 4875 59  0000 L BNN
@@ -524,7 +524,7 @@ F 3 "" H 9600 4500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:7449N IC2
+L PowerNode2:7449N IC2
 U 1 1 541775CA
 P 8700 3400
 F 0 "IC2" H 8400 3825 59  0000 L BNN
@@ -535,7 +535,7 @@ F 3 "" H 8700 3400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:7449N IC3
+L PowerNode2:7449N IC3
 U 1 1 5ED25CA7
 P 8700 4500
 F 0 "IC3" H 8400 4925 59  0000 L BNN
@@ -546,7 +546,7 @@ F 3 "" H 8700 4500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:7449N IC2
+L PowerNode2:7449N IC2
 U 2 1 541775C6
 P 1700 1700
 F 0 "IC2" H 1675 1675 59  0000 L BNN
@@ -557,7 +557,7 @@ F 3 "" H 1700 1700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:7449N IC3
+L PowerNode2:7449N IC3
 U 2 1 5ED25CAB
 P 2200 1700
 F 0 "IC3" H 2175 1675 59  0000 L BNN
@@ -568,7 +568,7 @@ F 3 "" H 2200 1700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:ACS712-LC IC4
+L PowerNode2:ACS712-LC IC4
 U 1 1 46657C43
 P 5700 5600
 F 0 "IC4" H 5800 6050 59  0000 L BNN
@@ -579,7 +579,7 @@ F 3 "" H 5700 5600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:74595N IC5
+L PowerNode2:74595N IC5
 U 1 1 E57833A7
 P 7200 3600
 F 0 "IC5" H 7000 4125 59  0000 L BNN
@@ -590,7 +590,7 @@ F 3 "" H 7200 3600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:C5_3 C3
+L PowerNode2:C5_3 C3
 U 1 1 DAA3AADF
 P 5900 4400
 F 0 "C3" H 5960 4415 59  0000 L BNN
@@ -601,7 +601,7 @@ F 3 "" H 5900 4400 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:74595N IC5
+L PowerNode2:74595N IC5
 U 2 1 E57833AB
 P 2700 1700
 F 0 "IC5" H 2675 1675 59  0000 L BNN
@@ -612,7 +612,7 @@ F 3 "" H 2700 1700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:LED5MM PWRLED1
+L PowerNode2:LED5MM PWRLED1
 U 1 1 EEAA4052
 P 2200 3000
 F 0 "PWRLED1" V 2340 2820 59  0000 L BNN
@@ -623,7 +623,7 @@ F 3 "" H 2200 3000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:R-US_0411_15 R4
+L PowerNode2:R-US_0411_15 R4
 U 1 1 F98F597E
 P 2200 3500
 F 0 "R4" H 2050 3559 59  0000 L BNN
@@ -634,7 +634,7 @@ F 3 "" H 2200 3500 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:EAGLE-TOP-15MM #LOGO1
+L PowerNode2:EAGLE-TOP-15MM #LOGO1
 U 1 1 8712EDD9
 P 1200 5600
 F 0 "#LOGO1" H 1200 5600 50  0001 C CNN
@@ -645,7 +645,7 @@ F 3 "" H 1200 5600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:TL32PO S1
+L PowerNode2:TL32PO S1
 U 1 1 CEBFFD5E
 P 6800 2200
 F 0 "S1" V 7000 2100 59  0000 L BNN
@@ -656,7 +656,7 @@ F 3 "" H 6800 2200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:LED5MM CURR1
+L PowerNode2:LED5MM CURR1
 U 1 1 46B498CE
 P 8400 2200
 F 0 "CURR1" V 8540 2020 59  0000 L BNN
@@ -667,7 +667,7 @@ F 3 "" H 8400 2200 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:R-US_0411_15 R5
+L PowerNode2:R-US_0411_15 R5
 U 1 1 6637B0E6
 P 8900 2200
 F 0 "R5" H 8750 2259 59  0000 L BNN
@@ -678,7 +678,7 @@ F 3 "" H 8900 2200 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:LED5MM VOLT1
+L PowerNode2:LED5MM VOLT1
 U 1 1 24952B63
 P 8400 2600
 F 0 "VOLT1" V 8540 2420 59  0000 L BNN
@@ -689,7 +689,7 @@ F 3 "" H 8400 2600 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:R-US_0411_15 R6
+L PowerNode2:R-US_0411_15 R6
 U 1 1 F7B4B2BB
 P 8900 2600
 F 0 "R6" H 8750 2659 59  0000 L BNN
@@ -700,7 +700,7 @@ F 3 "" H 8900 2600 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:741G04DBV IC6
+L PowerNode2:741G04DBV IC6
 U 1 1 6A4BA564
 P 7800 2200
 F 0 "IC6" H 7900 2325 59  0000 L BNN
@@ -711,7 +711,7 @@ F 3 "" H 7800 2200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:741G04DBV IC6
+L PowerNode2:741G04DBV IC6
 U 2 1 6A4BA568
 P 1400 1700
 F 0 "IC6" H 1375 1675 59  0000 L BNN
@@ -722,7 +722,7 @@ F 3 "" H 1400 1700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:2,54_0,9 PB2
+L PowerNode2:2,54_0,9 PB2
 U 1 1 F1E52EE7
 P 5000 3200
 F 0 "PB2" H 4955 3273 59  0000 L BNN
@@ -733,7 +733,7 @@ F 3 "" H 5000 3200 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:2,54_0,9 QH*1
+L PowerNode2:2,54_0,9 QH*1
 U 1 1 2C9469AA
 P 7600 4500
 F 0 "QH*1" H 7555 4573 59  0000 L BNN
@@ -744,7 +744,7 @@ F 3 "" H 7600 4500 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:2,54_0,9 DP1
+L PowerNode2:2,54_0,9 DP1
 U 1 1 2762D014
 P 11100 4200
 F 0 "DP1" H 11055 4273 59  0000 L BNN
@@ -755,7 +755,7 @@ F 3 "" H 11100 4200 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:2,15_1,0 GND1
+L PowerNode2:2,15_1,0 GND1
 U 1 1 DB8695AC
 P 1500 3200
 F 0 "GND1" H 1455 3273 59  0000 L BNN
@@ -766,7 +766,7 @@ F 3 "" H 1500 3200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:2,15_1,0 GND2
+L PowerNode2:2,15_1,0 GND2
 U 1 1 13A376EC
 P 1500 3400
 F 0 "GND2" H 1455 3473 59  0000 L BNN
@@ -777,7 +777,7 @@ F 3 "" H 1500 3400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PowerNode2-eagle-import:WIREPAD4,16O1,6 GNDHIOUT1
+L PowerNode2:WIREPAD4,16O1,6 GNDHIOUT1
 U 1 1 16E6194B
 P 5600 6700
 F 0 "GNDHIOUT1" H 5555 6773 59  0000 L BNN
@@ -788,7 +788,7 @@ F 3 "" H 5600 6700 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L PowerNode2-eagle-import:WIREPAD4,16O1,6 VHIOUT1
+L PowerNode2:WIREPAD4,16O1,6 VHIOUT1
 U 1 1 8575F09C
 P 5700 2300
 F 0 "VHIOUT1" H 5655 2373 59  0000 L BNN
