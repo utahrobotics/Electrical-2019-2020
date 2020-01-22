@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 6 9
+Sheet 3 9
 Title ""
 Date ""
 Rev ""
@@ -254,10 +254,10 @@ Wire Wire Line
 	8000 3800 8400 3800
 Wire Wire Line
 	8000 4000 8400 4000
-Wire Bus Line
-	5100 2350 5500 2350
 Text HLabel 8400 4000 2    50   BiDi ~ 0
 SWD
 Text HLabel 8400 3800 2    50   BiDi ~ 0
 SWC
+Wire Bus Line
+	5100 2350 5500 2350
 $EndSCHEMATC
