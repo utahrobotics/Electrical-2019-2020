@@ -1,5 +1,39 @@
-EESchema Schematic File Version 4
-EELAYER 30 0
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:switches
+LIBS:relays
+LIBS:motors
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:NG_IMU_Components
+LIBS:NG_IMU_Interface_Board-cache
+EELAYER 25 0
 EELAYER END
 $Descr USLetter 11000 8500
 encoding utf-8
@@ -16,7 +50,7 @@ $EndDescr
 Text Label 2960 2370 2    60   ~ 0
 +12V
 $Comp
-L Connector_Generic:Conn_01x02 J2
+L Conn_01x02 J2
 U 1 1 5AC98297
 P 3240 2370
 F 0 "J2" H 3240 2470 50  0000 C CNN
@@ -27,7 +61,7 @@ F 3 "" H 3240 2370 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:Varistor RV1
+L Varistor RV1
 U 1 1 5AC9833D
 P 4400 2440
 F 0 "RV1" V 4525 2440 50  0000 C CNN
@@ -38,7 +72,7 @@ F 3 "" H 4400 2440 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Device:L L1
+L L L1
 U 1 1 5AC983F3
 P 4810 2290
 F 0 "L1" V 4760 2290 50  0000 C CNN
@@ -49,7 +83,7 @@ F 3 "" H 4810 2290 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Device:D_Schottky D2
+L D_Schottky D2
 U 1 1 5AC98473
 P 5110 2440
 F 0 "D2" H 5110 2540 50  0000 C CNN
@@ -60,7 +94,7 @@ F 3 "" H 5110 2440 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Device:CP1 C2
+L CP1 C2
 U 1 1 5AC984C4
 P 5390 2440
 F 0 "C2" H 5415 2540 50  0000 L CNN
@@ -71,7 +105,7 @@ F 3 "" H 5390 2440 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C C3
+L C C3
 U 1 1 5AC984E3
 P 5660 2440
 F 0 "C3" H 5685 2540 50  0000 L CNN
@@ -82,7 +116,7 @@ F 3 "" H 5660 2440 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:EMI_Filter_LL FL1
+L EMI_Filter_LL FL1
 U 1 1 5AC985C4
 P 6140 2440
 F 0 "FL1" H 6140 2615 50  0000 C CNN
@@ -93,7 +127,7 @@ F 3 "" V 6140 2480 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C1
+L C_Small C1
 U 1 1 5AC986B6
 P 6660 2190
 F 0 "C1" H 6480 2190 50  0000 L CNN
@@ -104,7 +138,7 @@ F 3 "" H 6660 2190 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C4
+L C_Small C4
 U 1 1 5AC986E5
 P 6660 2450
 F 0 "C4" H 6480 2450 50  0000 L CNN
@@ -115,7 +149,7 @@ F 3 "" H 6660 2450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C5
+L C_Small C5
 U 1 1 5AC98710
 P 6660 2720
 F 0 "C5" H 6480 2720 50  0000 L CNN
@@ -126,7 +160,7 @@ F 3 "" H 6660 2720 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L NG_IMU_Interface_Board-rescue:PYB30-Q24-T515 U1
+L PYB30-Q24-T515 U1
 U 1 1 5AC98BBC
 P 7680 2450
 F 0 "U1" H 7680 2050 60  0000 C CNN
@@ -147,7 +181,7 @@ Text Label 8180 2550 0    60   ~ 0
 Text Label 8180 2700 0    60   ~ 0
 -15V
 $Comp
-L Connector_Generic:Conn_02x12_Top_Bottom J5
+L Conn_02x12_Top_Bottom J5
 U 1 1 5AC9990D
 P 3120 4560
 F 0 "J5" H 3170 5160 50  0000 C CNN
@@ -185,7 +219,7 @@ Text Label 2820 4160 2    60   ~ 0
 +15V
 NoConn ~ 2820 4060
 $Comp
-L NG_IMU_Interface_Board-rescue:MAX3280EAUK+T U2
+L MAX3280EAUK+T U2
 U 1 1 5AC9A058
 P 5730 4190
 F 0 "U2" H 5730 3940 60  0000 C CNN
@@ -196,7 +230,7 @@ F 3 "" H 5730 4190 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Device:R R2
+L R R2
 U 1 1 5AC9A1E6
 P 5050 4180
 F 0 "R2" V 5130 4180 50  0000 C CNN
@@ -215,7 +249,7 @@ Text Label 6080 4340 0    60   ~ 0
 Text Label 6080 4190 0    60   ~ 0
 0V
 $Comp
-L NG_IMU_Interface_Board-rescue:MAX3280EAUK+T U3
+L MAX3280EAUK+T U3
 U 1 1 5AC9A72D
 P 5740 4910
 F 0 "U3" H 5740 4660 60  0000 C CNN
@@ -226,7 +260,7 @@ F 3 "" H 5740 4910 60  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Device:R R3
+L R R3
 U 1 1 5AC9A733
 P 5060 4900
 F 0 "R3" V 5140 4900 50  0000 C CNN
@@ -245,7 +279,7 @@ Text Label 6090 5060 0    60   ~ 0
 Text Label 6090 4910 0    60   ~ 0
 0V
 $Comp
-L Connector_Generic:Conn_01x03 J4
+L Conn_01x03 J4
 U 1 1 5AC9ADA5
 P 7570 4520
 F 0 "J4" H 7570 4720 50  0000 C CNN
@@ -258,7 +292,7 @@ $EndComp
 Text Label 7370 4520 2    60   ~ 0
 0V
 $Comp
-L Connector_Generic:Conn_01x10 J3
+L Conn_01x10 J3
 U 1 1 5ACAADC2
 P 9320 4400
 F 0 "J3" H 9320 4900 50  0000 C CNN
@@ -309,7 +343,7 @@ M1
 Text Label 9120 4900 2    60   ~ 0
 M2
 $Comp
-L Connector_Generic:Conn_01x04 J1
+L Conn_01x04 J1
 U 1 1 5ACABB9D
 P 9530 2340
 F 0 "J1" H 9530 2540 50  0000 C CNN
@@ -330,7 +364,7 @@ IMU Connector
 Text Notes 9700 3800 2    79   ~ 0
 Misc. Breakout
 $Comp
-L Device:LED D1
+L LED D1
 U 1 1 5ACAC203
 P 9160 1320
 F 0 "D1" H 9160 1420 50  0000 C CNN
@@ -341,7 +375,7 @@ F 3 "" H 9160 1320 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Device:R R1
+L R R1
 U 1 1 5ACAC33C
 P 8810 1320
 F 0 "R1" V 8890 1320 50  0000 C CNN
@@ -358,7 +392,7 @@ Text Label 9440 1320 0    79   ~ 0
 Text Notes 9420 1110 2    59   ~ 0
 Power Indicator
 $Comp
-L Connector:TestPoint_Alt TP1
+L TEST TP1
 U 1 1 5ACACD28
 P 1960 6670
 F 0 "TP1" H 1960 6970 50  0000 C BNN
@@ -369,7 +403,7 @@ F 3 "" H 1960 6670 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:TestPoint_Alt TP2
+L TEST TP2
 U 1 1 5ACACE9F
 P 2340 6670
 F 0 "TP2" H 2340 6970 50  0000 C BNN
@@ -384,7 +418,7 @@ Data+
 Text Label 2340 6670 0    59   ~ 0
 Data-
 $Comp
-L Connector:TestPoint_Alt TP4
+L TEST TP4
 U 1 1 5ACAD038
 P 1970 7070
 F 0 "TP4" H 1970 7370 50  0000 C BNN
@@ -397,7 +431,7 @@ $EndComp
 Text Label 1970 7070 0    59   ~ 0
 CLK+
 $Comp
-L Connector:TestPoint_Alt TP6
+L TEST TP6
 U 1 1 5ACAD0E2
 P 2340 7080
 F 0 "TP6" H 2340 7380 50  0000 C BNN
@@ -410,7 +444,7 @@ $EndComp
 Text Label 2340 7080 0    59   ~ 0
 CLK-
 $Comp
-L Connector:TestPoint_Alt TP3
+L TEST TP3
 U 1 1 5ACAD3A6
 P 2850 6670
 F 0 "TP3" H 2850 6970 50  0000 C BNN
@@ -421,7 +455,7 @@ F 3 "" H 2850 6670 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:TestPoint_Alt TP5
+L TEST TP5
 U 1 1 5ACAD4AD
 P 2840 7070
 F 0 "TP5" H 2840 7370 50  0000 C BNN
@@ -433,6 +467,8 @@ F 3 "" H 2840 7070 50  0001 C CNN
 $EndComp
 Text Label 2850 6670 0    59   ~ 0
 Data_clean
+Text Label 2840 7070 0    59   ~ 0
+CLK_clean
 Text Label 6200 4040 0    59   ~ 0
 Data_clean
 Text Label 6210 4760 0    59   ~ 0
@@ -443,10 +479,12 @@ Text Notes 4780 3710 0    118  ~ 0
 Differential Pair to Single Ended
 Text Notes 2890 6070 2    118  ~ 0
 Test Points
+Text Label 2870 2470 2    59   ~ 0
+gnd
 Text Label 3990 2590 2    59   ~ 0
 gnd
 $Comp
-L NG_IMU_Interface_Board-rescue:GS2 J6
+L GS2 J6
 U 1 1 5ACFC618
 P 6150 2100
 F 0 "J6" H 6250 2250 50  0000 C CNN
@@ -457,7 +495,7 @@ F 3 "" H 6150 2100 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L NG_IMU_Interface_Board-rescue:GS2 J7
+L GS2 J7
 U 1 1 5ACFCB42
 P 6160 2800
 F 0 "J7" H 6260 2950 50  0000 C CNN
@@ -472,26 +510,26 @@ Wire Wire Line
 Wire Wire Line
 	2870 2470 3040 2470
 Wire Wire Line
-	4100 2290 4400 2290
+	4100 2290 4660 2290
 Wire Wire Line
-	4960 2290 5110 2290
+	4960 2290 5950 2290
 Connection ~ 5110 2290
 Connection ~ 5390 2290
 Wire Wire Line
 	5940 2290 5940 2340
 Connection ~ 5660 2290
 Wire Wire Line
-	6340 2340 6395 2340
+	6340 2340 7180 2340
 Wire Wire Line
-	6660 2290 6660 2340
+	6660 2290 6660 2350
 Connection ~ 6660 2340
 Wire Wire Line
-	6340 2540 6360 2540
+	6340 2540 6660 2540
 Wire Wire Line
-	6660 2540 6660 2550
+	6660 2540 6660 2620
 Connection ~ 6660 2550
 Wire Wire Line
-	3990 2590 4400 2590
+	3990 2590 5940 2590
 Wire Wire Line
 	5940 2590 5940 2540
 Connection ~ 5660 2590
@@ -518,23 +556,23 @@ Wire Wire Line
 Wire Wire Line
 	8570 3110 8570 2550
 Wire Wire Line
-	8180 2550 8570 2550
+	8180 2550 8930 2550
 Wire Wire Line
-	4780 4030 5050 4030
+	4780 4030 5380 4030
 Wire Wire Line
 	5380 4030 5380 4090
 Wire Wire Line
-	4800 4330 5050 4330
+	4800 4330 5380 4330
 Wire Wire Line
 	5380 4330 5380 4290
 Connection ~ 5050 4330
 Connection ~ 5050 4030
 Wire Wire Line
-	4790 4750 5060 4750
+	4790 4750 5390 4750
 Wire Wire Line
 	5390 4750 5390 4810
 Wire Wire Line
-	4810 5050 5060 5050
+	4810 5050 5390 5050
 Wire Wire Line
 	5390 5050 5390 5010
 Connection ~ 5060 5050
@@ -606,12 +644,14 @@ Wire Wire Line
 Connection ~ 5940 2290
 Wire Wire Line
 	5960 2800 5960 2590
+Wire Wire Line
+	5960 2590 5935 2590
 Connection ~ 5935 2590
 Wire Wire Line
 	6360 2800 6360 2540
 Connection ~ 6360 2540
 $Comp
-L Connector_Generic:Conn_01x01 J8
+L Conn_01x01 J8
 U 1 1 5ACFCFD9
 P 7335 1835
 F 0 "J8" H 7335 1935 50  0000 C CNN
@@ -626,7 +666,7 @@ Wire Wire Line
 Wire Wire Line
 	7135 2450 7135 1835
 $Comp
-L Connector:TestPoint_Alt TP7
+L TEST TP7
 U 1 1 5ACFD884
 P 3730 6635
 F 0 "TP7" H 3730 6935 50  0000 C BNN
@@ -637,7 +677,7 @@ F 3 "" H 3730 6635 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:TestPoint_Alt TP10
+L TEST TP10
 U 1 1 5ACFD905
 P 4130 6620
 F 0 "TP10" H 4130 6920 50  0000 C BNN
@@ -652,7 +692,7 @@ Text Label 3730 6635 0    60   ~ 0
 Text Label 4130 6620 0    60   ~ 0
 -15V
 $Comp
-L Connector:TestPoint_Alt TP8
+L TEST TP8
 U 1 1 5ACFEF22
 P 3735 7035
 F 0 "TP8" H 3735 7335 50  0000 C BNN
@@ -665,7 +705,7 @@ $EndComp
 Text Label 3735 7035 0    60   ~ 0
 0V
 $Comp
-L Connector:TestPoint_Alt TP9
+L TEST TP9
 U 1 1 5ACFF180
 P 4115 7020
 F 0 "TP9" H 4115 7320 50  0000 C BNN
@@ -677,46 +717,4 @@ F 3 "" H 4115 7020 50  0001 C CNN
 $EndComp
 Text Label 4115 7020 0    60   ~ 0
 +5V
-Wire Wire Line
-	5110 2290 5390 2290
-Wire Wire Line
-	5390 2290 5660 2290
-Wire Wire Line
-	5660 2290 5940 2290
-Wire Wire Line
-	6660 2340 7180 2340
-Wire Wire Line
-	6660 2340 6660 2350
-Wire Wire Line
-	6660 2550 6660 2620
-Wire Wire Line
-	5390 2590 5660 2590
-Wire Wire Line
-	5110 2590 5390 2590
-Wire Wire Line
-	4400 2290 4660 2290
-Wire Wire Line
-	4400 2590 5110 2590
-Wire Wire Line
-	5050 4330 5380 4330
-Wire Wire Line
-	5050 4030 5380 4030
-Wire Wire Line
-	5060 5050 5390 5050
-Wire Wire Line
-	5060 4750 5390 4750
-Wire Wire Line
-	8570 2550 8930 2550
-Wire Wire Line
-	6395 2340 6660 2340
-Wire Wire Line
-	5940 2290 5950 2290
-Wire Wire Line
-	6360 2540 6660 2540
-Wire Wire Line
-	5660 2590 5960 2590
-Text Label 2840 7070 0    59   ~ 0
-CLK_clean
-Text Label 2870 2470 2    59   ~ 0
-gnd
 $EndSCHEMATC
