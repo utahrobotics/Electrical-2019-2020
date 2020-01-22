@@ -13,19 +13,6 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Text Label 2960 2370 2    60   ~ 0
-+12V
-$Comp
-L Connector_Generic:Conn_01x02 J2
-U 1 1 5AC98297
-P 3240 2370
-F 0 "J2" H 3240 2470 50  0000 C CNN
-F 1 "Conn_01x02" H 3240 2170 50  0000 C CNN
-F 2 "Connectors_Molex:Molex_MegaFit_2x01x5.70mm_Angled" H 3240 2370 50  0001 C CNN
-F 3 "" H 3240 2370 50  0001 C CNN
-	1    3240 2370
-	1    0    0    -1  
-$EndComp
 $Comp
 L Device:Varistor RV1
 U 1 1 5AC9833D
@@ -443,8 +430,6 @@ Text Notes 4780 3710 0    118  ~ 0
 Differential Pair to Single Ended
 Text Notes 2890 6070 2    118  ~ 0
 Test Points
-Text Label 3990 2590 2    59   ~ 0
-gnd
 $Comp
 L NG_IMU_Interface_Board-rescue:GS2 J6
 U 1 1 5ACFC618
@@ -467,10 +452,6 @@ F 3 "" H 6160 2800 50  0001 C CNN
 	1    6160 2800
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	2960 2370 3040 2370
-Wire Wire Line
-	2870 2470 3040 2470
 Wire Wire Line
 	4100 2290 4400 2290
 Wire Wire Line
@@ -606,7 +587,6 @@ Wire Wire Line
 Connection ~ 5940 2290
 Wire Wire Line
 	5960 2800 5960 2590
-Connection ~ 5935 2590
 Wire Wire Line
 	6360 2800 6360 2540
 Connection ~ 6360 2540
@@ -713,10 +693,29 @@ Wire Wire Line
 	5940 2290 5950 2290
 Wire Wire Line
 	6360 2540 6660 2540
-Wire Wire Line
-	5660 2590 5960 2590
 Text Label 2840 7070 0    59   ~ 0
 CLK_clean
+Wire Wire Line
+	5660 2590 5960 2590
+Text Label 3990 2590 2    59   ~ 0
+gnd
 Text Label 2870 2470 2    59   ~ 0
 gnd
+Wire Wire Line
+	2870 2470 3040 2470
+Wire Wire Line
+	2960 2370 3040 2370
+$Comp
+L Connector_Generic:Conn_01x02 J2
+U 1 1 5AC98297
+P 3240 2370
+F 0 "J2" H 3240 2470 50  0000 C CNN
+F 1 "Conn_01x02" H 3240 2170 50  0000 C CNN
+F 2 "Connectors_Molex:Molex_MegaFit_2x01x5.70mm_Angled" H 3240 2370 50  0001 C CNN
+F 3 "" H 3240 2370 50  0001 C CNN
+	1    3240 2370
+	1    0    0    -1  
+$EndComp
+Text Label 2960 2370 2    60   ~ 0
++12V
 $EndSCHEMATC

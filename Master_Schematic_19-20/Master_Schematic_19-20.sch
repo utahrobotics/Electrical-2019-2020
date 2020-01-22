@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A2 23386 16535
 encoding utf-8
-Sheet 1 9
+Sheet 1 13
 Title ""
 Date ""
 Rev ""
@@ -14,7 +14,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 Wire Wire Line
-	3000 1950 3000 2050
+	3000 2450 3000 2550
 Wire Wire Line
 	6550 2150 6550 2200
 Wire Wire Line
@@ -32,8 +32,6 @@ Wire Wire Line
 Wire Wire Line
 	5300 1800 5150 1800
 Wire Wire Line
-	4350 1000 4350 2050
-Wire Wire Line
 	5150 1900 5200 1900
 Wire Wire Line
 	5200 1900 5200 1950
@@ -42,87 +40,80 @@ Wire Wire Line
 Wire Wire Line
 	6450 1100 6450 850 
 Wire Wire Line
-	3500 1950 3500 2050
+	3500 2450 3500 2550
 Wire Wire Line
-	4250 1000 4350 1000
+	3000 2050 3000 1900
 Wire Wire Line
-	3000 1550 3000 1400
+	3500 1900 3500 2050
 Wire Wire Line
-	3500 1400 3500 1550
+	3000 1600 3000 1500
 Wire Wire Line
-	3000 1100 3000 1000
-Wire Wire Line
-	3000 1000 3500 1000
-Wire Wire Line
-	3500 1100 3500 1000
-Connection ~ 3500 1000
-Wire Wire Line
-	3500 1000 3650 1000
+	3500 1600 3500 1500
 $Comp
 L Device:Fuse F1
 U 1 1 5E23AA57
-P 3000 1250
-F 0 "F1" H 3060 1296 50  0000 L CNN
-F 1 "Fuse" H 3060 1205 50  0000 L CNN
-F 2 "" V 2930 1250 50  0001 C CNN
-F 3 "~" H 3000 1250 50  0001 C CNN
-F 4 "R" H 3000 1250 50  0001 C CNN "Spice_Primitive"
-F 5 "0.1" H 3000 1250 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 3000 1250 50  0001 C CNN "Spice_Netlist_Enabled"
-	1    3000 1250
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Fuse F2
-U 1 1 5E233628
-P 3500 1250
-F 0 "F2" H 3560 1296 50  0000 L CNN
-F 1 "Fuse" H 3560 1205 50  0000 L CNN
-F 2 "" V 3430 1250 50  0001 C CNN
-F 3 "~" H 3500 1250 50  0001 C CNN
-F 4 "R" H 3500 1250 50  0001 C CNN "Spice_Primitive"
-F 5 "0.1" H 3500 1250 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 3500 1250 50  0001 C CNN "Spice_Netlist_Enabled"
-	1    3500 1250
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Battery BT1
-U 1 1 5E24B0F3
 P 3000 1750
-F 0 "BT1" H 3108 1796 50  0000 L CNN
-F 1 "Battery" H 3108 1705 50  0000 L CNN
-F 2 "" V 3000 1810 50  0001 C CNN
-F 3 "~" V 3000 1810 50  0001 C CNN
-F 4 "V" H 3000 1750 50  0001 C CNN "Spice_Primitive"
-F 5 "dc 22" H 3000 1750 50  0001 C CNN "Spice_Model"
+F 0 "F1" H 3060 1796 50  0000 L CNN
+F 1 "Fuse" H 3060 1705 50  0000 L CNN
+F 2 "" V 2930 1750 50  0001 C CNN
+F 3 "~" H 3000 1750 50  0001 C CNN
+F 4 "R" H 3000 1750 50  0001 C CNN "Spice_Primitive"
+F 5 "0.1" H 3000 1750 50  0001 C CNN "Spice_Model"
 F 6 "Y" H 3000 1750 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    3000 1750
 	1    0    0    -1  
 $EndComp
 $Comp
+L Device:Fuse F2
+U 1 1 5E233628
+P 3500 1750
+F 0 "F2" H 3560 1796 50  0000 L CNN
+F 1 "Fuse" H 3560 1705 50  0000 L CNN
+F 2 "" V 3430 1750 50  0001 C CNN
+F 3 "~" H 3500 1750 50  0001 C CNN
+F 4 "R" H 3500 1750 50  0001 C CNN "Spice_Primitive"
+F 5 "0.1" H 3500 1750 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 3500 1750 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    3500 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Battery BT1
+U 1 1 5E24B0F3
+P 3000 2250
+F 0 "BT1" H 3108 2296 50  0000 L CNN
+F 1 "Battery" H 3108 2205 50  0000 L CNN
+F 2 "" V 3000 2310 50  0001 C CNN
+F 3 "~" V 3000 2310 50  0001 C CNN
+F 4 "V" H 3000 2250 50  0001 C CNN "Spice_Primitive"
+F 5 "dc 22" H 3000 2250 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 3000 2250 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    3000 2250
+	1    0    0    -1  
+$EndComp
+$Comp
 L pspice:0 #GND?
 U 1 1 5E235B8F
-P 3500 2050
-F 0 "#GND?" H 3500 1950 50  0001 C CNN
-F 1 "0" H 3500 1950 50  0000 C CNN
-F 2 "" H 3500 2050 50  0001 C CNN
-F 3 "~" H 3500 2050 50  0001 C CNN
-	1    3500 2050
+P 3500 2550
+F 0 "#GND?" H 3500 2450 50  0001 C CNN
+F 1 "0" H 3500 2450 50  0000 C CNN
+F 2 "" H 3500 2550 50  0001 C CNN
+F 3 "~" H 3500 2550 50  0001 C CNN
+	1    3500 2550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:Battery BT2
 U 1 1 5E23456A
-P 3500 1750
-F 0 "BT2" H 3608 1796 50  0000 L CNN
-F 1 "Battery" H 3608 1705 50  0000 L CNN
-F 2 "" V 3500 1810 50  0001 C CNN
-F 3 "~" V 3500 1810 50  0001 C CNN
-F 4 "V" H 3500 1750 50  0001 C CNN "Spice_Primitive"
-F 5 "dc 22" H 3500 1750 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 3500 1750 50  0001 C CNN "Spice_Netlist_Enabled"
-	1    3500 1750
+P 3500 2250
+F 0 "BT2" H 3608 2296 50  0000 L CNN
+F 1 "Battery" H 3608 2205 50  0000 L CNN
+F 2 "" V 3500 2310 50  0001 C CNN
+F 3 "~" V 3500 2310 50  0001 C CNN
+F 4 "V" H 3500 2250 50  0001 C CNN "Spice_Primitive"
+F 5 "dc 22" H 3500 2250 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 3500 2250 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    3500 2250
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -173,27 +164,13 @@ $EndComp
 $Comp
 L pspice:0 #GND?
 U 1 1 5E220791
-P 3000 2050
-F 0 "#GND?" H 3000 1950 50  0001 C CNN
-F 1 "0" H 3000 1950 50  0000 C CNN
-F 2 "" H 3000 2050 50  0001 C CNN
-F 3 "~" H 3000 2050 50  0001 C CNN
-	1    3000 2050
+P 3000 2550
+F 0 "#GND?" H 3000 2450 50  0001 C CNN
+F 1 "0" H 3000 2450 50  0000 C CNN
+F 2 "" H 3000 2550 50  0001 C CNN
+F 3 "~" H 3000 2550 50  0001 C CNN
+	1    3000 2550
 	1    0    0    -1  
-$EndComp
-$Comp
-L Device:CircuitBreaker_1P CBBT
-U 1 1 5E1E8E58
-P 3950 1000
-F 0 "CBBT" V 3685 1000 50  0000 C CNN
-F 1 "CircuitBreaker_1P" V 3776 1000 50  0000 C CNN
-F 2 "" H 3950 1000 50  0001 C CNN
-F 3 "~" H 3950 1000 50  0001 C CNN
-F 4 "R" H 3950 1000 50  0001 C CNN "Spice_Primitive"
-F 5 "0.1" H 3950 1000 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 3950 1000 50  0001 C CNN "Spice_Netlist_Enabled"
-	1    3950 1000
-	0    1    1    0   
 $EndComp
 $Comp
 L Master_Schematic_19-20:BB U3
@@ -1105,5 +1082,41 @@ F11 "QH'" O R 8700 6600 50
 F12 "SDA1" B R 8700 7000 50 
 F13 "SCL1" I R 8700 6900 50 
 F14 "PB2" B R 8700 6800 50 
+$EndSheet
+$Comp
+L Switch:SW_Push_Open_Dual SW1
+U 1 1 5E28B283
+P 3350 1200
+F 0 "SW1" V 3300 1250 50  0000 L CNN
+F 1 "Emergency Stop" V 3400 1250 50  0000 L CNN
+F 2 "" H 3350 1400 50  0001 C CNN
+F 3 "~" H 3350 1400 50  0001 C CNN
+	1    3350 1200
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3000 1500 3150 1500
+Wire Wire Line
+	3150 1500 3150 1400
+Wire Wire Line
+	3350 1400 3350 1500
+Wire Wire Line
+	3350 1500 3500 1500
+Wire Wire Line
+	3350 1000 3350 900 
+Wire Wire Line
+	3350 900  4350 900 
+Wire Wire Line
+	4350 900  4350 2050
+Wire Wire Line
+	3150 1000 3150 900 
+Wire Wire Line
+	3150 900  3350 900 
+Connection ~ 3350 900 
+$Sheet
+S 18100 1950 3400 4400
+U 5E28349B
+F0 "IMU_Interface_Board" 50
+F1 "IMU_Interface_Board.sch" 50
 $EndSheet
 $EndSCHEMATC
