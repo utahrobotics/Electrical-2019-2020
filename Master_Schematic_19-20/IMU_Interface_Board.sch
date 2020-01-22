@@ -112,8 +112,6 @@ F 3 "" H 6750 2500 50  0001 C CNN
 	1    6750 2500
 	1    0    0    -1  
 $EndComp
-Text Label 4200 1900 2    60   ~ 0
-+12V
 Text Label 8400 1850 0    60   ~ 0
 +5V
 Text Label 8400 2000 0    60   ~ 0
@@ -221,27 +219,16 @@ Text Label 6150 4550 0    60   ~ 0
 $Comp
 L Connector_Generic:Conn_01x03 J4
 U 1 1 5AC9ADA5
-P 7700 4150
-F 0 "J4" H 7700 4350 50  0000 C CNN
-F 1 "Conn_01x03" H 7700 3950 50  0000 C CNN
-F 2 "Connectors_Molex:Molex_KK-6410-03_03x2.54mm_Straight" H 7700 4150 50  0001 C CNN
-F 3 "" H 7700 4150 50  0001 C CNN
-	1    7700 4150
+P 7700 4100
+F 0 "J4" H 7700 4300 50  0000 C CNN
+F 1 "Conn_01x03" H 7700 3900 50  0000 C CNN
+F 2 "Connectors_Molex:Molex_KK-6410-03_03x2.54mm_Straight" H 7700 4100 50  0001 C CNN
+F 3 "" H 7700 4100 50  0001 C CNN
+	1    7700 4100
 	1    0    0    -1  
 $EndComp
-Text Label 7500 4150 2    60   ~ 0
+Text Label 7500 4100 2    60   ~ 0
 0V
-$Comp
-L Connector_Generic:Conn_01x10 J3
-U 1 1 5ACAADC2
-P 9400 4050
-F 0 "J3" H 9400 4550 50  0000 C CNN
-F 1 "Conn_01x10" H 9400 3450 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x10_Pitch2.54mm" H 9400 4050 50  0001 C CNN
-F 3 "" H 9400 4050 50  0001 C CNN
-	1    9400 4050
-	1    0    0    -1  
-$EndComp
 Text Label 2900 3900 2    60   ~ 0
 M1
 Text Label 2900 4000 2    60   ~ 0
@@ -282,11 +269,11 @@ Text Label 9200 4450 2    60   ~ 0
 M1
 Text Label 9200 4550 2    60   ~ 0
 M2
-Text Notes 9950 1650 2    98   ~ 0
+Text Notes 9750 1650 2    98   ~ 0
 Aux Power
-Text Notes 8050 4600 2    79   ~ 0
+Text Notes 8050 4750 2    79   ~ 0
 Data & Clock
-Text Notes 3550 1800 2    79   ~ 0
+Text Notes 4700 1800 2    79   ~ 0
 Power Input
 Text Notes 3600 3500 2    79   ~ 0
 IMU Connector
@@ -506,27 +493,6 @@ Text Label 4200 6750 0    60   ~ 0
 +5V
 Text Label 2950 6750 0    59   ~ 0
 CLK_clean
-Text Label 4150 2300 2    59   ~ 0
-gnd
-Text Label 3050 2050 2    60   ~ 0
-+12V
-Text Label 2950 2150 2    59   ~ 0
-gnd
-$Comp
-L Connector_Generic:Conn_01x02 J2
-U 1 1 5AC98297
-P 3350 2050
-F 0 "J2" H 3350 2150 50  0000 C CNN
-F 1 "Conn_01x02" H 3350 1850 50  0000 C CNN
-F 2 "Connectors_Molex:Molex_MegaFit_2x01x5.70mm_Angled" H 3350 2050 50  0001 C CNN
-F 3 "" H 3350 2050 50  0001 C CNN
-	1    3350 2050
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3050 2050 3150 2050
-Wire Wire Line
-	2950 2150 3150 2150
 $Comp
 L Connector:TestPoint_Alt TP5
 U 1 1 5ACAD4AD
@@ -585,16 +551,6 @@ Wire Wire Line
 Wire Wire Line
 	6150 4400 7400 4400
 Wire Wire Line
-	7400 4400 7400 4250
-Wire Wire Line
-	7400 4250 7500 4250
-Wire Wire Line
-	6150 3700 7400 3700
-Wire Wire Line
-	7400 3700 7400 4050
-Wire Wire Line
-	7400 4050 7500 4050
-Wire Wire Line
 	9550 950  9450 950 
 Wire Wire Line
 	9150 950  9050 950 
@@ -625,7 +581,7 @@ Connection ~ 4500 1900
 Wire Wire Line
 	4500 1900 4750 1900
 Wire Wire Line
-	4150 2300 4500 2300
+	4200 2300 4500 2300
 Wire Wire Line
 	4500 2300 4500 2250
 Wire Wire Line
@@ -729,17 +685,6 @@ Wire Wire Line
 	8700 1300 8700 1850
 Wire Wire Line
 	8700 1850 8400 1850
-$Comp
-L Connector_Generic:Conn_01x04 J1
-U 1 1 5ACABB9D
-P 9600 2050
-F 0 "J1" H 9600 2250 50  0000 C CNN
-F 1 "Conn_01x04" H 9600 1750 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm" H 9600 2050 50  0001 C CNN
-F 3 "" H 9600 2050 50  0001 C CNN
-	1    9600 2050
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	6750 2750 8700 2750
 Wire Wire Line
@@ -752,30 +697,86 @@ Wire Wire Line
 	7200 1850 7200 1900
 Wire Wire Line
 	7200 1900 6750 1900
+Text HLabel 7500 3700 2    50   Output ~ 0
+Data
 Wire Wire Line
-	8700 1850 9300 1850
+	6150 3700 7400 3700
 Wire Wire Line
-	9300 1850 9300 1950
+	7500 4000 7400 4000
 Wire Wire Line
-	9300 1950 9400 1950
+	7400 4000 7400 3700
+Connection ~ 7400 3700
+Wire Wire Line
+	7400 3700 7500 3700
+Wire Wire Line
+	7500 4200 7400 4200
+Wire Wire Line
+	7400 4200 7400 4400
+Text HLabel 7500 4400 2    50   Output ~ 0
+CLK
+Wire Wire Line
+	7500 4400 7400 4400
+Connection ~ 7400 4400
+Text HLabel 4200 2300 0    50   Input ~ 0
+GND
+Text HLabel 4200 1900 0    50   Input ~ 0
++12V
+Wire Wire Line
+	8700 1850 9250 1850
 Connection ~ 8700 1850
 Wire Wire Line
-	9400 2250 9300 2250
-Wire Wire Line
-	9300 2250 9300 2350
-Wire Wire Line
-	9300 2350 8400 2350
-Wire Wire Line
-	9400 2150 9250 2150
-Wire Wire Line
-	9250 2150 9250 2200
-Wire Wire Line
-	9250 2200 8700 2200
+	8700 2200 9250 2200
 Connection ~ 8700 2200
 Wire Wire Line
-	9400 2050 9250 2050
+	8400 2000 9250 2000
 Wire Wire Line
-	9250 2050 9250 2000
+	8400 2350 9250 2350
+Text HLabel 9250 2350 2    50   Output ~ 0
+-15V
+Text HLabel 9250 2000 2    50   Output ~ 0
++15V
+Text HLabel 9250 2200 2    50   Output ~ 0
+0V
+Text HLabel 9250 1850 2    50   Output ~ 0
++5V
 Wire Wire Line
-	9250 2000 8400 2000
+	9200 3650 9400 3650
+Text HLabel 9400 3650 2    50   Output ~ 0
+D3
+Wire Wire Line
+	9200 3750 9400 3750
+Text HLabel 9400 3750 2    50   Output ~ 0
+C2
+Wire Wire Line
+	9200 3850 9400 3850
+Text HLabel 9400 3850 2    50   Output ~ 0
+G1
+Wire Wire Line
+	9200 3950 9400 3950
+Text HLabel 9400 3950 2    50   Output ~ 0
+G3
+Wire Wire Line
+	9200 4050 9400 4050
+Text HLabel 9400 4050 2    50   Output ~ 0
+H1
+Wire Wire Line
+	9200 4150 9400 4150
+Text HLabel 9400 4150 2    50   Output ~ 0
+H2
+Wire Wire Line
+	9200 4250 9400 4250
+Text HLabel 9400 4250 2    50   Output ~ 0
+J2
+Wire Wire Line
+	9200 4350 9400 4350
+Text HLabel 9400 4350 2    50   Output ~ 0
+K2
+Wire Wire Line
+	9200 4450 9400 4450
+Text HLabel 9400 4450 2    50   Output ~ 0
+M1
+Wire Wire Line
+	9200 4550 9400 4550
+Text HLabel 9400 4550 2    50   Output ~ 0
+M2
 $EndSCHEMATC
