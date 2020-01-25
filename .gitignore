@@ -5,3 +5,9 @@
 **/*~
 # other backup files
 **/*.bak
+# Eclipse files
+**/.*project
+**/.settings
+# Build files
+**/*.d
+**/*.o
