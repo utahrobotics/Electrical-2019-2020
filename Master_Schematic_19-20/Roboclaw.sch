@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 9 14
+Sheet 7 14
 Title ""
 Date ""
 Rev ""
@@ -194,10 +194,10 @@ L Master_Schematic_19-20:Roboclaw U1
 U 1 1 5E2D947F
 P 5050 2700
 AR Path="/5E23EE32/5E2D947F" Ref="U1"  Part="1" 
-AR Path="/5E2E2A99/5E2D947F" Ref="U?"  Part="1" 
-AR Path="/5E2EF843/5E2D947F" Ref="U?"  Part="1" 
-F 0 "U?" H 7394 1903 60  0000 L CNN
-F 1 "Roboclaw" H 7394 1797 60  0000 L CNN
+AR Path="/5E2E2A99/5E2D947F" Ref="U1"  Part="1" 
+AR Path="/5E2EF843/5E2D947F" Ref="U1"  Part="1" 
+F 0 "U1" H 6150 2050 60  0000 L CNN
+F 1 "Roboclaw" H 6000 1900 60  0000 L CNN
 F 2 "" H 5200 2750 60  0001 R CNN
 F 3 "" H 5200 2550 60  0001 R CNN
 F 4 "Roboclaw" H 5200 2450 60  0001 R CNN "Field5"
