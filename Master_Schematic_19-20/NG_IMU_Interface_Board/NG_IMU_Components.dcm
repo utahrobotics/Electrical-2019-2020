@@ -1,0 +1,11 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MAX3280EAUK+T
+D RS485/422 Receiver; 3V - 5.5V; SOT23-5
+$ENDCMP
+#
+$CMP PYB30-Q24-T515
+D DCDC Converter; 9-36 in; +5V, +15V, -15V out
+$ENDCMP
+#
+#End Doc Library
