@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 9 13
+Sheet 9 14
 Title ""
 Date ""
 Rev ""
@@ -103,18 +103,6 @@ Text HLabel 4800 3700 0    50   Input ~ 0
 EN2A
 Text HLabel 4800 3800 0    50   Input ~ 0
 EN2B
-$Comp
-L Master_Schematic_19-20:Roboclaw U1
-U 1 1 5E24A715
-P 5050 2700
-F 0 "U1" H 6150 1950 60  0000 L CNN
-F 1 "Roboclaw" H 6000 1850 60  0000 L CNN
-F 2 "" H 5200 2750 60  0001 R CNN
-F 3 "" H 5200 2550 60  0001 R CNN
-F 4 "Roboclaw" H 5200 2450 60  0001 R CNN "Field5"
-	1    5050 2700
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	6050 2000 5850 2000
 Wire Wire Line
@@ -196,4 +184,19 @@ Connection ~ 4900 2900
 Wire Wire Line
 	4900 3000 4800 3000
 Connection ~ 4900 3000
+$Comp
+L Master_Schematic_19-20:Roboclaw U1
+U 1 1 5E2D947F
+P 5050 2700
+AR Path="/5E23EE32/5E2D947F" Ref="U1"  Part="1" 
+AR Path="/5E2E2A99/5E2D947F" Ref="U?"  Part="1" 
+AR Path="/5E2EF843/5E2D947F" Ref="U?"  Part="1" 
+F 0 "U?" H 7394 1903 60  0000 L CNN
+F 1 "Roboclaw" H 7394 1797 60  0000 L CNN
+F 2 "" H 5200 2750 60  0001 R CNN
+F 3 "" H 5200 2550 60  0001 R CNN
+F 4 "Roboclaw" H 5200 2450 60  0001 R CNN "Field5"
+	1    5050 2700
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

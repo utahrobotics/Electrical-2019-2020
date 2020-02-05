@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 13
+Sheet 2 14
 Title ""
 Date ""
 Rev ""
@@ -171,10 +171,6 @@ Wire Wire Line
 Wire Wire Line
 	10000 4600 10200 4600
 Wire Wire Line
-	10000 4300 10000 4600
-Wire Wire Line
-	10000 4300 10000 4200
-Wire Wire Line
 	6300 4800 6500 4800
 Wire Wire Line
 	6500 4800 6500 6100
@@ -199,7 +195,6 @@ Connection ~ 10000 3200
 Connection ~ 6800 6100
 Connection ~ 6300 6100
 Connection ~ 10200 4600
-Connection ~ 10000 4300
 Connection ~ 6300 4800
 Connection ~ 6500 6100
 Connection ~ 5400 4800
@@ -439,18 +434,11 @@ F 0 "LED1" H 9400 3775 59  0000 L BNN
 F 1 "S4301B" H 9400 2950 59  0000 L BNN
 F 2 "PowerNode2:S4301B" H 9600 3400 50  0001 C CNN
 F 3 "" H 9600 3400 50  0001 C CNN
+F 4 "L" H 9600 3400 50  0001 C CNN "Spice_Primitive"
+F 5 "D7SEG" H 9600 3400 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 9600 3400 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "${KIPRJMOD}/../PowerNode/Power Node V2.0/PowerNode2_Spice.lib" H 9600 3400 50  0001 C CNN "Spice_Lib_File"
 	1    9600 3400
-	1    0    0    -1  
-$EndComp
-$Comp
-L PowerNode2:S4301B LED2
-U 1 1 6A31474D
-P 9600 4500
-F 0 "LED2" H 9400 4875 59  0000 L BNN
-F 1 "S4301B" H 9400 4050 59  0000 L BNN
-F 2 "PowerNode2:S4301B" H 9600 4500 50  0001 C CNN
-F 3 "" H 9600 4500 50  0001 C CNN
-	1    9600 4500
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -687,4 +675,24 @@ Text HLabel 5000 3900 2    50   Input ~ 0
 SCL1
 Text HLabel 4900 3200 2    50   BiDi ~ 0
 PB2
+Connection ~ 10000 4300
+Wire Wire Line
+	10000 4300 10000 4200
+Wire Wire Line
+	10000 4300 10000 4600
+$Comp
+L PowerNode2:S4301B LED2
+U 1 1 6A31474D
+P 9600 4500
+F 0 "LED2" H 9400 4875 59  0000 L BNN
+F 1 "S4301B" H 9400 4050 59  0000 L BNN
+F 2 "PowerNode2:S4301B" H 9600 4500 50  0001 C CNN
+F 3 "" H 9600 4500 50  0001 C CNN
+F 4 "L" H 9600 4500 50  0001 C CNN "Spice_Primitive"
+F 5 "D7SEG" H 9600 4500 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 9600 4500 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "${KIPRJMOD}/../PowerNode/Power Node V2.0/PowerNode2_Spice.lib" H 9600 4500 50  0001 C CNN "Spice_Lib_File"
+	1    9600 4500
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
