@@ -1,10 +1,12 @@
-# KiCAD backup files
+# KiCAD backup and cache files
 **/*-bak
 **/*-cache.*
+**/fp-info-cache
 # emacs backup files
 **/*~
 # other backup files
 **/*.bak
+**/*.bck
 # Eclipse files
 **/.*project
 **/.settings
