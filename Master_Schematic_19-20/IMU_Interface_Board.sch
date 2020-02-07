@@ -20,10 +20,10 @@ Comment9 ""
 $EndDescr
 Connection ~ 4500 1900
 Connection ~ 4500 2300
-Connection ~ 5150 3650
-Connection ~ 5150 4050
-Connection ~ 5150 4350
-Connection ~ 5150 4750
+Connection ~ 5050 3650
+Connection ~ 5050 4050
+Connection ~ 5050 4550
+Connection ~ 5050 4950
 Connection ~ 5200 1900
 Connection ~ 5200 2300
 Connection ~ 5500 1900
@@ -36,8 +36,8 @@ Connection ~ 6550 1900
 Connection ~ 6550 2300
 Connection ~ 6750 1900
 Connection ~ 6750 2300
-Connection ~ 7400 3700
-Connection ~ 7400 4400
+Connection ~ 7400 3650
+Connection ~ 7400 4550
 Connection ~ 8700 1850
 Connection ~ 8700 2200
 NoConn ~ 2900 3700
@@ -46,13 +46,13 @@ Wire Wire Line
 Wire Wire Line
 	4500 2300 4500 2250
 Wire Wire Line
-	5150 3700 5150 3650
+	5050 3700 5050 3650
 Wire Wire Line
-	5150 4050 5150 4000
+	5050 4050 5050 4000
 Wire Wire Line
-	5150 4400 5150 4350
+	5050 4600 5050 4550
 Wire Wire Line
-	5150 4700 5150 4750
+	5050 4900 5050 4950
 Wire Wire Line
 	5200 1900 5200 1950
 Wire Wire Line
@@ -70,21 +70,21 @@ Wire Wire Line
 Wire Wire Line
 	7200 2300 7200 2350
 Wire Wire Line
-	5350 3750 5350 3650
+	5300 3750 5300 3650
 Wire Wire Line
-	5350 3950 5450 3950
+	5300 3950 5400 3950
 Wire Wire Line
-	5350 4050 5350 3950
+	5300 3950 5300 4050
 Wire Wire Line
-	5350 4350 5350 4450
+	5300 4550 5300 4650
 Wire Wire Line
-	5350 4450 5450 4450
+	5300 4650 5400 4650
 Wire Wire Line
-	5350 4650 5350 4750
+	5300 4850 5300 4950
 Wire Wire Line
-	5450 3750 5350 3750
+	5400 3750 5300 3750
 Wire Wire Line
-	5450 4650 5350 4650
+	5400 4850 5300 4850
 Wire Wire Line
 	5950 1800 5950 1900
 Wire Wire Line
@@ -128,13 +128,13 @@ Wire Wire Line
 Wire Wire Line
 	7300 2100 7400 2100
 Wire Wire Line
-	7400 3700 7500 3700
+	7400 3650 7500 3650
 Wire Wire Line
 	7500 4000 7400 4000
 Wire Wire Line
 	7500 4200 7400 4200
 Wire Wire Line
-	7500 4400 7400 4400
+	7500 4550 7400 4550
 Wire Wire Line
 	9150 950  9050 950 
 Wire Wire Line
@@ -143,14 +143,6 @@ Wire Wire Line
 	5050 1900 5200 1900
 Wire Wire Line
 	6750 2600 6750 2750
-Wire Wire Line
-	5150 4050 5350 4050
-Wire Wire Line
-	5150 4350 5350 4350
-Wire Wire Line
-	5350 3650 5150 3650
-Wire Wire Line
-	5350 4750 5150 4750
 Wire Wire Line
 	5950 1900 5750 1900
 Wire Wire Line
@@ -163,8 +155,6 @@ Wire Wire Line
 	7200 2350 7400 2350
 Wire Wire Line
 	7400 1850 7200 1850
-Wire Wire Line
-	7400 4200 7400 4400
 Wire Wire Line
 	9200 3650 9400 3650
 Wire Wire Line
@@ -188,13 +178,21 @@ Wire Wire Line
 Wire Wire Line
 	4500 1900 4750 1900
 Wire Wire Line
-	4900 4050 5150 4050
+	4800 4050 5050 4050
 Wire Wire Line
-	4900 4350 5150 4350
+	4800 4550 5050 4550
 Wire Wire Line
-	5150 3650 4900 3650
+	5050 3650 4800 3650
 Wire Wire Line
-	5150 4750 4900 4750
+	5050 3650 5300 3650
+Wire Wire Line
+	5050 4050 5300 4050
+Wire Wire Line
+	5050 4550 5300 4550
+Wire Wire Line
+	5050 4950 5300 4950
+Wire Wire Line
+	5050 4950 4800 4950
 Wire Wire Line
 	5500 1900 5750 1900
 Wire Wire Line
@@ -210,11 +208,13 @@ Wire Wire Line
 Wire Wire Line
 	6750 1600 6750 1300
 Wire Wire Line
-	7400 4000 7400 3700
-Wire Wire Line
 	8700 1850 8400 1850
 Wire Wire Line
 	8700 2200 8400 2200
+Wire Wire Line
+	7400 3650 7400 4000
+Wire Wire Line
+	7400 4200 7400 4550
 Wire Wire Line
 	7700 1450 7300 1450
 Wire Wire Line
@@ -238,13 +238,9 @@ Wire Wire Line
 Wire Wire Line
 	8400 2350 9250 2350
 Wire Wire Line
-	6150 3700 7400 3700
+	6200 3650 7400 3650
 Wire Wire Line
-	6150 4400 7400 4400
-Wire Notes Line
-	4500 4930 4500 3410
-Wire Notes Line
-	8140 3410 8140 4930
+	6200 4550 7400 4550
 Wire Notes Line
 	3910 1240 3910 2860
 Wire Notes Line
@@ -253,6 +249,10 @@ Wire Notes Line
 	1690 7520 1690 5840
 Wire Notes Line
 	4910 5840 4910 7520
+Wire Notes Line
+	4450 5200 4450 3400
+Wire Notes Line
+	8150 3400 8150 5200
 Wire Wire Line
 	6750 1300 8700 1300
 Wire Wire Line
@@ -262,9 +262,9 @@ Wire Notes Line
 Wire Notes Line
 	4910 7520 1690 7520
 Wire Notes Line
-	4500 3410 8140 3410
+	4450 3400 8150 3400
 Wire Notes Line
-	8140 4930 4500 4930
+	8150 5200 4450 5200
 Wire Notes Line
 	3910 2860 10060 2860
 Wire Notes Line
@@ -279,7 +279,7 @@ Text Notes 4880 3360 0    118  ~ 0
 Differential Pair to Single Ended
 Text Notes 7200 1150 2    118  ~ 0
 Power Circuit
-Text Notes 8050 4750 2    79   ~ 0
+Text Notes 8000 5050 2    79   ~ 0
 Data & Clock
 Text Notes 9500 750  2    59   ~ 0
 Power Indicator
@@ -353,25 +353,25 @@ Text Label 4200 6300 0    60   ~ 0
 -15V
 Text Label 4200 6750 0    60   ~ 0
 +5V
-Text Label 4900 3650 2    60   ~ 0
+Text Label 4800 3650 2    60   ~ 0
 Data-
-Text Label 4900 4050 2    60   ~ 0
+Text Label 4800 4050 2    60   ~ 0
 Data+
-Text Label 4900 4350 2    60   ~ 0
+Text Label 4800 4550 2    60   ~ 0
 CLK-
-Text Label 4900 4750 2    60   ~ 0
+Text Label 4800 4950 2    60   ~ 0
 CLK+
-Text Label 6150 3850 0    60   ~ 0
+Text Label 6200 3850 0    60   ~ 0
 0V
-Text Label 6150 4000 0    60   ~ 0
+Text Label 6200 4050 0    60   ~ 0
 +5V
-Text Label 6150 4550 0    60   ~ 0
+Text Label 6200 4750 0    60   ~ 0
 0V
-Text Label 6150 4700 0    60   ~ 0
+Text Label 6200 4950 0    60   ~ 0
 +5V
-Text Label 6300 3700 0    59   ~ 0
+Text Label 6300 3650 0    59   ~ 0
 Data_clean
-Text Label 6300 4400 0    59   ~ 0
+Text Label 6300 4550 0    59   ~ 0
 CLK_clean
 Text Label 7500 4100 2    60   ~ 0
 0V
@@ -411,9 +411,9 @@ Text HLabel 4200 1900 0    50   Input ~ 0
 +12V
 Text HLabel 4200 2300 0    50   Input ~ 0
 GND
-Text HLabel 7500 3700 2    50   Output ~ 0
+Text HLabel 7500 3650 2    50   Output ~ 0
 Data
-Text HLabel 7500 4400 2    50   Output ~ 0
+Text HLabel 7500 4550 2    50   Output ~ 0
 CLK
 Text HLabel 9250 1850 2    50   Output ~ 0
 +5V
@@ -567,23 +567,23 @@ $EndComp
 $Comp
 L Device:R R2
 U 1 1 5AC9A1E6
-P 5150 3850
-F 0 "R2" V 5230 3850 50  0000 C CNN
-F 1 "120" V 5150 3850 50  0000 C CNN
-F 2 "Resistors_SMD:R_1206_HandSoldering" V 5080 3850 50  0001 C CNN
-F 3 "" H 5150 3850 50  0001 C CNN
-	1    5150 3850
+P 5050 3850
+F 0 "R2" V 5130 3850 50  0000 C CNN
+F 1 "120" V 5050 3850 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" V 4980 3850 50  0001 C CNN
+F 3 "" H 5050 3850 50  0001 C CNN
+	1    5050 3850
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R3
 U 1 1 5AC9A733
-P 5150 4550
-F 0 "R3" V 5230 4550 50  0000 C CNN
-F 1 "120" V 5150 4550 50  0000 C CNN
-F 2 "Resistors_SMD:R_1206_HandSoldering" V 5080 4550 50  0001 C CNN
-F 3 "" H 5150 4550 50  0001 C CNN
-	1    5150 4550
+P 5050 4750
+F 0 "R3" V 5130 4750 50  0000 C CNN
+F 1 "120" V 5050 4750 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" V 4980 4750 50  0001 C CNN
+F 3 "" H 5050 4750 50  0001 C CNN
+	1    5050 4750
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -653,7 +653,7 @@ F 3 "" H 5200 2100 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L NG_IMU_Interface_Board-rescue:GS2 J6
+L NG_IMU_Components:GS2 J6
 U 1 1 5ACFC618
 P 6250 1800
 F 0 "J6" H 6350 1950 50  0000 C CNN
@@ -664,7 +664,7 @@ F 3 "" H 6250 1800 50  0001 C CNN
 	0    1    -1   0   
 $EndComp
 $Comp
-L NG_IMU_Interface_Board-rescue:GS2 J7
+L NG_IMU_Components:GS2 J7
 U 1 1 5ACFCB42
 P 6250 2400
 F 0 "J7" H 6350 2550 50  0000 C CNN
@@ -741,25 +741,25 @@ F 3 "" V 6250 2140 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L NG_IMU_Interface_Board-rescue:MAX3280EAUK+T U2
+L NG_IMU_Components:MAX3280EAUK+T U2
 U 1 1 5AC9A058
 P 5800 3850
-F 0 "U2" H 5800 3600 60  0000 C CNN
-F 1 "MAX3280EAUK+T" H 5800 4100 60  0000 C CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23-5_HandSoldering" H 5800 3850 60  0001 C CNN
+F 0 "U2" H 5800 3500 60  0000 C CNN
+F 1 "MAX3280EAUK+T" H 5800 4200 60  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-5_HandSoldering" H 5800 3850 60  0001 C CNN
 F 3 "" H 5800 3850 60  0001 C CNN
 	1    5800 3850
 	-1   0    0    1   
 $EndComp
 $Comp
-L NG_IMU_Interface_Board-rescue:MAX3280EAUK+T U3
+L NG_IMU_Components:MAX3280EAUK+T U3
 U 1 1 5AC9A72D
-P 5800 4550
-F 0 "U3" H 5800 4300 60  0000 C CNN
-F 1 "MAX3280EAUK+T" H 5800 4800 60  0000 C CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23-5_HandSoldering" H 5800 4550 60  0001 C CNN
-F 3 "" H 5800 4550 60  0001 C CNN
-	1    5800 4550
+P 5800 4750
+F 0 "U3" H 5800 4400 60  0000 C CNN
+F 1 "MAX3280EAUK+T" H 5800 5100 60  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-5_HandSoldering" H 5800 4750 60  0001 C CNN
+F 3 "" H 5800 4750 60  0001 C CNN
+	1    5800 4750
 	-1   0    0    1   
 $EndComp
 $Comp
@@ -774,7 +774,7 @@ F 3 "" H 3200 4200 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L NG_IMU_Interface_Board-rescue:PYB30-Q24-T515 U1
+L NG_IMU_Components:PYB30-Q24-T515 U1
 U 1 1 5AC98BBC
 P 7900 2100
 F 0 "U1" H 7900 1700 60  0000 C CNN
