@@ -13,7 +13,7 @@ void setup() {
 }
 
 void loop() {
-  writeRegNum(7.7);
+  writeRegNum(6.9);
 }
 
 void writeRegNum(float num){
