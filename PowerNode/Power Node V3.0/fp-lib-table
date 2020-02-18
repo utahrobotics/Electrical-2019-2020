@@ -1,3 +1,2 @@
 (fp_lib_table
-  (lib (name PowerNode2)(type KiCad)(uri "$(KIPRJMOD)/PowerNode2.pretty")(options "")(descr ""))
 )
