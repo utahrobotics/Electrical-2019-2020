@@ -448,7 +448,7 @@ Wire Wire Line
 Wire Wire Line
 	11550 3800 11550 4000
 Wire Wire Line
-	11550 4000 12650 4000
+	11550 4000 12550 4000
 Wire Wire Line
 	11550 5100 11550 5300
 Wire Wire Line
@@ -491,6 +491,8 @@ Wire Wire Line
 	12350 5100 12350 6100
 Wire Wire Line
 	12450 2800 12450 5300
+Wire Wire Line
+	12850 4000 12950 4000
 Text Notes 1050 2950 0    50   ~ 0
 VCC
 Text Notes 1050 3050 0    50   ~ 0
@@ -688,12 +690,12 @@ $EndComp
 $Comp
 L Connector:TestPoint DP1
 U 1 1 2762D014
-P 12650 4000
-F 0 "DP1" V 12600 3950 50  0000 L BNN
-F 1 "2,54_0,9" V 12750 3850 50  0000 L BNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 12650 4000 50  0001 C CNN
-F 3 "" H 12650 4000 50  0001 C CNN
-	1    12650 4000
+P 12950 4000
+F 0 "DP1" V 12900 3950 50  0000 L BNN
+F 1 "2,54_0,9" V 13050 3850 50  0000 L BNN
+F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 12950 4000 50  0001 C CNN
+F 3 "" H 12950 4000 50  0001 C CNN
+	1    12950 4000
 	0    1    1    0   
 $EndComp
 $Comp
@@ -972,6 +974,17 @@ F 3 "~" H 11350 5000 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
+L Device:R R27
+U 1 1 5E4E8422
+P 12700 4000
+F 0 "R27" V 12600 4000 50  0000 C CNN
+F 1 "220" V 12700 4000 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_Power_L20.0mm_W6.4mm_P5.08mm_Vertical" V 12630 4000 50  0001 C CNN
+F 3 "~" H 12700 4000 50  0001 C CNN
+	1    12700 4000
+	0    1    1    0   
+$EndComp
+$Comp
 L Device:C_Small C2
 U 1 1 5E66977B
 P 2600 2750
@@ -1001,6 +1014,11 @@ F 0 "PWRLED1" V 3539 3130 50  0000 L CNN
 F 1 "LED5MM" V 3448 3130 50  0000 L CNN
 F 2 "LED_THT:LED_D5.0mm" H 3500 3050 50  0001 C CNN
 F 3 "~" H 3500 3050 50  0001 C CNN
+F 4 "D" H 3500 3050 50  0001 C CNN "Spice_Primitive"
+F 5 "LedRed" H 3500 3050 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 3500 3050 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 3500 3050 50  0001 C CNN "Spice_Lib_File"
+F 8 "2 1" V 3500 3050 50  0001 C CNN "Spice_Node_Sequence"
 	1    3500 3050
 	0    1    -1   0   
 $EndComp
@@ -1012,6 +1030,11 @@ F 0 "VOLT1" H 9893 2817 50  0000 C CNN
 F 1 "LED5MM" H 9893 2726 50  0000 C CNN
 F 2 "LED_THT:LED_D5.0mm" H 9900 2600 50  0001 C CNN
 F 3 "~" H 9900 2600 50  0001 C CNN
+F 4 "D" H 9900 2600 50  0001 C CNN "Spice_Primitive"
+F 5 "LedRed" H 9900 2600 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 9900 2600 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 9900 2600 50  0001 C CNN "Spice_Lib_File"
+F 8 "2 1" H 9900 2600 50  0001 C CNN "Spice_Node_Sequence"
 	1    9900 2600
 	-1   0    0    -1  
 $EndComp
@@ -1056,6 +1079,10 @@ F 0 "S1" V 8146 2112 50  0000 R CNN
 F 1 "SW_SPDT" V 8055 2112 50  0000 R CNN
 F 2 "PowerNode2:SWITCH_SPDT_PTH_11.6X4.0MM" H 8100 2300 50  0001 C CNN
 F 3 "~" H 8100 2300 50  0001 C CNN
+F 4 "X" H 8100 2300 50  0001 C CNN "Spice_Primitive"
+F 5 "swspdt" H 8100 2300 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 8100 2300 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 8100 2300 50  0001 C CNN "Spice_Lib_File"
 	1    8100 2300
 	0    -1   -1   0   
 $EndComp
@@ -1064,9 +1091,13 @@ L Display_Character:SC39-11EWA LED1
 U 1 1 5E946226
 P 11950 3400
 F 0 "LED1" H 11950 3950 50  0000 C CNN
-F 1 "S4301B" H 11950 2850 50  0000 C CNN
+F 1 "LTS-4301P" H 11950 2850 50  0000 C CNN
 F 2 "Display_7Segment:Sx39-1xxxxx" H 11950 2850 50  0001 C CNN
-F 3 "http://www.kingbrightusa.com/images/catalog/SPEC/sc39-11ewa.pdf" H 11950 3400 50  0001 C CNN
+F 3 "https://www.datasheets360.com/pdf/-3279684472568245476" H 11950 3400 50  0001 C CNN
+F 4 "X" H 11950 3400 50  0001 C CNN "Spice_Primitive"
+F 5 "lts4301p" H 11950 3400 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 11950 3400 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 11950 3400 50  0001 C CNN "Spice_Lib_File"
 	1    11950 3400
 	1    0    0    -1  
 $EndComp
@@ -1075,9 +1106,13 @@ L Display_Character:SC39-11EWA LED2
 U 1 1 5E9E0181
 P 11950 4700
 F 0 "LED2" H 11950 5250 50  0000 C CNN
-F 1 "S4301B" H 11950 4150 50  0000 C CNN
+F 1 "LTS-4301P" H 11950 4150 50  0000 C CNN
 F 2 "Display_7Segment:Sx39-1xxxxx" H 11950 4150 50  0001 C CNN
-F 3 "http://www.kingbrightusa.com/images/catalog/SPEC/sc39-11ewa.pdf" H 11950 4700 50  0001 C CNN
+F 3 "https://www.datasheets360.com/pdf/-3279684472568245476" H 11950 4700 50  0001 C CNN
+F 4 "X" H 11950 4700 50  0001 C CNN "Spice_Primitive"
+F 5 "lts4301p" H 11950 4700 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 11950 4700 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 11950 4700 50  0001 C CNN "Spice_Lib_File"
 	1    11950 4700
 	1    0    0    -1  
 $EndComp
@@ -1089,6 +1124,10 @@ F 0 "IC4" H 7200 6181 50  0000 C CNN
 F 1 "ACS712xLCTR-30A" H 7200 6090 50  0000 C CNN
 F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 7300 5250 50  0001 L CIN
 F 3 "http://www.allegromicro.com/~/media/Files/Datasheets/ACS712-Datasheet.ashx?la=en" H 7200 5600 50  0001 C CNN
+F 4 "X" H 7200 5600 50  0001 C CNN "Spice_Primitive"
+F 5 "acs712elctr" H 7200 5600 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 7200 5600 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 7200 5600 50  0001 C CNN "Spice_Lib_File"
 	1    7200 5600
 	1    0    0    -1  
 $EndComp

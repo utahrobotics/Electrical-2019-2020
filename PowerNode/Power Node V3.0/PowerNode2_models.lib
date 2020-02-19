@@ -1,8 +1,44 @@
+* 5mm LEDs
+.MODEL LedRed D (IS=93.2P RS=42M N=3.73 BV=4 IBV=10U CJO=2.97P VJ=.75 M=.333 TT=4.32U Iave=40m Vpk=4)
+
 * W237-4 screw terminal providing voltage vcc
 .subckt w237_4 VCC GND SCL SDA
 V1 VCC GND 5V
 R1 GND 0 0
 .ends w237_4
+
+* Switch
+.subckt swspdt 1 2 3 tswitch=1 ron=100m roff=10Meg
+R1 1 2 {time<tswitch ? ron : roff}
+R2 2 3 {time>tswitch ? ron : roff}
+.ends swspdt
+
+* ACS712ELCTR current measurement IC
+* IP+ IP+ IP- IP- GND FILTER VIOUT VCC
+.subckt acs712elctr 1 2 3 4 5 6 7 8 sens=0.185
+RIP1 1 2 0
+RIP2 3 4 0
+VMEAS 1 3 0
+HIOUT 7 9 VMEAS {sens}
+VOFF 9 5 {v(8,5)/2}
+.ends acs712elctr
+
+* LTS-4301P diode model
+* TODO: update to be more awesomer
+.model d_lts4301p D (IS=93.2p N=3.73 BV=5 IBV=100u VJ=1.8 TT=4.32u Vpk=5)
+
+* LTS-4301P 7 segment display
+.subckt lts4301p 1 2 3 4 5 6 7 8 9 10
+RK 8 3 0
+DA 10 8 d_lts4301p
+DB 9 8 d_lts4301p
+DC 7 8 d_lts4301p
+DD 5 3 d_lts4301p
+DE 4 3 d_lts4301p
+DF 2 3 d_lts4301p
+DG 1 3 d_lts4301p
+DDP 6 8 d_lts4301p
+.ends lts4301p
 
 * CD4511B CD-to-7 segment latch/decoder/driver
 * TODO: add latch functionality
