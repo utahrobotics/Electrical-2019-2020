@@ -1097,9 +1097,13 @@ L 4xxx_IEEE:4511 IC1
 U 1 1 5E9BD899
 P 10550 3400
 F 0 "IC1" H 10300 3850 50  0000 L TNN
-F 1 "4511N" H 10550 2950 50  0000 C BNN
+F 1 "CD4511B" H 10550 2950 50  0000 C BNN
 F 2 "Package_DIP:DIP-16_W7.62mm_LongPads" H 10550 3400 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/cd74hc4511.pdf" H 10550 3400 50  0001 C CNN
+F 3 "https://www.ti.com/lit/ds/symlink/cd4511b.pdf" H 10550 3400 50  0001 C CNN
+F 4 "X" H 10550 3400 50  0001 C CNN "Spice_Primitive"
+F 5 "cd4511b" H 10550 3400 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 10550 3400 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 10550 3400 50  0001 C CNN "Spice_Lib_File"
 	1    10550 3400
 	1    0    0    -1  
 $EndComp
@@ -1108,9 +1112,13 @@ L 4xxx_IEEE:4511 IC7
 U 1 1 5E72FFCB
 P 10550 4700
 F 0 "IC7" H 10300 5150 50  0000 L TNN
-F 1 "4511N" H 10550 4250 50  0000 C BNN
+F 1 "CD4511B" H 10550 4250 50  0000 C BNN
 F 2 "Package_DIP:DIP-16_W7.62mm_LongPads" H 10550 4700 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/cd74hc4511.pdf" H 10550 4700 50  0001 C CNN
+F 3 "https://www.ti.com/lit/ds/symlink/cd4511b.pdf" H 10550 4700 50  0001 C CNN
+F 4 "X" H 10550 4700 50  0001 C CNN "Spice_Primitive"
+F 5 "cd4511b" H 10550 4700 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 10550 4700 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 10550 4700 50  0001 C CNN "Spice_Lib_File"
 	1    10550 4700
 	1    0    0    -1  
 $EndComp

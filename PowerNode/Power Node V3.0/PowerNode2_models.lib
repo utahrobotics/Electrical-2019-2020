@@ -1,0 +1,24 @@
+* W237-4 screw terminal providing voltage vcc
+.subckt w237_4 VCC GND SCL SDA
+V1 VCC GND 5V
+R1 GND 0 0
+.ends w237_4
+
+* CD4511B CD-to-7 segment latch/decoder/driver
+* TODO: add latch functionality
+.subckt cd4511b Bin Cin nLT nBL LE Din Ain GND e d c b a g f VCC VOH=4.55 ROUT=40 VIL=1.5 VIH=3.5
+Va aout GND {(v(nLT,GND)<VIL || (v(nBL,GND)>VIH && ((v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)>VIH && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)>VIH && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)<VIL && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)>VIH && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)>VIH) || (v(Ain,GND)>VIH && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)>VIH)))) ? VOH : 0}
+Ra a aout {ROUT}
+Vb bout GND {(v(nLT,GND)<VIL || (v(nBL,GND)>VIH && ((v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)>VIH && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)>VIH && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)>VIH && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)>VIH) || (v(Ain,GND)>VIH && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)>VIH)))) ? VOH : 0}
+Rb b bout {ROUT}
+Vc cout GND {(v(nLT,GND)<VIL || (v(nBL,GND)>VIH && ((v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)>VIH && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)<VIL && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)>VIH && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)>VIH && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)>VIH) || (v(Ain,GND)>VIH && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)>VIH)))) ? VOH : 0}
+Rc c cout {ROUT}
+Vd dout GND {(v(nLT,GND)<VIL || (v(nBL,GND)>VIH && ((v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)>VIH && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)>VIH && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)<VIL && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)>VIH && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)>VIH)))) ? VOH : 0}
+Rd d dout {ROUT}
+Ve eout GND {(v(nLT,GND)<VIL || (v(nBL,GND)>VIH && ((v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)>VIH && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)>VIH && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)>VIH)))) ? VOH : 0}
+Re e eout {ROUT}
+Vf fout GND {(v(nLT,GND)<VIL || (v(nBL,GND)>VIH && ((v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)<VIL && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)>VIH && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)>VIH) || (v(Ain,GND)>VIH && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)>VIH)))) ? VOH : 0}
+Rf f fout {ROUT}
+Vg gout GND {(v(nLT,GND)<VIL || (v(nBL,GND)>VIH && ((v(Ain,GND)<VIL && v(Bin,GND)>VIH && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)>VIH && v(Cin,GND)<VIL && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)>VIH && v(Bin,GND)<VIL && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)>VIH && v(Cin,GND)>VIH && v(Din,GND)<VIL) || (v(Ain,GND)<VIL && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)>VIH) || (v(Ain,GND)>VIH && v(Bin,GND)<VIL && v(Cin,GND)<VIL && v(Din,GND)>VIH)))) ? VOH : 0}
+Rg g gout {ROUT}
+.ends cd4511b
