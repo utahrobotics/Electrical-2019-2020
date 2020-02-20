@@ -82,6 +82,8 @@ Wire Wire Line
 Wire Wire Line
 	2600 2850 2600 3000
 Wire Wire Line
+	2600 3000 2600 3050
+Wire Wire Line
 	2600 3000 3100 3000
 Wire Wire Line
 	2800 4300 3100 4300
@@ -509,8 +511,14 @@ Text Label 1850 3100 0    50   ~ 0
 SCL
 Text Label 2600 2500 0    50   ~ 0
 VCC
-Text Label 3100 2350 0    50   ~ 0
-GND
+Text Label 5000 2350 0    50   ~ 0
+VMEAS
+Text Label 6650 3800 0    50   ~ 0
+VPOT
+Text Label 6650 4000 0    50   ~ 0
+IMEAS
+Text Label 8950 2600 2    50   ~ 0
+SWITCH
 Text Label 9950 3100 0    50   ~ 0
 LE*1
 Text Label 9950 3600 0    50   ~ 0
@@ -615,7 +623,9 @@ F 0 "VHIIN1" V 7450 2200 50  0000 L BNN
 F 1 "WIREPAD4,16O1,6" V 7600 2450 50  0000 C BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 7500 2350 50  0001 C CNN
 F 3 "" H 7500 2350 50  0001 C CNN
-F 4 "N" V 7500 2350 50  0001 C CNN "Spice_Netlist_Enabled"
+F 4 "Y" V 7500 2350 50  0001 C CNN "Spice_Netlist_Enabled"
+F 5 "V" H 7500 2350 50  0001 C CNN "Spice_Primitive"
+F 6 "dc 22" H 7500 2350 50  0001 C CNN "Spice_Model"
 	1    7500 2350
 	0    1    1    0   
 $EndComp
@@ -714,6 +724,17 @@ F 3 "" H 12950 4000 50  0001 C CNN
 F 4 "N" V 12950 4000 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    12950 4000
 	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5E5BFDA0
+P 2600 3050
+F 0 "#PWR?" H 2600 2800 50  0001 C CNN
+F 1 "GND" H 2605 2877 50  0000 C CNN
+F 2 "" H 2600 3050 50  0001 C CNN
+F 3 "" H 2600 3050 50  0001 C CNN
+	1    2600 3050
+	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R_Small R25
