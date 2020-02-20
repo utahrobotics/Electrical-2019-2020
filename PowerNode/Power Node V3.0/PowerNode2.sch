@@ -31,9 +31,14 @@ Connection ~ 3800 5000
 Connection ~ 4400 2350
 Connection ~ 4600 2500
 Connection ~ 5000 2350
+Connection ~ 5300 2700
+Connection ~ 5700 2600
+Connection ~ 6050 1850
+Connection ~ 6050 2350
 Connection ~ 6050 2500
 Connection ~ 6400 2500
 Connection ~ 6700 5000
+Connection ~ 6750 5800
 Connection ~ 7000 2350
 Connection ~ 7200 6100
 Connection ~ 7600 2900
@@ -124,7 +129,7 @@ Wire Wire Line
 Wire Wire Line
 	4000 2700 4000 4300
 Wire Wire Line
-	4400 1900 4400 2350
+	4400 1850 4400 2350
 Wire Wire Line
 	4400 2350 3100 2350
 Wire Wire Line
@@ -138,9 +143,11 @@ Wire Wire Line
 Wire Wire Line
 	5000 2600 5000 2350
 Wire Wire Line
-	5000 2600 6400 2600
+	5000 2600 5700 2600
 Wire Wire Line
 	5300 2700 4000 2700
+Wire Wire Line
+	5300 2700 5400 2700
 Wire Wire Line
 	5300 2800 5300 2700
 Wire Wire Line
@@ -148,7 +155,13 @@ Wire Wire Line
 Wire Wire Line
 	5300 4700 4600 4700
 Wire Wire Line
-	5550 2350 7000 2350
+	5550 2350 6050 2350
+Wire Wire Line
+	5600 2700 5700 2700
+Wire Wire Line
+	5700 2600 6400 2600
+Wire Wire Line
+	5700 2700 5700 2600
 Wire Wire Line
 	5900 3100 6050 3100
 Wire Wire Line
@@ -174,6 +187,14 @@ Wire Wire Line
 Wire Wire Line
 	6000 4400 6000 4300
 Wire Wire Line
+	6050 1850 4400 1850
+Wire Wire Line
+	6050 1850 6050 1950
+Wire Wire Line
+	6050 2250 6050 2350
+Wire Wire Line
+	6050 2350 7000 2350
+Wire Wire Line
 	6050 2500 4600 2500
 Wire Wire Line
 	6050 3100 6050 2500
@@ -198,13 +219,19 @@ Wire Wire Line
 Wire Wire Line
 	6500 3400 6500 2800
 Wire Wire Line
+	6650 5550 6750 5550
+Wire Wire Line
 	6700 5000 3800 5000
 Wire Wire Line
 	6700 5000 6700 5400
 Wire Wire Line
 	6700 5000 7600 5000
 Wire Wire Line
-	6700 5800 6800 5800
+	6700 5800 6750 5800
+Wire Wire Line
+	6750 5550 6750 5800
+Wire Wire Line
+	6750 5800 6800 5800
 Wire Wire Line
 	6800 5400 6700 5400
 Wire Wire Line
@@ -274,9 +301,9 @@ Wire Wire Line
 Wire Wire Line
 	8100 2600 8100 3300
 Wire Wire Line
-	8200 1900 4400 1900
+	8200 1850 6050 1850
 Wire Wire Line
-	8200 1900 8200 2100
+	8200 1850 8200 2100
 Wire Wire Line
 	8200 5700 7600 5700
 Wire Wire Line
@@ -513,10 +540,14 @@ Text Label 2600 2500 0    50   ~ 0
 VCC
 Text Label 5000 2350 0    50   ~ 0
 VMEAS
+Text Label 6250 5550 2    50   ~ 0
+VHI
 Text Label 6650 3800 0    50   ~ 0
 VPOT
 Text Label 6650 4000 0    50   ~ 0
 IMEAS
+Text Label 7150 2350 2    50   ~ 0
+VHI
 Text Label 8950 2600 2    50   ~ 0
 SWITCH
 Text Label 9950 3100 0    50   ~ 0
@@ -726,10 +757,10 @@ F 4 "N" V 12950 4000 50  0001 C CNN "Spice_Netlist_Enabled"
 	0    1    1    0   
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR01
 U 1 1 5E5BFDA0
 P 2600 3050
-F 0 "#PWR?" H 2600 2800 50  0001 C CNN
+F 0 "#PWR01" H 2600 2800 50  0001 C CNN
 F 1 "GND" H 2605 2877 50  0000 C CNN
 F 2 "" H 2600 3050 50  0001 C CNN
 F 3 "" H 2600 3050 50  0001 C CNN
@@ -742,7 +773,7 @@ U 1 1 5E558591
 P 9800 3100
 F 0 "R25" V 9900 3150 50  0000 R CNN
 F 1 "10k" V 9800 3100 50  0000 C CNN
-F 2 "" H 9800 3100 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_Power_L20.0mm_W6.4mm_P5.08mm_Vertical" H 9800 3100 50  0001 C CNN
 F 3 "~" H 9800 3100 50  0001 C CNN
 	1    9800 3100
 	0    -1   -1   0   
@@ -753,7 +784,7 @@ U 1 1 5E51A0A4
 P 9800 3600
 F 0 "R21" V 9900 3650 50  0000 R CNN
 F 1 "10k" V 9800 3600 50  0000 C CNN
-F 2 "" H 9800 3600 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_Power_L20.0mm_W6.4mm_P5.08mm_Vertical" H 9800 3600 50  0001 C CNN
 F 3 "~" H 9800 3600 50  0001 C CNN
 	1    9800 3600
 	0    -1   -1   0   
@@ -764,7 +795,7 @@ U 1 1 5E4EE400
 P 9800 3700
 F 0 "R22" V 9700 3750 50  0000 R CNN
 F 1 "10k" V 9800 3700 50  0000 C CNN
-F 2 "" H 9800 3700 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_Power_L20.0mm_W6.4mm_P5.08mm_Vertical" H 9800 3700 50  0001 C CNN
 F 3 "~" H 9800 3700 50  0001 C CNN
 	1    9800 3700
 	0    -1   -1   0   
@@ -775,7 +806,7 @@ U 1 1 5E55D297
 P 9800 4400
 F 0 "R26" V 9900 4450 50  0000 R CNN
 F 1 "10k" V 9800 4400 50  0000 C CNN
-F 2 "" H 9800 4400 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_Power_L20.0mm_W6.4mm_P5.08mm_Vertical" H 9800 4400 50  0001 C CNN
 F 3 "~" H 9800 4400 50  0001 C CNN
 	1    9800 4400
 	0    -1   -1   0   
@@ -786,7 +817,7 @@ U 1 1 5E547F96
 P 9800 4900
 F 0 "R23" V 9900 4950 50  0000 R CNN
 F 1 "10k" V 9800 4900 50  0000 C CNN
-F 2 "" H 9800 4900 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_Power_L20.0mm_W6.4mm_P5.08mm_Vertical" H 9800 4900 50  0001 C CNN
 F 3 "~" H 9800 4900 50  0001 C CNN
 	1    9800 4900
 	0    -1   -1   0   
@@ -797,7 +828,7 @@ U 1 1 5E547FAD
 P 9800 5000
 F 0 "R24" V 9700 5050 50  0000 R CNN
 F 1 "10k" V 9800 5000 50  0000 C CNN
-F 2 "" H 9800 5000 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_Power_L20.0mm_W6.4mm_P5.08mm_Vertical" H 9800 5000 50  0001 C CNN
 F 3 "~" H 9800 5000 50  0001 C CNN
 	1    9800 5000
 	0    -1   -1   0   
@@ -1028,10 +1059,21 @@ U 1 1 5E66977B
 P 2600 2750
 F 0 "C2" H 2692 2796 50  0000 L CNN
 F 1 "0.1uF" H 2692 2705 50  0000 L CNN
-F 2 "PowerNode2:C5B3" H 2600 2750 50  0001 C CNN
+F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 2600 2750 50  0001 C CNN
 F 3 "~" H 2600 2750 50  0001 C CNN
 	1    2600 2750
 	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C4
+U 1 1 5E50F8A3
+P 5500 2700
+F 0 "C4" V 5450 2800 50  0000 C CNN
+F 1 "0.1uF" V 5600 2700 50  0000 C CNN
+F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 5538 2550 50  0001 C CNN
+F 3 "~" H 5500 2700 50  0001 C CNN
+	1    5500 2700
+	0    1    1    0   
 $EndComp
 $Comp
 L Device:C_Small C1
@@ -1039,7 +1081,7 @@ U 1 1 5E6DA189
 P 8200 5900
 F 0 "C1" H 8292 5946 50  0000 L CNN
 F 1 "1nF" H 8292 5855 50  0000 L CNN
-F 2 "PowerNode2:C5B3" H 8200 5900 50  0001 C CNN
+F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 8200 5900 50  0001 C CNN
 F 3 "~" H 8200 5900 50  0001 C CNN
 	1    8200 5900
 	1    0    0    -1  
@@ -1077,12 +1119,23 @@ F 8 "2 1" H 9900 2600 50  0001 C CNN "Spice_Node_Sequence"
 	-1   0    0    -1  
 $EndComp
 $Comp
+L Device:CP1 C5
+U 1 1 5E5009B1
+P 6050 2100
+F 0 "C5" H 5935 2055 50  0000 R CNN
+F 1 "100uF" H 5935 2145 50  0000 R CNN
+F 2 "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm" H 6050 2100 50  0001 C CNN
+F 3 "~" H 6050 2100 50  0001 C CNN
+	1    6050 2100
+	1    0    0    1   
+$EndComp
+$Comp
 L Device:C C3
 U 1 1 5E6F8BCD
 P 7150 4400
 F 0 "C3" V 7000 4400 50  0000 C CNN
 F 1 "0.1uF" V 7300 4400 50  0000 C CNN
-F 2 "PowerNode2:C5B3" H 7188 4250 50  0001 C CNN
+F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 7188 4250 50  0001 C CNN
 F 3 "~" H 7150 4400 50  0001 C CNN
 	1    7150 4400
 	0    1    1    0   
@@ -1101,6 +1154,20 @@ F 6 "Y" H 7600 3800 50  0001 C CNN "Spice_Netlist_Enabled"
 F 7 "PowerNode2_models.lib" H 7600 3800 50  0001 C CNN "Spice_Lib_File"
 	1    7600 3800
 	-1   0    0    -1  
+$EndComp
+$Comp
+L Simulation_SPICE:IDC ILOAD1
+U 1 1 5E54AD5C
+P 6450 5550
+F 0 "ILOAD1" V 6806 5550 50  0000 C CNN
+F 1 "IDC" V 6716 5550 50  0000 C CNN
+F 2 "" H 6450 5550 50  0001 C CNN
+F 3 "~" H 6450 5550 50  0001 C CNN
+F 4 "Y" H 6450 5550 50  0001 L CNN "Spice_Netlist_Enabled"
+F 5 "I" H 6450 5550 50  0001 L CNN "Spice_Primitive"
+F 6 "dc 30" V 6625 5550 50  0000 C CNN "Spice_Model"
+	1    6450 5550
+	0    -1   -1   0   
 $EndComp
 $Comp
 L Connector:Screw_Terminal_01x04 INOUT1
