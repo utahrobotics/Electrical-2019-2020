@@ -501,6 +501,8 @@ Text Notes 1050 3150 0    50   ~ 0
 SCL
 Text Notes 1050 3250 0    50   ~ 0
 SDA
+Text Notes 9300 2250 2    50   ~ 0
+.tran 1e-4 100m
 Text Label 1700 3200 0    50   ~ 0
 SDA
 Text Label 1850 3100 0    50   ~ 0
@@ -541,6 +543,7 @@ F 0 "GNDHIIN1" V 2900 4050 50  0000 L BNN
 F 1 "WIREPAD4,16O1,6" V 2750 4300 50  0000 C BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 2800 4300 50  0001 C CNN
 F 3 "" H 2800 4300 50  0001 C CNN
+F 4 "N" V 2800 4300 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    2800 4300
 	0    -1   -1   0   
 $EndComp
@@ -552,6 +555,7 @@ F 0 "GND1" V 3000 3200 50  0000 L BNN
 F 1 "2,15_1,0" V 2850 3400 50  0000 C BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 2900 3300 50  0001 C CNN
 F 3 "" H 2900 3300 50  0001 C CNN
+F 4 "N" H 2900 3300 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    2900 3300
 	0    -1   -1   0   
 $EndComp
@@ -563,6 +567,7 @@ F 0 "GND2" V 3000 3550 50  0000 L BNN
 F 1 "2,15_1,0" V 2850 3750 50  0000 C BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 2900 3650 50  0001 C CNN
 F 3 "" H 2900 3650 50  0001 C CNN
+F 4 "N" V 2900 3650 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    2900 3650
 	0    -1   -1   0   
 $EndComp
@@ -574,6 +579,7 @@ F 0 "PB2" V 6100 3150 50  0000 L BNN
 F 1 "2,54_0,9" V 6200 2950 50  0000 L CNN
 F 2 "PowerNode2:2,54_0,9" H 6150 3200 50  0001 C CNN
 F 3 "" H 6150 3200 50  0001 C CNN
+F 4 "N" V 6150 3200 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    6150 3200
 	0    1    1    0   
 $EndComp
@@ -585,6 +591,7 @@ F 0 "GNDHIOUT1" V 6800 5900 50  0000 C BNN
 F 1 "WIREPAD4,16O1,6" V 6600 5950 50  0000 C TNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 6700 5800 50  0001 C CNN
 F 3 "" H 6700 5800 50  0001 C CNN
+F 4 "N" V 6700 5800 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    6700 5800
 	0    -1   -1   0   
 $EndComp
@@ -596,6 +603,7 @@ F 0 "VHIOUT1" H 6650 2250 50  0000 L BNN
 F 1 "WIREPAD4,16O1,6" H 7000 2500 50  0000 C BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 7000 2300 50  0001 C CNN
 F 3 "" H 7000 2300 50  0001 C CNN
+F 4 "N" H 7000 2300 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    7000 2300
 	1    0    0    -1  
 $EndComp
@@ -607,6 +615,7 @@ F 0 "VHIIN1" V 7450 2200 50  0000 L BNN
 F 1 "WIREPAD4,16O1,6" V 7600 2450 50  0000 C BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 7500 2350 50  0001 C CNN
 F 3 "" H 7500 2350 50  0001 C CNN
+F 4 "N" V 7500 2350 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    7500 2350
 	0    1    1    0   
 $EndComp
@@ -618,6 +627,7 @@ F 0 "QH*1" H 8800 4500 50  0000 L BNN
 F 1 "2,54_0,9" H 8800 4700 50  0000 C BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 8800 4500 50  0001 C CNN
 F 3 "" H 8800 4500 50  0001 C CNN
+F 4 "N" H 8800 4500 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    8800 4500
 	-1   0    0    1   
 $EndComp
@@ -629,6 +639,7 @@ F 0 "BL*1" V 10650 2200 50  0000 L BNN
 F 1 "2,54_0,9" V 10800 2150 50  0000 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 10700 2250 50  0001 C CNN
 F 3 "" H 10700 2250 50  0001 C CNN
+F 4 "N" V 10700 2250 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    10700 2250
 	-1   0    0    -1  
 $EndComp
@@ -640,6 +651,7 @@ F 0 "LT*1" V 10900 2200 50  0000 L BNN
 F 1 "2,54_0,9" V 11050 2150 50  0000 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 10950 2250 50  0001 C CNN
 F 3 "" H 10950 2250 50  0001 C CNN
+F 4 "N" V 10950 2250 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    10950 2250
 	-1   0    0    -1  
 $EndComp
@@ -651,6 +663,7 @@ F 0 "BL*2" V 11150 2200 50  0000 L BNN
 F 1 "2,54_0,9" V 11300 2150 50  0000 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 11200 2250 50  0001 C CNN
 F 3 "" H 11200 2250 50  0001 C CNN
+F 4 "N" V 11200 2250 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    11200 2250
 	-1   0    0    -1  
 $EndComp
@@ -662,6 +675,7 @@ F 0 "LT*2" V 11400 2200 50  0000 L BNN
 F 1 "2,54_0,9" V 11550 2150 50  0000 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 11450 2250 50  0001 C CNN
 F 3 "" H 11450 2250 50  0001 C CNN
+F 4 "N" V 11450 2250 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    11450 2250
 	-1   0    0    -1  
 $EndComp
@@ -673,6 +687,7 @@ F 0 "LE*1" V 11650 2200 50  0000 L BNN
 F 1 "2,54_0,9" V 11800 2150 50  0000 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 11700 2250 50  0001 C CNN
 F 3 "" H 11700 2250 50  0001 C CNN
+F 4 "N" V 11700 2250 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    11700 2250
 	-1   0    0    -1  
 $EndComp
@@ -684,6 +699,7 @@ F 0 "LE*2" V 11900 2200 50  0000 L BNN
 F 1 "2,54_0,9" V 12050 2150 50  0000 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 11950 2250 50  0001 C CNN
 F 3 "" H 11950 2250 50  0001 C CNN
+F 4 "N" V 11950 2250 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    11950 2250
 	-1   0    0    -1  
 $EndComp
@@ -695,6 +711,7 @@ F 0 "DP1" V 12900 3950 50  0000 L BNN
 F 1 "2,54_0,9" V 13050 3850 50  0000 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 12950 4000 50  0001 C CNN
 F 3 "" H 12950 4000 50  0001 C CNN
+F 4 "N" V 12950 4000 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    12950 4000
 	0    1    1    0   
 $EndComp
@@ -1057,6 +1074,10 @@ F 0 "R3" H 7532 3846 50  0000 R CNN
 F 1 "TRIM_US-B25P" H 7532 3755 50  0000 R CNN
 F 2 "PowerNode2:B25P" H 7600 3800 50  0001 C CNN
 F 3 "~" H 7600 3800 50  0001 C CNN
+F 4 "X" H 7600 3800 50  0001 C CNN "Spice_Primitive"
+F 5 "pot100k" H 7600 3800 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 7600 3800 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 7600 3800 50  0001 C CNN "Spice_Lib_File"
 	1    7600 3800
 	-1   0    0    -1  
 $EndComp
@@ -1068,6 +1089,10 @@ F 0 "INOUT1" H 1218 3317 50  0000 C CNN
 F 1 "W237-4" H 1218 3226 50  0000 C CNN
 F 2 "PowerNode2:W237-4" H 1300 3000 50  0001 C CNN
 F 3 "~" H 1300 3000 50  0001 C CNN
+F 4 "X" H 1300 3000 50  0001 C CNN "Spice_Primitive"
+F 5 "w237_4" H 1300 3000 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 1300 3000 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 1300 3000 50  0001 C CNN "Spice_Lib_File"
 	1    1300 3000
 	-1   0    0    -1  
 $EndComp
@@ -1169,6 +1194,10 @@ F 0 "IC5" H 8250 4200 50  0000 L TNN
 F 1 "74HC595N" H 8600 4200 50  0000 L TNN
 F 2 "Package_DIP:DIP-16_W7.62mm_LongPads" H 8550 3600 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf" H 8550 3600 50  0001 C CNN
+F 4 "X" H 8550 3600 50  0001 C CNN "Spice_Primitive"
+F 5 "ti74hc595n" H 8550 3600 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 8550 3600 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 8550 3600 50  0001 C CNN "Spice_Lib_File"
 	1    8550 3600
 	1    0    0    -1  
 $EndComp
@@ -1180,6 +1209,10 @@ F 0 "U$1" H 4771 3654 50  0000 R CNN
 F 1 "ATtiny84-20PU" H 4771 3745 50  0000 R CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 5300 3700 50  0001 C CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/doc8006.pdf" H 5300 3700 50  0001 C CNN
+F 4 "X" H 5300 3700 50  0001 C CNN "Spice_Primitive"
+F 5 "attiny84" H 5300 3700 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 5300 3700 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 5300 3700 50  0001 C CNN "Spice_Lib_File"
 	1    5300 3700
 	1    0    0    1   
 $EndComp
