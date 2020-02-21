@@ -30,11 +30,10 @@ Connection ~ 3800 4300
 Connection ~ 3800 5000
 Connection ~ 4400 2350
 Connection ~ 4600 2500
+Connection ~ 5000 1850
 Connection ~ 5000 2350
 Connection ~ 5300 2700
 Connection ~ 5700 2600
-Connection ~ 6050 1850
-Connection ~ 6050 2350
 Connection ~ 6050 2500
 Connection ~ 6400 2500
 Connection ~ 6700 6100
@@ -50,6 +49,8 @@ Connection ~ 8050 6100
 Connection ~ 8100 2600
 Connection ~ 8200 6100
 Connection ~ 8550 2900
+Connection ~ 8550 5000
+Connection ~ 9000 4300
 Connection ~ 9500 4100
 Connection ~ 9600 2900
 Connection ~ 9600 3600
@@ -59,6 +60,8 @@ Connection ~ 9600 4900
 Connection ~ 9600 5000
 Connection ~ 9650 6100
 Connection ~ 10550 4100
+Connection ~ 11200 4100
+Connection ~ 11550 3900
 Connection ~ 12350 3700
 Connection ~ 12350 3800
 Connection ~ 12350 4100
@@ -133,6 +136,8 @@ Wire Wire Line
 Wire Wire Line
 	4400 1850 4400 2350
 Wire Wire Line
+	4400 1850 5000 1850
+Wire Wire Line
 	4400 2350 3100 2350
 Wire Wire Line
 	4400 2350 4550 2350
@@ -140,6 +145,12 @@ Wire Wire Line
 	4600 4700 4600 2500
 Wire Wire Line
 	4850 2350 5000 2350
+Wire Wire Line
+	5000 1850 5000 1950
+Wire Wire Line
+	5000 1850 8200 1850
+Wire Wire Line
+	5000 2250 5000 2350
 Wire Wire Line
 	5000 2350 5250 2350
 Wire Wire Line
@@ -157,7 +168,7 @@ Wire Wire Line
 Wire Wire Line
 	5300 4700 4600 4700
 Wire Wire Line
-	5550 2350 6050 2350
+	5550 2350 7000 2350
 Wire Wire Line
 	5600 2700 5700 2700
 Wire Wire Line
@@ -188,14 +199,6 @@ Wire Wire Line
 	6000 4300 5900 4300
 Wire Wire Line
 	6000 4400 6000 4300
-Wire Wire Line
-	6050 1850 4400 1850
-Wire Wire Line
-	6050 1850 6050 1950
-Wire Wire Line
-	6050 2250 6050 2350
-Wire Wire Line
-	6050 2350 7000 2350
 Wire Wire Line
 	6050 2500 4600 2500
 Wire Wire Line
@@ -301,8 +304,6 @@ Wire Wire Line
 Wire Wire Line
 	8100 2600 8100 3300
 Wire Wire Line
-	8200 1850 6050 1850
-Wire Wire Line
 	8200 1850 8200 2100
 Wire Wire Line
 	8200 5700 7600 5700
@@ -321,7 +322,11 @@ Wire Wire Line
 Wire Wire Line
 	8550 5000 8550 4300
 Wire Wire Line
+	8550 5000 8650 5000
+Wire Wire Line
 	8800 4300 8800 4500
+Wire Wire Line
+	8850 5000 9000 5000
 Wire Wire Line
 	8950 3200 10000 3200
 Wire Wire Line
@@ -344,6 +349,8 @@ Wire Wire Line
 	9000 4100 9000 4300
 Wire Wire Line
 	9000 4300 8800 4300
+Wire Wire Line
+	9000 5000 9000 4300
 Wire Wire Line
 	9100 3900 9100 4800
 Wire Wire Line
@@ -419,7 +426,7 @@ Wire Wire Line
 Wire Wire Line
 	10550 4100 10550 3750
 Wire Wire Line
-	10550 4100 12350 4100
+	10550 4100 11200 4100
 Wire Wire Line
 	10550 4200 9600 4200
 Wire Wire Line
@@ -445,6 +452,10 @@ Wire Wire Line
 Wire Wire Line
 	11200 3600 11100 3600
 Wire Wire Line
+	11200 3900 11200 4100
+Wire Wire Line
+	11200 4100 12350 4100
+Wire Wire Line
 	11200 4400 11100 4400
 Wire Wire Line
 	11200 4500 11100 4500
@@ -456,6 +467,10 @@ Wire Wire Line
 	11200 4800 11100 4800
 Wire Wire Line
 	11200 4900 11100 4900
+Wire Wire Line
+	11250 3900 11200 3900
+Wire Wire Line
+	11450 3900 11550 3900
 Wire Wire Line
 	11500 2800 12450 2800
 Wire Wire Line
@@ -475,7 +490,9 @@ Wire Wire Line
 Wire Wire Line
 	11500 5000 11650 5000
 Wire Wire Line
-	11550 3800 11550 4000
+	11550 3800 11550 3900
+Wire Wire Line
+	11550 3900 11550 4000
 Wire Wire Line
 	11550 4000 12550 4000
 Wire Wire Line
@@ -769,6 +786,17 @@ F 3 "" H 2600 3050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
+L Device:R_Small R28
+U 1 1 5E662105
+P 8750 5000
+F 0 "R28" V 8850 5050 50  0000 R CNN
+F 1 "10k" V 8750 5000 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_Power_L20.0mm_W6.4mm_P5.08mm_Vertical" H 8750 5000 50  0001 C CNN
+F 3 "~" H 8750 5000 50  0001 C CNN
+	1    8750 5000
+	0    -1   -1   0   
+$EndComp
+$Comp
 L Device:R_Small R25
 U 1 1 5E558591
 P 9800 3100
@@ -832,6 +860,17 @@ F 1 "10k" V 9800 5000 50  0000 C CNN
 F 2 "Resistor_THT:R_Axial_Power_L20.0mm_W6.4mm_P5.08mm_Vertical" H 9800 5000 50  0001 C CNN
 F 3 "~" H 9800 5000 50  0001 C CNN
 	1    9800 5000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R_Small R29
+U 1 1 5E6012D7
+P 11350 3900
+F 0 "R29" V 11250 3950 50  0000 R CNN
+F 1 "10k" V 11350 3900 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_Power_L20.0mm_W6.4mm_P5.08mm_Vertical" H 11350 3900 50  0001 C CNN
+F 3 "~" H 11350 3900 50  0001 C CNN
+	1    11350 3900
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -1122,12 +1161,12 @@ $EndComp
 $Comp
 L Device:CP1 C5
 U 1 1 5E5009B1
-P 6050 2100
-F 0 "C5" H 5935 2055 50  0000 R CNN
-F 1 "100uF" H 5935 2145 50  0000 R CNN
-F 2 "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm" H 6050 2100 50  0001 C CNN
-F 3 "~" H 6050 2100 50  0001 C CNN
-	1    6050 2100
+P 5000 2100
+F 0 "C5" H 4885 2055 50  0000 R CNN
+F 1 "100uF" H 4885 2145 50  0000 R CNN
+F 2 "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm" H 5000 2100 50  0001 C CNN
+F 3 "~" H 5000 2100 50  0001 C CNN
+	1    5000 2100
 	1    0    0    1   
 $EndComp
 $Comp
