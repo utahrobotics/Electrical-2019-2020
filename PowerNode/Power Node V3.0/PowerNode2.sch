@@ -37,8 +37,8 @@ Connection ~ 6050 1850
 Connection ~ 6050 2350
 Connection ~ 6050 2500
 Connection ~ 6400 2500
-Connection ~ 6700 5000
-Connection ~ 6750 5800
+Connection ~ 6700 6100
+Connection ~ 6750 5400
 Connection ~ 7000 2350
 Connection ~ 7200 6100
 Connection ~ 7600 2900
@@ -125,7 +125,9 @@ Wire Wire Line
 Wire Wire Line
 	3800 5000 3800 6100
 Wire Wire Line
-	3800 6100 7200 6100
+	3800 5000 7600 5000
+Wire Wire Line
+	3800 6100 6700 6100
 Wire Wire Line
 	4000 2700 4000 4300
 Wire Wire Line
@@ -219,21 +221,19 @@ Wire Wire Line
 Wire Wire Line
 	6500 3400 6500 2800
 Wire Wire Line
-	6650 5550 6750 5550
+	6650 5650 6750 5650
 Wire Wire Line
-	6700 5000 3800 5000
+	6700 5400 6750 5400
 Wire Wire Line
-	6700 5000 6700 5400
+	6700 5800 6700 6100
 Wire Wire Line
-	6700 5000 7600 5000
+	6700 6100 7200 6100
 Wire Wire Line
-	6700 5800 6750 5800
+	6750 5400 6800 5400
 Wire Wire Line
-	6750 5550 6750 5800
+	6750 5650 6750 5400
 Wire Wire Line
-	6750 5800 6800 5800
-Wire Wire Line
-	6800 5400 6700 5400
+	6800 5800 6700 5800
 Wire Wire Line
 	7000 2300 7000 2350
 Wire Wire Line
@@ -540,7 +540,7 @@ Text Label 2600 2500 0    50   ~ 0
 VCC
 Text Label 5000 2350 0    50   ~ 0
 VMEAS
-Text Label 6250 5550 2    50   ~ 0
+Text Label 6250 5650 2    50   ~ 0
 VHI
 Text Label 6650 3800 0    50   ~ 0
 VPOT
@@ -625,14 +625,14 @@ $EndComp
 $Comp
 L Connector:TestPoint GNDHIOUT1
 U 1 1 16E6194B
-P 6700 5800
-F 0 "GNDHIOUT1" V 6800 5900 50  0000 C BNN
-F 1 "WIREPAD4,16O1,6" V 6600 5950 50  0000 C TNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 6700 5800 50  0001 C CNN
-F 3 "" H 6700 5800 50  0001 C CNN
-F 4 "N" V 6700 5800 50  0001 C CNN "Spice_Netlist_Enabled"
-	1    6700 5800
-	0    -1   -1   0   
+P 6700 5400
+F 0 "GNDHIOUT1" V 6800 5500 50  0000 C BNN
+F 1 "WIREPAD4,16O1,6" V 6600 5550 50  0000 C TNN
+F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 6700 5400 50  0001 C CNN
+F 3 "" H 6700 5400 50  0001 C CNN
+F 4 "N" V 6700 5400 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    6700 5400
+	0    -1   1    0   
 $EndComp
 $Comp
 L Connector:TestPoint VHIOUT1
@@ -655,8 +655,9 @@ F 1 "WIREPAD4,16O1,6" V 7600 2450 50  0000 C BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 7500 2350 50  0001 C CNN
 F 3 "" H 7500 2350 50  0001 C CNN
 F 4 "Y" V 7500 2350 50  0001 C CNN "Spice_Netlist_Enabled"
-F 5 "V" H 7500 2350 50  0001 C CNN "Spice_Primitive"
-F 6 "dc 22" H 7500 2350 50  0001 C CNN "Spice_Model"
+F 5 "X" H 7500 2350 50  0001 C CNN "Spice_Primitive"
+F 6 "battery" H 7500 2350 50  0001 C CNN "Spice_Model"
+F 7 "PowerNode2_models.lib" H 7500 2350 50  0001 C CNN "Spice_Lib_File"
 	1    7500 2350
 	0    1    1    0   
 $EndComp
@@ -1157,17 +1158,17 @@ F 7 "PowerNode2_models.lib" H 7600 3800 50  0001 C CNN "Spice_Lib_File"
 $EndComp
 $Comp
 L Simulation_SPICE:IDC ILOAD1
-U 1 1 5E54AD5C
-P 6450 5550
-F 0 "ILOAD1" V 6806 5550 50  0000 C CNN
-F 1 "IDC" V 6716 5550 50  0000 C CNN
-F 2 "" H 6450 5550 50  0001 C CNN
-F 3 "~" H 6450 5550 50  0001 C CNN
-F 4 "Y" H 6450 5550 50  0001 L CNN "Spice_Netlist_Enabled"
-F 5 "I" H 6450 5550 50  0001 L CNN "Spice_Primitive"
-F 6 "dc 30" V 6625 5550 50  0000 C CNN "Spice_Model"
-	1    6450 5550
-	0    -1   -1   0   
+U 1 1 5E5C2560
+P 6450 5650
+F 0 "ILOAD1" V 6400 5475 50  0000 C CNN
+F 1 "IDC" V 6500 5475 50  0000 C CNN
+F 2 "" H 6450 5650 50  0001 C CNN
+F 3 "~" H 6450 5650 50  0001 C CNN
+F 4 "Y" H 6450 5650 50  0001 L CNN "Spice_Netlist_Enabled"
+F 5 "I" H 6450 5650 50  0001 L CNN "Spice_Primitive"
+F 6 "SIN(15 15 100)" V 6500 6050 50  0000 C CNN "Spice_Model"
+	1    6450 5650
+	0    -1   1    0   
 $EndComp
 $Comp
 L Connector:Screw_Terminal_01x04 INOUT1
@@ -1238,7 +1239,7 @@ F 1 "ACS712xLCTR-30A" H 7200 6090 50  0000 C CNN
 F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 7300 5250 50  0001 L CIN
 F 3 "http://www.allegromicro.com/~/media/Files/Datasheets/ACS712-Datasheet.ashx?la=en" H 7200 5600 50  0001 C CNN
 F 4 "X" H 7200 5600 50  0001 C CNN "Spice_Primitive"
-F 5 "acs712elctr" H 7200 5600 50  0001 C CNN "Spice_Model"
+F 5 "acs712elctr sens=0.066 NA=7m" H 7200 5600 50  0001 C CNN "Spice_Model"
 F 6 "Y" H 7200 5600 50  0001 C CNN "Spice_Netlist_Enabled"
 F 7 "PowerNode2_models.lib" H 7200 5600 50  0001 C CNN "Spice_Lib_File"
 	1    7200 5600

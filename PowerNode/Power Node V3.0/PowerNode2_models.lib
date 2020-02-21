@@ -7,15 +7,21 @@ R2 2 3 {value}
 * 5mm LEDs
 .MODEL LedRed D (IS=93.2P RS=42M N=3.73 BV=4 IBV=10U CJO=2.97P VJ=.75 M=.333 TT=4.32U Iave=40m Vpk=4)
 
+* Voltage input
+.subckt battery 1 NA=10m NT=10u
+V1 2 GND 22
+V2 1 2 TRNOISE({NA} {NT} 0 0)
+.ends battery
+
 * W237-4 screw terminal providing voltage vcc
-.subckt w237_4 VCC GND SCL SDA
+.subckt w237_4 VCC GND SCL SDA NA=10m NT=10u
 V1 VCC GND 5
 .ends w237_4
 
 * Switch
-.subckt swspdt 1 2 3 tswitch=1 ron=100m roff=10Meg
-R1 1 2 {time<tswitch ? ron : roff}
-R2 2 3 {time>tswitch ? ron : roff}
+.subckt swspdt 1 2 3 imeas=1 ron=100m roff=10Meg
+R1 1 2 {imeas ? ron : roff}
+R2 2 3 {imeas ? roff : ron}
 .ends swspdt
 
 * ATTiny84
@@ -56,13 +62,16 @@ R14 14 8 10Meg
 
 * ACS712ELCTR current measurement IC
 * IP+ IP+ IP- IP- GND FILTER VIOUT VCC
-.subckt acs712elctr 1 2 3 4 5 6 7 8 sens=0.185
+.subckt acs712elctr 1 2 3 4 5 6 7 8 sens=0.185 NA=21m NT=10u
 RIP1 1 2 1m
 RIP2 3 4 1m
 VMEAS 1 3 0
-HIOUT 7 9 VMEAS {sens}
+HIOUT 10 9 VMEAS {sens}
 BOFF 9 5 v=v(8,5)/2
-RF 6 5 10Meg
+RF 10 6 1.7k
+EOUT 11 5 6 5 1
+VN 12 11 TRNOISE({NA} {NT} 0 0)
+ROUT 7 12 4.7k
 .ends acs712elctr
 
 * LTS-4301P diode model
