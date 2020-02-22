@@ -9,6 +9,11 @@ ros::Publisher imu_pub("imu", &imu_msg);
 
 #define NO_CRC_CHECK
 
+#ifndef NO_CRC_CHECK
+#define BADCRC 11
+#endif
+
+#define BADCHECKSUM 12
 #define IMUDataReady 19
 #define RxData 20
 #define SignalPin 13
@@ -108,6 +113,8 @@ void set_ts(void) {
     spin = false;
 }
 
+#ifndef NO_CRC_CHECK
+
 /*
  * The following code comes from RFC 1331.
  * See https://tools.ietf.org/html/rfc1331#appendix-B
@@ -169,12 +176,9 @@ inline uint16_t fcs(uint16_t fcs, const uint8_t* cp, size_t len) {
 /* My code again below */
 
 inline int crc_check(const uint16_t* data, size_t length) {
-#ifdef NO_CRC_CHECK
-    return 0;
-#else
     return (fcs(INITFCS, (uint8_t*) data, length * 2) - GOODFCS);
-#endif
 }
+#endif
 
 struct ImuData {
     double timestamp;
@@ -209,14 +213,18 @@ struct ImuData {
     {}
 
     int set_data(const uint16_t* data) {
+#ifndef NO_CRC_CHECK
         if (crc_check(data, 13)) {
+            digitalWriteFast(BADCRC, HIGH);
             return 1;
         }
+#endif
         uint16_t sum = 0;
         for (size_t i = 0; i < 12; i++) {
             sum += data[i];
         }
         if (((uint16_t) ~sum) ^ data[12]) {
+            digitalWriteFast(BADCHECKSUM, HIGH);
             return 2;
         }
         timestamp = ts;
@@ -301,11 +309,18 @@ void setup() {
     Serial.begin(115200);
     Serial1.begin(115200);
 
+#ifndef NO_CRC_CHECK
+    pinMode(BADCRC, OUTPUT);
+    digitalWriteFast(BADCRC, LOW);
+#endif
+
+    pinMode(BADCHECKSUM, OUTPUT);
     pinMode(IMUDataReady, INPUT);
     pinMode(RxData, INPUT);
     pinMode(SignalPin, OUTPUT);
     pinMode(DataReady, OUTPUT);
 
+    digitalWriteFast(BADCHECKSUM, LOW);
     digitalWriteFast(SignalPin, inFrame);
     digitalWriteFast(DataReady, ready);
 
@@ -329,6 +344,10 @@ void loop() {
         detachInterrupt(digitalPinToInterrupt(ClkPin));
         fillImuMsg();
         imu_pub.publish(&imu_msg);
+#ifndef NO_CRC_CHECK
+        digitalWriteFast(BADCRC, LOW);
+#endif
+        digitalWriteFast(BADCHECKSUM, LOW);
         SETREADY(0);
         spin = true;
     }
