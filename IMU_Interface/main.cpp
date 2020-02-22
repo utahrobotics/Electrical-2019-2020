@@ -283,8 +283,8 @@ inline Quaternion operator*(Quaternion q0, const Quaternion& q1) {
 #define DELTA(dir, q) (raw_imu_data1.dir##_delta_##q)
 #define DT (raw_imu_data1.timestamp - raw_imu_data.timestamp)
 #define DIFF(dir, q) (DELTA(dir, q) / DT)
-#define ANGLE_SCALE 2e-14
-#define VEL_SCALE 2e-19
+#define ANGLE_SCALE (1.0L / (1 << 14))
+#define VEL_SCALE (1.0L / (1 << 19))
 
 inline void fillImuMsg() {
     // TODO: double check
