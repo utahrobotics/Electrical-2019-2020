@@ -18,30 +18,30 @@ Comment7 ""
 Comment8 ""
 Comment9 ""
 $EndDescr
-Connection ~ 4000 4700
-Connection ~ 7000 5400
-Connection ~ 4000 5100
-Connection ~ 5500 5400
-Connection ~ 7500 5400
-Connection ~ 6000 5400
-Connection ~ 8100 2750
-Connection ~ 10000 3800
-Connection ~ 6500 5400
-Connection ~ 10800 3700
-Connection ~ 10800 5100
-Connection ~ 6000 4300
-Connection ~ 4000 5400
-Connection ~ 5500 4400
-Connection ~ 3000 4050
-Connection ~ 7400 2650
 Connection ~ 10800 5000
-Connection ~ 4500 5400
+Connection ~ 5500 4400
+Connection ~ 7500 5400
+Connection ~ 3000 4050
+Connection ~ 6000 5400
+Connection ~ 5500 5400
+Connection ~ 10800 3700
+Connection ~ 7000 5400
 Connection ~ 10800 3800
-Connection ~ 6500 4300
-Connection ~ 5000 5400
+Connection ~ 4000 4700
 Connection ~ 7000 2650
-Connection ~ 7500 3200
+Connection ~ 4500 5400
+Connection ~ 6500 4300
+Connection ~ 10000 3800
+Connection ~ 8100 2750
 Connection ~ 5500 2650
+Connection ~ 7400 2650
+Connection ~ 5000 5400
+Connection ~ 6000 4300
+Connection ~ 4000 5100
+Connection ~ 6500 5400
+Connection ~ 4000 5400
+Connection ~ 7500 3200
+Connection ~ 10800 5100
 Wire Wire Line
 	3000 3950 3000 4050
 Wire Wire Line
@@ -593,7 +593,7 @@ U 1 1 00000000
 P 3000 4300
 F 0 "R2" H 2932 4346 50  0000 R CNN
 F 1 "TRIM_US-B25P" H 2932 4255 50  0000 R CNN
-F 2 "PowerNode2:B25P" H 3000 4300 50  0001 C CNN
+F 2 "Potentiometer_THT:Potentiometer_Vishay_T73YP_Vertical" H 3000 4300 50  0001 C CNN
 F 3 "~" H 3000 4300 50  0001 C CNN
 F 4 "X" H 3000 4300 50  0001 C CNN "Spice_Primitive"
 F 5 "pot100k" H 3000 4300 50  0001 C CNN "Spice_Model"
@@ -608,7 +608,7 @@ U 1 1 5E5A8C67
 P 7000 3500
 F 0 "R3" H 6932 3546 50  0000 R CNN
 F 1 "TRIM_US-B25P" H 6932 3455 50  0000 R CNN
-F 2 "PowerNode2:B25P" H 7000 3500 50  0001 C CNN
+F 2 "Potentiometer_THT:Potentiometer_Vishay_T73YP_Vertical" H 7000 3500 50  0001 C CNN
 F 3 "~" H 7000 3500 50  0001 C CNN
 F 4 "X" H 7000 3500 50  0001 C CNN "Spice_Primitive"
 F 5 "pot100k" H 7000 3500 50  0001 C CNN "Spice_Model"
