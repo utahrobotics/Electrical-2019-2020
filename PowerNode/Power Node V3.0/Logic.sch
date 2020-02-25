@@ -329,6 +329,8 @@ Wire Wire Line
 	9600 4350 9450 4350
 Wire Wire Line
 	9600 4450 9450 4450
+Text Label 4000 4100 0    50   ~ 0
+VMEAS_IN
 Text Label 7900 3150 0    50   ~ 0
 LE*1
 Text Label 7900 3650 0    50   ~ 0
@@ -374,19 +376,19 @@ VMEAS
 Text HLabel 5100 4400 2    50   Input ~ 0
 SWITCH
 Text HLabel 6500 4500 2    50   Output ~ 0
-QH'
+nQH
 Text HLabel 8250 2500 1    50   Input ~ 0
-BL'1
+nBL1
 Text HLabel 8500 2500 1    50   Input ~ 0
-LT'1
+nLT1
 Text HLabel 8750 2500 1    50   Input ~ 0
-LE'1
+nLE1
 Text HLabel 9000 2500 1    50   Input ~ 0
-BL'2
+nBL2
 Text HLabel 9250 2500 1    50   Input ~ 0
-LT'2
+nLT2
 Text HLabel 9500 2500 1    50   Input ~ 0
-LE'2
+nLE2
 Text HLabel 9600 3150 2    50   Output ~ 0
 a1
 Text HLabel 9600 3250 2    50   Output ~ 0
@@ -433,8 +435,8 @@ L Device:R R30
 U 1 1 00000000
 P 4750 4100
 F 0 "R30" V 4850 4100 50  0000 C CNN
-F 1 "110" V 4750 4100 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P5.08mm_Vertical" H 4750 4100 50  0001 C CNN
+F 1 "220" V 4750 4100 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0516_L15.5mm_D5.0mm_P20.32mm_Horizontal" H 4750 4100 50  0001 C CNN
 F 3 "~" H 4750 4100 50  0001 C CNN
 	1    4750 4100
 	0    -1   -1   0   
@@ -700,6 +702,7 @@ F 0 "C3" V 3300 3300 50  0000 C CNN
 F 1 "0.1uF" V 3500 3300 50  0000 C CNN
 F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 3438 3150 50  0001 C CNN
 F 3 "~" H 3400 3300 50  0001 C CNN
+F 4 "N" H 3400 3300 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    3400 3300
 	0    1    1    0   
 $EndComp
@@ -730,13 +733,14 @@ L Diode:1N47xxA D1
 U 1 1 00000000
 P 4000 4700
 F 0 "D1" H 4000 4600 50  0000 C CNN
-F 1 "1N4733A" H 4000 4800 50  0000 C CNN
+F 1 "1N4732A" H 4000 4800 50  0000 C CNN
 F 2 "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal" H 4000 4525 50  0001 C CNN
 F 3 "https://www.vishay.com/docs/85816/1n4728a.pdf" H 4000 4700 50  0001 C CNN
 F 4 "X" H 4000 4700 50  0001 C CNN "Spice_Primitive"
-F 5 "DI_1N4733A" H 4000 4700 50  0001 C CNN "Spice_Model"
+F 5 "DI_1N4732A" H 4000 4700 50  0001 C CNN "Spice_Model"
 F 6 "Y" H 4000 4700 50  0001 C CNN "Spice_Netlist_Enabled"
 F 7 "zener.lib" H 4000 4700 50  0001 C CNN "Spice_Lib_File"
+F 8 "2 1" H 4000 4700 50  0001 C CNN "Spice_Node_Sequence"
 	1    4000 4700
 	0    1    1    0   
 $EndComp
@@ -749,7 +753,7 @@ F 1 "CD4511B" H 8500 3000 50  0000 C BNN
 F 2 "Package_DIP:DIP-16_W7.62mm_LongPads" H 8500 3450 50  0001 C CNN
 F 3 "https://www.ti.com/lit/ds/symlink/cd4511b.pdf" H 8500 3450 50  0001 C CNN
 F 4 "X" H 8500 3450 50  0001 C CNN "Spice_Primitive"
-F 5 "cd4511b" H 8500 3450 50  0001 C CNN "Spice_Model"
+F 5 "cd4511b VOH=4.55 ROUT=40 VIL=1.5 VIH=3.5" H 8500 3450 50  0001 C CNN "Spice_Model"
 F 6 "Y" H 8500 3450 50  0001 C CNN "Spice_Netlist_Enabled"
 F 7 "PowerNode2_models.lib" H 8500 3450 50  0001 C CNN "Spice_Lib_File"
 	1    8500 3450
@@ -764,7 +768,7 @@ F 1 "CD4511B" H 8500 4100 50  0000 C BNN
 F 2 "Package_DIP:DIP-16_W7.62mm_LongPads" H 8500 4550 50  0001 C CNN
 F 3 "https://www.ti.com/lit/ds/symlink/cd4511b.pdf" H 8500 4550 50  0001 C CNN
 F 4 "X" H 8500 4550 50  0001 C CNN "Spice_Primitive"
-F 5 "cd4511b" H 8500 4550 50  0001 C CNN "Spice_Model"
+F 5 "cd4511b VOH=4.55 ROUT=40 VIL=1.5 VIH=3.5" H 8500 4550 50  0001 C CNN "Spice_Model"
 F 6 "Y" H 8500 4550 50  0001 C CNN "Spice_Netlist_Enabled"
 F 7 "PowerNode2_models.lib" H 8500 4550 50  0001 C CNN "Spice_Lib_File"
 	1    8500 4550
