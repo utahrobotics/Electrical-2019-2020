@@ -9,7 +9,7 @@ R2 2 3 {value}
 
 * Voltage input
 .subckt battery 1 NA=10m NT=10u
-V1 2 GND 22
+V1 2 GND dc 22
 V2 1 2 TRNOISE({NA} {NT} 0 0)
 .ends battery
 

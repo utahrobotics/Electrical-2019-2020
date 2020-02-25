@@ -20,8 +20,6 @@ Comment9 ""
 $EndDescr
 Connection ~ 2500 3000
 Connection ~ 2500 5000
-Connection ~ 4000 4100
-Connection ~ 4000 5000
 Connection ~ 4500 4400
 Connection ~ 4500 5000
 Connection ~ 5000 3000
@@ -52,7 +50,7 @@ Wire Wire Line
 Wire Wire Line
 	2500 5000 2500 5050
 Wire Wire Line
-	2500 5000 4000 5000
+	2500 5000 4500 5000
 Wire Wire Line
 	3100 3500 5400 3500
 Wire Wire Line
@@ -66,7 +64,7 @@ Wire Wire Line
 Wire Wire Line
 	3100 4000 3600 4000
 Wire Wire Line
-	3100 4100 4000 4100
+	3100 4100 3600 4100
 Wire Wire Line
 	3100 4300 3200 4300
 Wire Wire Line
@@ -74,7 +72,7 @@ Wire Wire Line
 Wire Wire Line
 	3100 4500 3600 4500
 Wire Wire Line
-	3100 4600 3900 4600
+	3100 4600 4000 4600
 Wire Wire Line
 	3200 3300 3200 3400
 Wire Wire Line
@@ -86,15 +84,9 @@ Wire Wire Line
 Wire Wire Line
 	3500 4300 3600 4300
 Wire Wire Line
-	3900 3900 5000 3900
+	4000 3900 5000 3900
 Wire Wire Line
-	3900 4600 3900 3900
-Wire Wire Line
-	4000 4100 4000 4550
-Wire Wire Line
-	4000 4850 4000 5000
-Wire Wire Line
-	4000 5000 4500 5000
+	4000 4600 4000 3900
 Wire Wire Line
 	4500 4400 4500 4600
 Wire Wire Line
@@ -103,10 +95,6 @@ Wire Wire Line
 	4500 4800 4500 5000
 Wire Wire Line
 	4500 5000 5000 5000
-Wire Wire Line
-	4600 4100 4000 4100
-Wire Wire Line
-	4900 4100 5100 4100
 Wire Wire Line
 	4900 4400 5100 4400
 Wire Wire Line
@@ -329,8 +317,6 @@ Wire Wire Line
 	9600 4350 9450 4350
 Wire Wire Line
 	9600 4450 9450 4450
-Text Label 4000 4100 0    50   ~ 0
-VMEAS_IN
 Text Label 7900 3150 0    50   ~ 0
 LE*1
 Text Label 7900 3650 0    50   ~ 0
@@ -367,12 +353,12 @@ Text HLabel 3600 3900 2    50   Input ~ 0
 VPOT
 Text HLabel 3600 4000 2    50   Output ~ 0
 SDA
+Text HLabel 3600 4100 2    50   Input ~ 0
+VMEAS
 Text HLabel 3600 4300 2    50   Output ~ 0
 DP2
 Text HLabel 3600 4500 2    50   Input ~ 0
 PB2
-Text HLabel 5100 4100 2    50   Input ~ 0
-VMEAS
 Text HLabel 5100 4400 2    50   Input ~ 0
 SWITCH
 Text HLabel 6500 4500 2    50   Output ~ 0
@@ -421,7 +407,7 @@ Text HLabel 9600 4850 2    50   Output ~ 0
 g2
 $Comp
 L Device:R R5
-U 1 1 00000000
+U 1 1 5E568311
 P 3350 4300
 F 0 "R5" V 3450 4300 50  0000 C CNN
 F 1 "220" V 3350 4300 50  0000 C CNN
@@ -431,19 +417,8 @@ F 3 "~" H 3350 4300 50  0001 C CNN
 	0    1    -1   0   
 $EndComp
 $Comp
-L Device:R R30
-U 1 1 00000000
-P 4750 4100
-F 0 "R30" V 4850 4100 50  0000 C CNN
-F 1 "220" V 4750 4100 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0516_L15.5mm_D5.0mm_P20.32mm_Horizontal" H 4750 4100 50  0001 C CNN
-F 3 "~" H 4750 4100 50  0001 C CNN
-	1    4750 4100
-	0    -1   -1   0   
-$EndComp
-$Comp
 L Device:R R31
-U 1 1 00000000
+U 1 1 5E568313
 P 4750 4400
 F 0 "R31" V 4850 4400 50  0000 C CNN
 F 1 "10k" V 4750 4400 50  0000 C CNN
@@ -465,7 +440,7 @@ F 3 "~" H 6450 4750 50  0001 C CNN
 $EndComp
 $Comp
 L Device:R R25
-U 1 1 00000000
+U 1 1 5E568315
 P 7700 3150
 F 0 "R25" V 7800 3150 50  0000 C CNN
 F 1 "10k" V 7700 3150 50  0000 C CNN
@@ -708,7 +683,7 @@ F 4 "N" H 3400 3300 50  0001 C CNN "Spice_Netlist_Enabled"
 $EndComp
 $Comp
 L Device:C_Small C7
-U 1 1 00000000
+U 1 1 5E568314
 P 4500 4700
 F 0 "C7" V 4400 4700 50  0000 C CNN
 F 1 "0.1uF" V 4600 4700 50  0000 C CNN
@@ -719,7 +694,7 @@ F 3 "~" H 4500 4700 50  0001 C CNN
 $EndComp
 $Comp
 L Device:C_Small C2
-U 1 1 00000000
+U 1 1 5E568312
 P 5000 4700
 F 0 "C2" V 4900 4700 50  0000 C CNN
 F 1 "0.1uF" V 5100 4700 50  0000 C CNN
@@ -727,22 +702,6 @@ F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 5038 4550 50  0001 C CNN
 F 3 "~" H 5000 4700 50  0001 C CNN
 	1    5000 4700
 	1    0    0    -1  
-$EndComp
-$Comp
-L Diode:1N47xxA D1
-U 1 1 00000000
-P 4000 4700
-F 0 "D1" H 4000 4600 50  0000 C CNN
-F 1 "1N4732A" H 4000 4800 50  0000 C CNN
-F 2 "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal" H 4000 4525 50  0001 C CNN
-F 3 "https://www.vishay.com/docs/85816/1n4728a.pdf" H 4000 4700 50  0001 C CNN
-F 4 "X" H 4000 4700 50  0001 C CNN "Spice_Primitive"
-F 5 "DI_1N4732A" H 4000 4700 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 4000 4700 50  0001 C CNN "Spice_Netlist_Enabled"
-F 7 "zener.lib" H 4000 4700 50  0001 C CNN "Spice_Lib_File"
-F 8 "2 1" H 4000 4700 50  0001 C CNN "Spice_Node_Sequence"
-	1    4000 4700
-	0    1    1    0   
 $EndComp
 $Comp
 L 4xxx_IEEE:4511 IC1
@@ -791,7 +750,7 @@ F 7 "PowerNode2_models.lib" H 6000 4000 50  0001 C CNN "Spice_Lib_File"
 $EndComp
 $Comp
 L MCU_Microchip_ATtiny:ATtiny84-20PU U$1
-U 1 1 00000000
+U 1 1 5E568310
 P 2500 4000
 F 0 "U$1" H 1970 4045 50  0000 R CNN
 F 1 "ATtiny84-20PU" H 1970 3955 50  0000 R CNN
