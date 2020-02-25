@@ -343,7 +343,7 @@ P 2800 4000
 F 0 "VHIOUT1" V 2800 4200 50  0000 L CNN
 F 1 "WIREPAD4,16O1,6" V 2700 4150 50  0001 C TNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 2800 4000 50  0001 C CNN
-F 3 "" H 2800 4000 50  0001 C CNN
+F 3 "~" H 2800 4000 50  0001 C CNN
 F 4 "N" V 2800 4000 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    2800 4000
 	0    -1   1    0   
@@ -355,7 +355,7 @@ P 3000 3900
 F 0 "VHIIN1" V 3000 4100 50  0000 L CNN
 F 1 "WIREPAD4,16O1,6" V 2950 3900 50  0001 C BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3000 3900 50  0001 C CNN
-F 3 "" H 3000 3900 50  0001 C CNN
+F 3 "~" H 3000 3900 50  0001 C CNN
 F 4 "Y" V 3000 3900 50  0001 C CNN "Spice_Netlist_Enabled"
 F 5 "X" H 3000 3900 50  0001 C CNN "Spice_Primitive"
 F 6 "battery" H 3000 3900 50  0001 C CNN "Spice_Model"
@@ -370,7 +370,7 @@ P 3900 4800
 F 0 "GNDHIOUT1" V 3900 5000 50  0000 L CNN
 F 1 "WIREPAD4,16O1,6" V 3800 4950 50  0001 C TNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3900 4800 50  0001 C CNN
-F 3 "" H 3900 4800 50  0001 C CNN
+F 3 "~" H 3900 4800 50  0001 C CNN
 F 4 "N" V 3900 4800 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    3900 4800
 	0    -1   1    0   
@@ -382,7 +382,7 @@ P 3900 5200
 F 0 "GNDHIIN1" V 3900 5400 50  0000 L CNN
 F 1 "WIREPAD4,16O1,6" V 3850 5200 50  0001 C BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3900 5200 50  0001 C CNN
-F 3 "" H 3900 5200 50  0001 C CNN
+F 3 "~" H 3900 5200 50  0001 C CNN
 F 4 "N" V 3900 5200 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    3900 5200
 	0    -1   -1   0   
@@ -394,7 +394,7 @@ P 8400 3900
 F 0 "PB2" V 8400 4200 50  0000 C CNN
 F 1 "2,54_0,9" V 8500 3750 50  0001 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 8400 3900 50  0001 C CNN
-F 3 "" H 8400 3900 50  0001 C CNN
+F 3 "~" H 8400 3900 50  0001 C CNN
 F 4 "N" V 8400 3900 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    8400 3900
 	0    -1   1    0   
@@ -406,7 +406,7 @@ P 8400 4100
 F 0 "LE*1" V 8400 4300 50  0000 L CNN
 F 1 "2,54_0,9" V 8500 4000 50  0001 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 8400 4100 50  0001 C CNN
-F 3 "" H 8400 4100 50  0001 C CNN
+F 3 "~" H 8400 4100 50  0001 C CNN
 F 4 "N" V 8400 4100 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    8400 4100
 	0    -1   -1   0   
@@ -418,7 +418,7 @@ P 8400 4200
 F 0 "LT*1" V 8400 4400 50  0000 L CNN
 F 1 "2,54_0,9" V 8500 4100 50  0001 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 8400 4200 50  0001 C CNN
-F 3 "" H 8400 4200 50  0001 C CNN
+F 3 "~" H 8400 4200 50  0001 C CNN
 F 4 "N" V 8400 4200 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    8400 4200
 	0    -1   -1   0   
@@ -430,7 +430,7 @@ P 8400 4300
 F 0 "BL*1" V 8400 4500 50  0000 L CNN
 F 1 "2,54_0,9" V 8500 4200 50  0001 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 8400 4300 50  0001 C CNN
-F 3 "" H 8400 4300 50  0001 C CNN
+F 3 "~" H 8400 4300 50  0001 C CNN
 F 4 "N" V 8400 4300 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    8400 4300
 	0    -1   -1   0   
@@ -442,7 +442,7 @@ P 8400 4500
 F 0 "LE*2" V 8400 4700 50  0000 L CNN
 F 1 "2,54_0,9" V 8500 4400 50  0001 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 8400 4500 50  0001 C CNN
-F 3 "" H 8400 4500 50  0001 C CNN
+F 3 "~" H 8400 4500 50  0001 C CNN
 F 4 "N" V 8400 4500 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    8400 4500
 	0    -1   -1   0   
@@ -454,7 +454,7 @@ P 8400 4600
 F 0 "LT*2" V 8400 4800 50  0000 L CNN
 F 1 "2,54_0,9" V 8500 4500 50  0001 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 8400 4600 50  0001 C CNN
-F 3 "" H 8400 4600 50  0001 C CNN
+F 3 "~" H 8400 4600 50  0001 C CNN
 F 4 "N" V 8400 4600 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    8400 4600
 	0    -1   -1   0   
@@ -466,7 +466,7 @@ P 8400 4700
 F 0 "BL*2" V 8400 4900 50  0000 L CNN
 F 1 "2,54_0,9" V 8500 4600 50  0001 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 8400 4700 50  0001 C CNN
-F 3 "" H 8400 4700 50  0001 C CNN
+F 3 "~" H 8400 4700 50  0001 C CNN
 F 4 "N" V 8400 4700 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    8400 4700
 	0    -1   -1   0   
@@ -478,7 +478,7 @@ P 8400 4900
 F 0 "QH*1" V 8400 5100 50  0000 L CNN
 F 1 "2,54_0,9" V 8500 4800 50  0001 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 8400 4900 50  0001 C CNN
-F 3 "" H 8400 4900 50  0001 C CNN
+F 3 "~" H 8400 4900 50  0001 C CNN
 F 4 "N" V 8400 4900 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    8400 4900
 	0    -1   -1   0   
@@ -490,7 +490,7 @@ P 11400 3800
 F 0 "GND1" V 11450 3700 50  0000 L CNN
 F 1 "2,15_1,0" V 11350 3900 50  0001 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 11400 3800 50  0001 C CNN
-F 3 "" H 11400 3800 50  0001 C CNN
+F 3 "~" H 11400 3800 50  0001 C CNN
 F 4 "N" H 11400 3800 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    11400 3800
 	0    1    -1   0   
@@ -502,7 +502,7 @@ P 11400 4100
 F 0 "DP1" V 11350 4050 50  0000 L CNN
 F 1 "2,54_0,9" V 11500 3950 50  0001 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 11400 4100 50  0001 C CNN
-F 3 "" H 11400 4100 50  0001 C CNN
+F 3 "~" H 11400 4100 50  0001 C CNN
 F 4 "N" V 11400 4100 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    11400 4100
 	0    1    1    0   
@@ -514,7 +514,7 @@ P 11400 5100
 F 0 "GND2" V 11450 5000 50  0000 L CNN
 F 1 "2,15_1,0" V 11350 5200 50  0001 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 11400 5100 50  0001 C CNN
-F 3 "" H 11400 5100 50  0001 C CNN
+F 3 "~" H 11400 5100 50  0001 C CNN
 F 4 "N" H 11400 5100 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    11400 5100
 	0    1    -1   0   
@@ -753,7 +753,7 @@ P 6900 4250
 F 0 "Q1" H 7091 4295 50  0000 L CNN
 F 1 "2N3904" H 7091 4205 50  0000 L CNN
 F 2 "Package_TO_SOT_THT:TO-92_Inline" H 7100 4175 50  0001 L CIN
-F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 6900 4250 50  0001 L CNN
+F 3 "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF" H 6900 4250 50  0001 L CNN
 F 4 "Q" H 6900 4250 50  0001 C CNN "Spice_Primitive"
 F 5 "2N3904" H 6900 4250 50  0001 C CNN "Spice_Model"
 F 6 "Y" H 6900 4250 50  0001 C CNN "Spice_Netlist_Enabled"
@@ -769,7 +769,7 @@ P 7400 4750
 F 0 "Q2" H 7591 4705 50  0000 L CNN
 F 1 "2N3906" H 7591 4795 50  0000 L CNN
 F 2 "Package_TO_SOT_THT:TO-92_Inline" H 7600 4675 50  0001 L CIN
-F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3906.pdf" H 7400 4750 50  0001 L CNN
+F 3 "https://www.onsemi.com/pub/Collateral/2N3906-D.PDF" H 7400 4750 50  0001 L CNN
 F 4 "Q" H 7400 4750 50  0001 C CNN "Spice_Primitive"
 F 5 "2N3906" H 7400 4750 50  0001 C CNN "Spice_Model"
 F 6 "Y" H 7400 4750 50  0001 C CNN "Spice_Netlist_Enabled"

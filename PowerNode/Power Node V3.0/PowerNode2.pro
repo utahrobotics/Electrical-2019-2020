@@ -1,4 +1,4 @@
-update=Tue 25 Feb 2020 11:17:32 AM MST
+update=Tue 25 Feb 2020 01:56:26 PM MST
 version=1
 last_client=kicad
 [general]
@@ -46,5 +46,5 @@ version=1
 [SchematicFrame]
 version=1
 [sheetnames]
-1=20dd30bb-b29c-41f8-a135-732a21c1ba4e:Sheet20dd30bb-b29c-41f8-a135-732a21c1ba4e
-2=3820cd80-a772-4ae0-aeff-982a065ea669:Logic
+1=5b3ccd05-ff07-4cb8-acd4-01810ca95a22:Sheet5b3ccd05-ff07-4cb8-acd4-01810ca95a22
+2=00000000-0000-0000-0000-00005e568305:Logic
