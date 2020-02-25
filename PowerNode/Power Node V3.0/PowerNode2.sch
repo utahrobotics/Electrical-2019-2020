@@ -18,100 +18,90 @@ Comment7 ""
 Comment8 ""
 Comment9 ""
 $EndDescr
-Connection ~ 7000 4900
-Connection ~ 7500 3750
-Connection ~ 4500 5400
-Connection ~ 10800 3800
-Connection ~ 7000 2650
+Connection ~ 4500 5100
 Connection ~ 6000 5400
-Connection ~ 5000 5400
-Connection ~ 10800 3700
-Connection ~ 7500 3200
-Connection ~ 4000 4700
-Connection ~ 7500 5400
-Connection ~ 6000 4300
-Connection ~ 5500 2650
+Connection ~ 6000 4400
 Connection ~ 10800 5100
-Connection ~ 7000 5400
-Connection ~ 10000 3800
-Connection ~ 4000 5100
-Connection ~ 5500 5400
-Connection ~ 3000 4050
-Connection ~ 7400 2650
-Connection ~ 10800 5000
-Connection ~ 8100 2750
-Connection ~ 4000 5400
-Connection ~ 6500 4300
-Connection ~ 5500 4400
 Connection ~ 6500 5400
+Connection ~ 5000 5400
+Connection ~ 3500 4050
+Connection ~ 4500 4700
+Connection ~ 5500 5400
+Connection ~ 7500 3750
+Connection ~ 7400 2650
+Connection ~ 4500 5400
+Connection ~ 7000 4900
+Connection ~ 7500 3200
+Connection ~ 7000 5400
+Connection ~ 10800 3800
+Connection ~ 7500 5400
+Connection ~ 7000 2650
+Connection ~ 6500 4300
+Connection ~ 10800 5000
+Connection ~ 10000 3800
+Connection ~ 6000 2650
+Connection ~ 10800 3700
+Connection ~ 8100 2750
 Wire Wire Line
-	3000 3950 3000 4050
+	3500 3950 3500 4050
 Wire Wire Line
-	3000 4050 2800 4050
+	3500 4050 3300 4050
 Wire Wire Line
-	3000 4050 3000 4150
+	3500 4050 3500 4150
 Wire Wire Line
-	3000 4450 3000 5400
+	3500 4450 3500 5400
 Wire Wire Line
-	3000 5400 4000 5400
+	3500 5400 4500 5400
 Wire Wire Line
-	3150 4300 6000 4300
+	3650 4300 6500 4300
 Wire Wire Line
-	3800 4900 4000 4900
+	4300 4900 4500 4900
 Wire Wire Line
-	3900 4700 4000 4700
+	4400 4700 4500 4700
 Wire Wire Line
-	4000 4700 4100 4700
+	4500 4700 4600 4700
 Wire Wire Line
-	4000 4900 4000 4700
+	4500 4900 4500 4700
 Wire Wire Line
-	4000 5100 3900 5100
+	4500 5100 4400 5100
 Wire Wire Line
-	4000 5100 4000 5400
-Wire Wire Line
-	4000 5400 4500 5400
-Wire Wire Line
-	4100 5100 4000 5100
-Wire Wire Line
-	4500 4400 5500 4400
-Wire Wire Line
-	4500 4500 4500 4400
-Wire Wire Line
-	4500 5300 4500 5400
+	4500 5100 4500 5400
 Wire Wire Line
 	4500 5400 5000 5400
 Wire Wire Line
-	4900 4900 6600 4900
+	4600 5100 4500 5100
 Wire Wire Line
-	5000 5000 4900 5000
+	5000 4400 6000 4400
 Wire Wire Line
-	5000 5000 5000 5100
+	5000 4500 5000 4400
 Wire Wire Line
 	5000 5300 5000 5400
 Wire Wire Line
 	5000 5400 5500 5400
 Wire Wire Line
-	5200 2650 5500 2650
+	5400 4900 6600 4900
 Wire Wire Line
-	5200 2950 7100 2950
+	5500 5000 5400 5000
 Wire Wire Line
-	5500 2650 5500 4400
-Wire Wire Line
-	5500 2650 7000 2650
-Wire Wire Line
-	5500 4400 5500 4500
-Wire Wire Line
-	5500 4800 5500 5000
+	5500 5000 5500 5100
 Wire Wire Line
 	5500 5300 5500 5400
 Wire Wire Line
 	5500 5400 6000 5400
 Wire Wire Line
-	6000 4300 6000 4500
+	5700 2650 6000 2650
 Wire Wire Line
-	6000 4300 6500 4300
+	5700 2950 7100 2950
 Wire Wire Line
-	6000 4800 6000 5400
+	6000 2650 6000 4400
+Wire Wire Line
+	6000 2650 7000 2650
+Wire Wire Line
+	6000 4400 6000 4500
+Wire Wire Line
+	6000 4800 6000 5000
+Wire Wire Line
+	6000 5300 6000 5400
 Wire Wire Line
 	6000 5400 6500 5400
 Wire Wire Line
@@ -147,13 +137,13 @@ Wire Wire Line
 Wire Wire Line
 	7150 3500 8500 3500
 Wire Wire Line
-	7200 2850 5200 2850
+	7200 2850 5700 2850
 Wire Wire Line
 	7200 3300 7200 2850
 Wire Wire Line
 	7200 3300 7900 3300
 Wire Wire Line
-	7300 2750 5200 2750
+	7300 2750 5700 2750
 Wire Wire Line
 	7300 3200 7300 2750
 Wire Wire Line
@@ -284,21 +274,21 @@ Wire Wire Line
 	11000 4000 10000 4000
 Wire Wire Line
 	11300 4000 11400 4000
-Text Notes 4750 2700 0    50   ~ 0
+Text Notes 5250 2700 0    50   ~ 0
 VCC
-Text Notes 4750 2800 0    50   ~ 0
+Text Notes 5250 2800 0    50   ~ 0
 GND
-Text Notes 4750 2900 0    50   ~ 0
+Text Notes 5250 2900 0    50   ~ 0
 SCL
-Text Notes 4750 3000 0    50   ~ 0
+Text Notes 5250 3000 0    50   ~ 0
 SDA
 Text Notes 6550 2550 2    50   ~ 0
 .tran 1e-4 100m
-Text Label 2850 4050 0    50   ~ 0
+Text Label 3350 4050 0    50   ~ 0
 VHI
-Text Label 3200 4300 0    50   ~ 0
+Text Label 3700 4300 0    50   ~ 0
 VMEAS
-Text Label 3400 4900 2    50   ~ 0
+Text Label 3900 4900 2    50   ~ 0
 VHI
 Text Label 7400 2650 2    50   ~ 0
 VCC
@@ -311,49 +301,49 @@ SWITCH
 $Comp
 L Connector:TestPoint VHIOUT1
 U 1 1 00000000
-P 2800 4050
-F 0 "VHIOUT1" V 2800 4250 50  0000 L CNN
-F 1 "WIREPAD4,16O1,6" V 2700 4200 50  0001 C TNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 2800 4050 50  0001 C CNN
-F 3 "" H 2800 4050 50  0001 C CNN
-F 4 "N" V 2800 4050 50  0001 C CNN "Spice_Netlist_Enabled"
-	1    2800 4050
+P 3300 4050
+F 0 "VHIOUT1" V 3300 4250 50  0000 L CNN
+F 1 "WIREPAD4,16O1,6" V 3200 4200 50  0001 C TNN
+F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3300 4050 50  0001 C CNN
+F 3 "" H 3300 4050 50  0001 C CNN
+F 4 "N" V 3300 4050 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    3300 4050
 	0    -1   1    0   
 $EndComp
 $Comp
 L Connector:TestPoint VHIIN1
 U 1 1 00000000
-P 3000 3950
-F 0 "VHIIN1" V 3000 4150 50  0000 L CNN
-F 1 "WIREPAD4,16O1,6" V 2950 3950 50  0001 C BNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3000 3950 50  0001 C CNN
-F 3 "" H 3000 3950 50  0001 C CNN
-F 4 "N" V 3000 3950 50  0001 C CNN "Spice_Netlist_Enabled"
-	1    3000 3950
+P 3500 3950
+F 0 "VHIIN1" V 3500 4150 50  0000 L CNN
+F 1 "WIREPAD4,16O1,6" V 3450 3950 50  0001 C BNN
+F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3500 3950 50  0001 C CNN
+F 3 "" H 3500 3950 50  0001 C CNN
+F 4 "N" V 3500 3950 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    3500 3950
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:TestPoint GNDHIOUT1
 U 1 1 16E6194B
-P 3900 4700
-F 0 "GNDHIOUT1" V 3900 4900 50  0000 L CNN
-F 1 "WIREPAD4,16O1,6" V 3800 4850 50  0001 C TNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3900 4700 50  0001 C CNN
-F 3 "" H 3900 4700 50  0001 C CNN
-F 4 "N" V 3900 4700 50  0001 C CNN "Spice_Netlist_Enabled"
-	1    3900 4700
+P 4400 4700
+F 0 "GNDHIOUT1" V 4400 4900 50  0000 L CNN
+F 1 "WIREPAD4,16O1,6" V 4300 4850 50  0001 C TNN
+F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 4400 4700 50  0001 C CNN
+F 3 "" H 4400 4700 50  0001 C CNN
+F 4 "N" V 4400 4700 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    4400 4700
 	0    -1   1    0   
 $EndComp
 $Comp
 L Connector:TestPoint GNDHIIN1
 U 1 1 9FE8900C
-P 3900 5100
-F 0 "GNDHIIN1" V 3900 5300 50  0000 L CNN
-F 1 "WIREPAD4,16O1,6" V 3850 5100 50  0001 C BNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3900 5100 50  0001 C CNN
-F 3 "" H 3900 5100 50  0001 C CNN
-F 4 "N" V 3900 5100 50  0001 C CNN "Spice_Netlist_Enabled"
-	1    3900 5100
+P 4400 5100
+F 0 "GNDHIIN1" V 4400 5300 50  0000 L CNN
+F 1 "WIREPAD4,16O1,6" V 4350 5100 50  0001 C BNN
+F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 4400 5100 50  0001 C CNN
+F 3 "" H 4400 5100 50  0001 C CNN
+F 4 "N" V 4400 5100 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    4400 5100
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -502,12 +492,12 @@ $EndComp
 $Comp
 L Device:R R4
 U 1 1 00000000
-P 5500 5150
-F 0 "R4" V 5600 5150 50  0000 C CNN
-F 1 "220" V 5500 5150 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P5.08mm_Vertical" V 5430 5150 50  0001 C CNN
-F 3 "~" H 5500 5150 50  0001 C CNN
-	1    5500 5150
+P 6000 5150
+F 0 "R4" V 6100 5150 50  0000 C CNN
+F 1 "220" V 6000 5150 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P5.08mm_Vertical" V 5930 5150 50  0001 C CNN
+F 3 "~" H 6000 5150 50  0001 C CNN
+	1    6000 5150
 	-1   0    0    1   
 $EndComp
 $Comp
@@ -546,12 +536,12 @@ $EndComp
 $Comp
 L Device:C_Small C1
 U 1 1 5E6DA189
-P 5000 5200
-F 0 "C1" H 5092 5246 50  0000 L CNN
-F 1 "1nF" H 5092 5155 50  0000 L CNN
-F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 5000 5200 50  0001 C CNN
-F 3 "~" H 5000 5200 50  0001 C CNN
-	1    5000 5200
+P 5500 5200
+F 0 "C1" H 5592 5246 50  0000 L CNN
+F 1 "1nF" H 5592 5155 50  0000 L CNN
+F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 5500 5200 50  0001 C CNN
+F 3 "~" H 5500 5200 50  0001 C CNN
+	1    5500 5200
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -579,17 +569,17 @@ $EndComp
 $Comp
 L Device:LED PWRLED1
 U 1 1 00000000
-P 5500 4650
-F 0 "PWRLED1" V 5539 4730 50  0000 L CNN
-F 1 "LED5MM" V 5448 4730 50  0000 L CNN
-F 2 "LED_THT:LED_D5.0mm" H 5500 4650 50  0001 C CNN
-F 3 "~" H 5500 4650 50  0001 C CNN
-F 4 "D" H 5500 4650 50  0001 C CNN "Spice_Primitive"
-F 5 "LedRed" H 5500 4650 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 5500 4650 50  0001 C CNN "Spice_Netlist_Enabled"
-F 7 "PowerNode2_models.lib" H 5500 4650 50  0001 C CNN "Spice_Lib_File"
-F 8 "2 1" V 5500 4650 50  0001 C CNN "Spice_Node_Sequence"
-	1    5500 4650
+P 6000 4650
+F 0 "PWRLED1" V 6039 4730 50  0000 L CNN
+F 1 "LED5MM" V 5948 4730 50  0000 L CNN
+F 2 "LED_THT:LED_D5.0mm" H 6000 4650 50  0001 C CNN
+F 3 "~" H 6000 4650 50  0001 C CNN
+F 4 "D" H 6000 4650 50  0001 C CNN "Spice_Primitive"
+F 5 "LedRed" H 6000 4650 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 6000 4650 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 6000 4650 50  0001 C CNN "Spice_Lib_File"
+F 8 "2 1" V 6000 4650 50  0001 C CNN "Spice_Node_Sequence"
+	1    6000 4650
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -609,29 +599,18 @@ F 8 "2 1" H 8350 2750 50  0001 C CNN "Spice_Node_Sequence"
 	-1   0    0    1   
 $EndComp
 $Comp
-L Device:CP1 C5
-U 1 1 5E5009B1
-P 6000 4650
-F 0 "C5" H 6150 4750 50  0000 R CNN
-F 1 "100uF" H 6250 4550 50  0000 R CNN
-F 2 "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm" H 6000 4650 50  0001 C CNN
-F 3 "~" H 6000 4650 50  0001 C CNN
-	1    6000 4650
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R_POT_US R2
 U 1 1 00000000
-P 3000 4300
-F 0 "R2" H 2932 4346 50  0000 R CNN
-F 1 "TRIM_US-B25P" H 2932 4255 50  0000 R CNN
-F 2 "Potentiometer_THT:Potentiometer_Vishay_T73YP_Vertical" H 3000 4300 50  0001 C CNN
-F 3 "~" H 3000 4300 50  0001 C CNN
-F 4 "X" H 3000 4300 50  0001 C CNN "Spice_Primitive"
-F 5 "pot100k" H 3000 4300 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 3000 4300 50  0001 C CNN "Spice_Netlist_Enabled"
-F 7 "PowerNode2_models.lib" H 3000 4300 50  0001 C CNN "Spice_Lib_File"
-	1    3000 4300
+P 3500 4300
+F 0 "R2" H 3432 4346 50  0000 R CNN
+F 1 "TRIM_US-B25P" H 3432 4255 50  0000 R CNN
+F 2 "Potentiometer_THT:Potentiometer_Vishay_T73YP_Vertical" H 3500 4300 50  0001 C CNN
+F 3 "~" H 3500 4300 50  0001 C CNN
+F 4 "X" H 3500 4300 50  0001 C CNN "Spice_Primitive"
+F 5 "pot100k" H 3500 4300 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 3500 4300 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 3500 4300 50  0001 C CNN "Spice_Lib_File"
+	1    3500 4300
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -652,30 +631,30 @@ $EndComp
 $Comp
 L Simulation_SPICE:IDC ILOAD1
 U 1 1 5E5C2560
-P 3600 4900
-F 0 "ILOAD1" V 3550 4650 50  0000 C CNN
-F 1 "IDC" V 3650 4725 50  0001 C CNN
-F 2 "" H 3600 4900 50  0001 C CNN
-F 3 "~" H 3600 4900 50  0001 C CNN
-F 4 "Y" H 3600 4900 50  0001 L CNN "Spice_Netlist_Enabled"
-F 5 "I" H 3600 4900 50  0001 L CNN "Spice_Primitive"
-F 6 "SIN(15 15 100)" V 3650 5300 50  0000 C CNN "Spice_Model"
-	1    3600 4900
+P 4100 4900
+F 0 "ILOAD1" V 4050 4650 50  0000 C CNN
+F 1 "IDC" V 4150 4725 50  0001 C CNN
+F 2 "" H 4100 4900 50  0001 C CNN
+F 3 "~" H 4100 4900 50  0001 C CNN
+F 4 "Y" H 4100 4900 50  0001 L CNN "Spice_Netlist_Enabled"
+F 5 "I" H 4100 4900 50  0001 L CNN "Spice_Primitive"
+F 6 "SIN(15 15 100)" V 4150 5300 50  0000 C CNN "Spice_Model"
+	1    4100 4900
 	0    -1   1    0   
 $EndComp
 $Comp
 L Connector:Screw_Terminal_01x04 INOUT1
 U 1 1 5E4A09A8
-P 5000 2750
-F 0 "INOUT1" H 4918 3067 50  0000 C CNN
-F 1 "W237-4" H 4918 2976 50  0000 C CNN
-F 2 "PowerNode2:W237-4" H 5000 2750 50  0001 C CNN
-F 3 "~" H 5000 2750 50  0001 C CNN
-F 4 "X" H 5000 2750 50  0001 C CNN "Spice_Primitive"
-F 5 "w237_4" H 5000 2750 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 5000 2750 50  0001 C CNN "Spice_Netlist_Enabled"
-F 7 "PowerNode2_models.lib" H 5000 2750 50  0001 C CNN "Spice_Lib_File"
-	1    5000 2750
+P 5500 2750
+F 0 "INOUT1" H 5418 3067 50  0000 C CNN
+F 1 "W237-4" H 5418 2976 50  0000 C CNN
+F 2 "PowerNode2:W237-4" H 5500 2750 50  0001 C CNN
+F 3 "~" H 5500 2750 50  0001 C CNN
+F 4 "X" H 5500 2750 50  0001 C CNN "Spice_Primitive"
+F 5 "w237_4" H 5500 2750 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 5500 2750 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 5500 2750 50  0001 C CNN "Spice_Lib_File"
+	1    5500 2750
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -726,16 +705,16 @@ $EndComp
 $Comp
 L Sensor_Current:ACS712xLCTR-30A IC4
 U 1 1 5E4E9EEA
-P 4500 4900
-F 0 "IC4" H 4200 5250 50  0000 L CNN
-F 1 "ACS712xLCTR-30A" H 4500 5450 50  0000 C CNN
-F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 4600 4550 50  0001 L CIN
-F 3 "http://www.allegromicro.com/~/media/Files/Datasheets/ACS712-Datasheet.ashx?la=en" H 4500 4900 50  0001 C CNN
-F 4 "X" H 4500 4900 50  0001 C CNN "Spice_Primitive"
-F 5 "acs712elctr sens=0.066 NA=7m" H 4500 4900 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 4500 4900 50  0001 C CNN "Spice_Netlist_Enabled"
-F 7 "PowerNode2_models.lib" H 4500 4900 50  0001 C CNN "Spice_Lib_File"
-	1    4500 4900
+P 5000 4900
+F 0 "IC4" H 4700 5250 50  0000 L CNN
+F 1 "ACS712xLCTR-30A" H 5000 5450 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 5100 4550 50  0001 L CIN
+F 3 "http://www.allegromicro.com/~/media/Files/Datasheets/ACS712-Datasheet.ashx?la=en" H 5000 4900 50  0001 C CNN
+F 4 "X" H 5000 4900 50  0001 C CNN "Spice_Primitive"
+F 5 "acs712elctr sens=0.066 NA=7m" H 5000 4900 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 5000 4900 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 5000 4900 50  0001 C CNN "Spice_Lib_File"
+	1    5000 4900
 	1    0    0    -1  
 $EndComp
 $Sheet
