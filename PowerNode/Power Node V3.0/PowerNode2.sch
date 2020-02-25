@@ -18,30 +18,32 @@ Comment7 ""
 Comment8 ""
 Comment9 ""
 $EndDescr
+Connection ~ 7000 4900
+Connection ~ 7500 3750
 Connection ~ 4500 5400
-Connection ~ 10800 5000
-Connection ~ 10800 3700
-Connection ~ 5000 5400
-Connection ~ 10000 3800
-Connection ~ 4000 4700
-Connection ~ 5500 5400
-Connection ~ 6000 5400
-Connection ~ 7400 2650
 Connection ~ 10800 3800
-Connection ~ 5500 2650
-Connection ~ 5500 4400
+Connection ~ 7000 2650
+Connection ~ 6000 5400
+Connection ~ 5000 5400
+Connection ~ 10800 3700
+Connection ~ 7500 3200
+Connection ~ 4000 4700
 Connection ~ 7500 5400
-Connection ~ 6500 4300
+Connection ~ 6000 4300
+Connection ~ 5500 2650
 Connection ~ 10800 5100
 Connection ~ 7000 5400
-Connection ~ 6000 4300
-Connection ~ 8100 2750
-Connection ~ 3000 4050
-Connection ~ 6500 5400
+Connection ~ 10000 3800
 Connection ~ 4000 5100
+Connection ~ 5500 5400
+Connection ~ 3000 4050
+Connection ~ 7400 2650
+Connection ~ 10800 5000
+Connection ~ 8100 2750
 Connection ~ 4000 5400
-Connection ~ 7000 2650
-Connection ~ 7500 3200
+Connection ~ 6500 4300
+Connection ~ 5500 4400
+Connection ~ 6500 5400
 Wire Wire Line
 	3000 3950 3000 4050
 Wire Wire Line
@@ -79,7 +81,7 @@ Wire Wire Line
 Wire Wire Line
 	4500 5400 5000 5400
 Wire Wire Line
-	4900 4900 7700 4900
+	4900 4900 6600 4900
 Wire Wire Line
 	5000 5000 4900 5000
 Wire Wire Line
@@ -121,11 +123,21 @@ Wire Wire Line
 Wire Wire Line
 	6500 5400 7000 5400
 Wire Wire Line
+	6900 4900 7000 4900
+Wire Wire Line
 	7000 2650 7000 3350
 Wire Wire Line
 	7000 2650 7400 2650
 Wire Wire Line
-	7000 3650 7000 5400
+	7000 3650 7000 3750
+Wire Wire Line
+	7000 3750 7500 3750
+Wire Wire Line
+	7000 4900 7000 5050
+Wire Wire Line
+	7000 4900 7700 4900
+Wire Wire Line
+	7000 5250 7000 5400
 Wire Wire Line
 	7000 5400 7500 5400
 Wire Wire Line
@@ -157,7 +169,9 @@ Wire Wire Line
 Wire Wire Line
 	7500 3200 8500 3200
 Wire Wire Line
-	7500 5400 7500 3200
+	7500 3750 7500 3200
+Wire Wire Line
+	7500 5400 7500 3750
 Wire Wire Line
 	7500 5400 7500 5450
 Wire Wire Line
@@ -286,10 +300,6 @@ Text Label 3200 4300 0    50   ~ 0
 VMEAS
 Text Label 3400 4900 2    50   ~ 0
 VHI
-Text Label 4950 4900 0    50   ~ 0
-IMEAS
-Text Label 7200 3500 0    50   ~ 0
-VPOT
 Text Label 7400 2650 2    50   ~ 0
 VCC
 Text Label 7600 3400 0    50   ~ 0
@@ -501,6 +511,17 @@ F 3 "~" H 5500 5150 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
+L Device:R R1
+U 1 1 00000000
+P 6750 4900
+F 0 "R1" V 6650 4900 50  0000 C CNN
+F 1 "10k" V 6750 4900 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P5.08mm_Vertical" H 6750 4900 50  0001 C CNN
+F 3 "~" H 6750 4900 50  0001 C CNN
+	1    6750 4900
+	0    -1   -1   0   
+$EndComp
+$Comp
 L Device:R R6
 U 1 1 5E889EBB
 P 8750 2750
@@ -542,6 +563,17 @@ F 1 "0.1uF" H 6750 4550 50  0000 R CNN
 F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 6538 4500 50  0001 C CNN
 F 3 "~" H 6500 4650 50  0001 C CNN
 	1    6500 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C6
+U 1 1 00000000
+P 7000 5150
+F 0 "C6" H 7150 5250 50  0000 R CNN
+F 1 "0.1uF" H 7250 5050 50  0000 R CNN
+F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 7038 5000 50  0001 C CNN
+F 3 "~" H 7000 5150 50  0001 C CNN
+	1    7000 5150
 	1    0    0    -1  
 $EndComp
 $Comp
