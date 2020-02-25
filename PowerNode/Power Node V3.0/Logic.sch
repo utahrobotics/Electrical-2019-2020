@@ -756,6 +756,10 @@ F 0 "U$1" H 1970 4045 50  0000 R CNN
 F 1 "ATtiny84-20PU" H 1970 3955 50  0000 R CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 2500 4000 50  0001 C CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/doc8006.pdf" H 2500 4000 50  0001 C CNN
+F 4 "X" H 2500 4000 50  0001 C CNN "Spice_Primitive"
+F 5 "attiny84" H 2500 4000 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 2500 4000 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 2500 4000 50  0001 C CNN "Spice_Lib_File"
 	1    2500 4000
 	1    0    0    -1  
 $EndComp
