@@ -290,7 +290,7 @@ SCL
 Text Notes 4750 3100 0    50   ~ 0
 SDA
 Text Notes 6550 2650 2    50   ~ 0
-.tran 1e-4 100m\n* .dc V.XVHIIN1.V1 5 24 0.1
+.tran 1e-4 100m\n* .dc V.XVHIIN1.V1 0 24 0.1
 Text Label 3350 3750 0    50   ~ 0
 VHI
 Text Label 3700 4000 0    50   ~ 0

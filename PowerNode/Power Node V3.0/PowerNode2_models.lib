@@ -14,8 +14,8 @@ V2 1 2 TRNOISE({NA} {NT} 0 0)
 .ends battery
 
 * W237-4 screw terminal providing voltage vcc
-.subckt w237_4 VCC GND SCL SDA NA=10m NT=10u
-V1 VCC GND 5
+.subckt w237_4 VCC GND SCL SDA
+V1 VCC GND dc 5
 .ends w237_4
 
 * Switch
