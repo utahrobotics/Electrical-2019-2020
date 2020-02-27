@@ -1,4 +1,4 @@
-update=Tue 25 Feb 2020 01:56:26 PM MST
+update=Thu 27 Feb 2020 12:00:54 PM MST
 version=1
 last_client=kicad
 [general]
@@ -45,6 +45,8 @@ ERC_TestSimilarLabels=1
 version=1
 [SchematicFrame]
 version=1
+[LibeditFrame]
+version=1
 [sheetnames]
-1=5b3ccd05-ff07-4cb8-acd4-01810ca95a22:Sheet5b3ccd05-ff07-4cb8-acd4-01810ca95a22
+1=57804358-0644-4eb2-9745-cfe0c62299bd:Sheet57804358-0644-4eb2-9745-cfe0c62299bd
 2=00000000-0000-0000-0000-00005e568305:Logic

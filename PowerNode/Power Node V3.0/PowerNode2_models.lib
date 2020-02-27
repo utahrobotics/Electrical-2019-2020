@@ -18,11 +18,18 @@ V2 1 2 TRNOISE({NA} {NT} 0 0)
 V1 VCC GND dc 5
 .ends w237_4
 
-* Switch
-.subckt swspdt 1 2 3 imeas=1 ron=100m roff=10Meg
+* Switches
+.subckt swspdt 1 2 3 imeas=1 ron=20m roff=100Meg
 R1 1 2 {imeas ? ron : roff}
 R2 2 3 {imeas ? roff : ron}
 .ends swspdt
+
+.subckt swdpdt 1 2 3 4 5 6 pos=1 ron=20m roff=100Meg
+R1 1 2 {pos ? ron : roff}
+R2 2 3 {pos ? roff : ron}
+R3 4 5 {pos ? ron : roff}
+R4 5 6 {pos ? roff : ron}
+.ends swdpdt
 
 * ATTiny84
 * VCC PB0 PB1 PB3 PB2 PA7 PA6 PA5 PA4 PA3 PA2 PA1 PA0 GND
