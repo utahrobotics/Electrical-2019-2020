@@ -105,12 +105,40 @@ Entry Bus Bus
 	8650 1050 8750 950 
 Entry Bus Bus
 	9600 1050 9700 950 
-Wire Bus Line
-	1100 4400 1050 4400
-Wire Bus Line
-	1150 600  1100 600 
 Wire Wire Line
-	3450 6550 3500 6550
+	1200 3650 1850 3650
+Wire Wire Line
+	1200 3750 1850 3750
+Wire Wire Line
+	1250 2350 1850 2350
+Wire Wire Line
+	1250 2450 1850 2450
+Wire Wire Line
+	1350 3350 1850 3350
+Wire Wire Line
+	1400 2850 1850 2850
+Wire Wire Line
+	1400 2950 1850 2950
+Wire Wire Line
+	1400 4900 900  4900
+Wire Wire Line
+	1400 5000 900  5000
+Wire Wire Line
+	1400 5200 900  5200
+Wire Wire Line
+	1400 5300 900  5300
+Wire Wire Line
+	1850 2050 1100 2050
+Wire Wire Line
+	1850 2150 1100 2150
+Wire Wire Line
+	1850 3250 1350 3250
+Wire Wire Line
+	2000 5750 2000 6450
+Wire Wire Line
+	2000 6450 2150 6450
+Wire Wire Line
+	2150 5750 2000 5750
 Wire Wire Line
 	2150 5850 2150 5750
 Wire Wire Line
@@ -119,6 +147,14 @@ Wire Wire Line
 	2250 5750 2350 5750
 Wire Wire Line
 	2250 5850 2250 5750
+Wire Wire Line
+	2350 2050 3200 2050
+Wire Wire Line
+	2350 2250 3200 2250
+Wire Wire Line
+	2350 2350 3200 2350
+Wire Wire Line
+	2350 3050 3000 3050
 Wire Wire Line
 	2350 5750 2450 5750
 Wire Wire Line
@@ -140,13 +176,31 @@ Wire Wire Line
 Wire Wire Line
 	2750 5850 2750 5750
 Wire Wire Line
+	2850 5750 2850 5850
+Wire Wire Line
 	2850 5750 2950 5750
 Wire Wire Line
-	2850 5750 2850 5850
+	2900 3150 2350 3150
+Wire Wire Line
+	2900 3450 2350 3450
+Wire Wire Line
+	2900 3550 2350 3550
 Wire Wire Line
 	2950 5750 3050 5750
 Wire Wire Line
 	2950 5850 2950 5750
+Wire Wire Line
+	2950 6350 2950 6650
+Wire Wire Line
+	2950 6650 3150 6650
+Wire Wire Line
+	3050 2550 2350 2550
+Wire Wire Line
+	3050 2650 2350 2650
+Wire Wire Line
+	3050 3850 2350 3850
+Wire Wire Line
+	3050 3950 2350 3950
 Wire Wire Line
 	3050 5750 3050 5850
 Wire Wire Line
@@ -160,6 +214,8 @@ Wire Wire Line
 Wire Wire Line
 	3450 6550 3450 6650
 Wire Wire Line
+	3450 6550 3500 6550
+Wire Wire Line
 	3450 6650 3350 6650
 Wire Wire Line
 	4950 5250 4950 5350
@@ -167,6 +223,14 @@ Wire Wire Line
 	4950 5350 5050 5350
 Wire Wire Line
 	5050 5350 5050 5250
+Wire Wire Line
+	6250 6100 5750 6100
+Wire Wire Line
+	6250 6200 5750 6200
+Wire Wire Line
+	6250 6300 5750 6300
+Wire Wire Line
+	6250 6500 5750 6500
 Wire Wire Line
 	8150 1250 8150 1150
 Wire Wire Line
@@ -188,93 +252,11 @@ Wire Wire Line
 Wire Wire Line
 	9500 1150 9500 1250
 Wire Wire Line
-	10200 850  10200 950 
-Wire Wire Line
-	10300 850  10200 850 
-Wire Wire Line
-	10300 950  10300 850 
-Wire Wire Line
-	10400 850  10400 750 
-Wire Wire Line
-	10400 850  10300 850 
-Wire Wire Line
-	10400 950  10400 850 
-Wire Wire Line
-	10500 850  10400 850 
-Wire Wire Line
-	10500 950  10500 850 
-Wire Wire Line
-	10600 850  10500 850 
-Wire Wire Line
-	10600 950  10600 850 
-Wire Wire Line
-	2000 6450 2150 6450
-Wire Wire Line
-	2150 5750 2000 5750
-Wire Bus Line
-	1250 4250 1050 4250
-Wire Bus Line
-	1300 750  1100 750 
-Wire Wire Line
-	2950 6650 3150 6650
-Wire Bus Line
-	8250 1050 8450 1050
-Wire Bus Line
-	8450 1050 8650 1050
-Wire Bus Line
-	9200 1050 9400 1050
-Wire Bus Line
-	9400 1050 9600 1050
-Wire Wire Line
-	10100 950  10100 750 
-Wire Wire Line
 	9500 5250 9250 5250
 Wire Wire Line
 	9500 5350 9250 5350
 Wire Wire Line
 	9500 5450 9250 5450
-Wire Wire Line
-	2950 6350 2950 6650
-Wire Wire Line
-	1400 2850 1850 2850
-Wire Wire Line
-	1400 2950 1850 2950
-Wire Bus Line
-	3150 3950 3150 4400
-Wire Notes Line
-	5050 3400 5500 3400
-Wire Notes Line
-	5500 2450 5050 2450
-Wire Wire Line
-	1350 3350 1850 3350
-Wire Wire Line
-	1400 4900 900  4900
-Wire Wire Line
-	1400 5000 900  5000
-Wire Wire Line
-	1400 5200 900  5200
-Wire Wire Line
-	1400 5300 900  5300
-Wire Wire Line
-	1850 3250 1350 3250
-Wire Wire Line
-	6250 6100 5750 6100
-Wire Wire Line
-	6250 6200 5750 6200
-Wire Wire Line
-	6250 6300 5750 6300
-Wire Wire Line
-	6250 6500 5750 6500
-Wire Wire Line
-	2900 3150 2350 3150
-Wire Wire Line
-	2900 3450 2350 3450
-Wire Wire Line
-	2900 3550 2350 3550
-Wire Notes Line
-	4000 2350 4550 2350
-Wire Notes Line
-	4550 3950 4000 3950
 Wire Wire Line
 	9950 2250 10500 2250
 Wire Wire Line
@@ -290,105 +272,125 @@ Wire Wire Line
 Wire Wire Line
 	9950 3150 10500 3150
 Wire Wire Line
-	1250 2350 1850 2350
+	10100 950  10100 750 
 Wire Wire Line
-	1250 2450 1850 2450
+	10200 850  10200 950 
+Wire Wire Line
+	10300 850  10200 850 
+Wire Wire Line
+	10300 950  10300 850 
+Wire Wire Line
+	10400 850  10300 850 
+Wire Wire Line
+	10400 850  10400 750 
+Wire Wire Line
+	10400 950  10400 850 
+Wire Wire Line
+	10500 850  10400 850 
+Wire Wire Line
+	10500 950  10500 850 
+Wire Wire Line
+	10600 850  10500 850 
+Wire Wire Line
+	10600 950  10600 850 
+Wire Bus Line
+	1100 3750 1100 4400
+Wire Bus Line
+	1100 4400 1050 4400
+Wire Bus Line
+	1100 4400 3150 4400
+Wire Bus Line
+	1150 600  1100 600 
+Wire Bus Line
+	1150 600  1150 2350
+Wire Bus Line
+	1150 600  3150 600 
+Wire Bus Line
+	1250 3350 1250 4250
+Wire Bus Line
+	1250 4250 1050 4250
+Wire Bus Line
+	1250 4250 3000 4250
+Wire Bus Line
+	1300 750  1100 750 
+Wire Bus Line
+	1300 750  1300 2850
+Wire Bus Line
+	3000 750  1300 750 
+Wire Bus Line
+	3000 750  3000 3050
+Wire Bus Line
+	3000 3550 3000 4250
+Wire Bus Line
+	3150 600  3150 2550
+Wire Bus Line
+	3150 3950 3150 4400
+Wire Bus Line
+	8250 1050 8450 1050
+Wire Bus Line
+	8450 1050 8650 1050
+Wire Bus Line
+	9200 1050 9300 1050
+Wire Bus Line
+	9300 1050 9500 1050
+Wire Bus Line
+	9500 1050 9600 1050
+Wire Notes Line
+	4000 2350 4550 2350
+Wire Notes Line
+	4000 3950 4000 2350
+Wire Notes Line
+	4250 850  4900 850 
+Wire Notes Line
+	4250 1550 4250 850 
+Wire Notes Line
+	4550 2350 4550 3950
+Wire Notes Line
+	4550 3950 4000 3950
+Wire Notes Line
+	4900 850  4900 1550
+Wire Notes Line
+	4900 1550 4250 1550
+Wire Notes Line
+	5050 2450 5050 3400
+Wire Notes Line
+	5050 3400 5500 3400
+Wire Notes Line
+	5300 750  6400 750 
+Wire Notes Line
+	5300 2050 5300 750 
+Wire Notes Line
+	5500 2450 5050 2450
+Wire Notes Line
+	5500 3400 5500 2450
+Wire Notes Line
+	6400 750  6400 2050
+Wire Notes Line
+	6400 2050 5300 2050
 Wire Notes Line
 	6750 800  7350 800 
 Wire Notes Line
+	6750 1450 6750 800 
+Wire Notes Line
+	7350 800  7350 1450
+Wire Notes Line
 	7350 1450 6750 1450
 Wire Notes Line
+	7350 3200 9350 3200
+Wire Notes Line
 	7350 3800 7350 3200
+Wire Notes Line
+	7350 4050 9350 4050
 Wire Notes Line
 	7350 4650 7350 4050
 Wire Notes Line
 	9350 3200 9350 3800
 Wire Notes Line
-	9350 4050 9350 4650
-Wire Bus Line
-	1100 3750 1100 4400
-Wire Wire Line
-	1200 3650 1850 3650
-Wire Wire Line
-	1200 3750 1850 3750
-Wire Wire Line
-	2350 3050 3000 3050
-Wire Notes Line
-	4250 850  4900 850 
-Wire Notes Line
-	4900 1550 4250 1550
-Wire Notes Line
-	6750 1450 6750 800 
-Wire Notes Line
-	7350 800  7350 1450
-Wire Wire Line
-	2000 5750 2000 6450
-Wire Bus Line
-	3000 3550 3000 4250
-Wire Wire Line
-	3050 2550 2350 2550
-Wire Wire Line
-	3050 2650 2350 2650
-Wire Wire Line
-	3050 3850 2350 3850
-Wire Wire Line
-	3050 3950 2350 3950
-Wire Notes Line
-	4250 1550 4250 850 
-Wire Notes Line
-	4900 850  4900 1550
-Wire Wire Line
-	1850 2050 1100 2050
-Wire Wire Line
-	1850 2150 1100 2150
-Wire Wire Line
-	2350 2050 3200 2050
-Wire Wire Line
-	2350 2250 3200 2250
-Wire Wire Line
-	2350 2350 3200 2350
-Wire Bus Line
-	1250 3350 1250 4250
-Wire Notes Line
-	5050 2450 5050 3400
-Wire Notes Line
-	5500 3400 5500 2450
-Wire Notes Line
-	5300 750  6400 750 
-Wire Notes Line
-	6400 2050 5300 2050
-Wire Notes Line
-	5300 2050 5300 750 
-Wire Notes Line
-	6400 750  6400 2050
-Wire Notes Line
-	4000 3950 4000 2350
-Wire Notes Line
-	4550 2350 4550 3950
-Wire Bus Line
-	3000 750  1300 750 
-Wire Bus Line
-	1150 600  1150 2350
-Wire Bus Line
-	1250 4250 3000 4250
-Wire Bus Line
-	3150 600  3150 2550
-Wire Bus Line
-	1150 600  3150 600 
-Wire Notes Line
-	7350 3200 9350 3200
-Wire Notes Line
-	7350 4050 9350 4050
-Wire Notes Line
 	9350 3800 7350 3800
 Wire Notes Line
+	9350 4050 9350 4650
+Wire Notes Line
 	9350 4650 7350 4650
-Wire Bus Line
-	1100 4400 3150 4400
-Wire Bus Line
-	1300 750  1300 2850
-Wire Bus Line
-	3000 750  3000 3050
 Text Notes 4200 2550 0    50   ~ 0
 J13
 Text Notes 4300 1300 0    50   ~ 0

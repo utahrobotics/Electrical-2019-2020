@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name PowerNode2)(type Legacy)(uri ${KIPRJMOD}/PowerNode2.lib)(options "")(descr ""))
-)

@@ -1,9 +1,0 @@
-EESchema-DOCLIB  Version 2.0
-#
-$CMP BOB-12009
-D LOGIC LEVEL CONVERTER - BI-DIREC
-K
-F https://media.digikey.com/pdf/Data%20Sheets/Sparkfun%20PDFs/Bi-Directional-Logic-Level_HookupGuide.pdf
-$ENDCMP
-#
-#End Doc Library
