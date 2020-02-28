@@ -1,25 +1,52 @@
-EAGLE AutoRouter Statistics:
-
-Job           : C:/Users/megag/Documents/EAGLE/projects/Power Node V3.0/PowerNode2.brd
-
-Start at      : 22:34:56 (2/6/2020)
-End at        : 22:35:11 (2/6/2020)
-Elapsed time  : 00:00:04
-
-Signals       :    59   RoutingGrid: 12.5 mil  Layers: 2
-Connections   :    96   predefined:  19 ( 0 Vias )
-
-Router memory :   216240
-
-Passname          :    Busses     Route Optimize1 Optimize2 Optimize3 Optimize4 Optimize5 Optimize6 Optimize7 Optimize8 Optimize9Optimize10Optimize11Optimize12
-
-Time per pass     :  00:00:00  00:00:01  00:00:00  00:00:00  00:00:01  00:00:00  00:00:00  00:00:00  00:00:01  00:00:00  00:00:00  00:00:00  00:00:01  00:00:00
-Number of Ripups  :         0         2         0         0         0         0         0         0         0         0         0         0         0         0
-max. Level        :         0         1         0         0         0         0         0         0         0         0         0         0         0         0
-max. Total        :         0         1         0         0         0         0         0         0         0         0         0         0         0         0
-
-Routed            :         6        73        73        73        73        73        73        73        73        73        73        73        73        73
-Vias              :         0        57        58        54        53        53        53        53        49        44        44        44        44        44
-Resolution        :    26.0 %    95.8 %    95.8 %    95.8 %    95.8 %    95.8 %    95.8 %    95.8 %    95.8 %    95.8 %    95.8 %    95.8 %    95.8 %    95.8 %
-
-Final             : 85.4% finished. Polygons may have fallen apart.
+update=Thu 27 Feb 2020 12:00:54 PM MST
+version=1
+last_client=kicad
+[general]
+version=1
+RootSch=
+BoardNm=
+[pcbnew]
+version=1
+LastNetListRead=
+UseCmpFile=1
+PadDrill=0.600000000000
+PadDrillOvalY=0.600000000000
+PadSizeH=1.500000000000
+PadSizeV=1.500000000000
+PcbTextSizeV=1.500000000000
+PcbTextSizeH=1.500000000000
+PcbTextThickness=0.300000000000
+ModuleTextSizeV=1.000000000000
+ModuleTextSizeH=1.000000000000
+ModuleTextSizeThickness=0.150000000000
+SolderMaskClearance=0.000000000000
+SolderMaskMinWidth=0.000000000000
+DrawSegmentWidth=0.200000000000
+BoardOutlineThickness=0.100000000000
+ModuleOutlineThickness=0.150000000000
+[cvpcb]
+version=1
+NetIExt=net
+[eeschema]
+version=1
+LibDir=
+[eeschema/libraries]
+[schematic_editor]
+version=1
+PageLayoutDescrFile=empty.kicad_wks
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceAjustPassiveValues=0
+LabSize=50
+ERC_TestSimilarLabels=1
+[ModEditFrame]
+version=1
+[SchematicFrame]
+version=1
+[LibeditFrame]
+version=1
+[sheetnames]
+1=57804358-0644-4eb2-9745-cfe0c62299bd:Sheet57804358-0644-4eb2-9745-cfe0c62299bd
+2=00000000-0000-0000-0000-00005e568305:Logic
