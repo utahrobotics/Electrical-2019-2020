@@ -18,9 +18,9 @@ Comment7 ""
 Comment8 ""
 Comment9 ""
 $EndDescr
-Connection ~ 3500 3750
-Connection ~ 3900 2850
-Connection ~ 4000 2750
+Connection ~ 3300 3750
+Connection ~ 3700 2850
+Connection ~ 3800 2750
 Connection ~ 4500 4800
 Connection ~ 4500 5200
 Connection ~ 5000 2850
@@ -48,41 +48,41 @@ Connection ~ 10800 3900
 Connection ~ 10800 5100
 Connection ~ 10800 5200
 Wire Wire Line
-	3500 3650 3500 3750
+	3300 3650 3300 3750
 Wire Wire Line
-	3500 3750 3300 3750
+	3300 3750 3100 3750
 Wire Wire Line
-	3500 3750 3500 3850
+	3300 3750 3300 3850
 Wire Wire Line
-	3500 3750 4000 3750
+	3300 3750 3800 3750
 Wire Wire Line
-	3500 4150 3500 4250
+	3300 4150 3300 4250
 Wire Wire Line
-	3700 2750 4000 2750
+	3500 2750 3800 2750
 Wire Wire Line
-	3700 3050 7100 3050
+	3500 3050 7100 3050
 Wire Wire Line
-	3900 2850 3700 2850
+	3700 2850 3500 2850
 Wire Wire Line
-	3900 2850 3900 3700
+	3700 2850 3700 3700
 Wire Wire Line
-	3900 3700 4050 3700
+	3700 3700 3850 3700
 Wire Wire Line
-	4000 2750 4000 3500
+	3800 2750 3800 3500
 Wire Wire Line
-	4000 2750 6000 2750
+	3800 2750 6000 2750
 Wire Wire Line
-	4000 3500 4050 3500
+	3800 3500 3850 3500
 Wire Wire Line
-	4000 3750 4000 3900
+	3800 3750 3800 3900
 Wire Wire Line
-	4000 3900 4050 3900
+	3800 3900 3850 3900
 Wire Wire Line
-	4000 4100 4000 4250
+	3800 4100 3800 4250
 Wire Wire Line
-	4000 4250 3500 4250
+	3800 4250 3300 4250
 Wire Wire Line
-	4050 4100 4000 4100
+	3850 4100 3800 4100
 Wire Wire Line
 	4300 5000 4500 5000
 Wire Wire Line
@@ -106,7 +106,7 @@ Wire Wire Line
 Wire Wire Line
 	4900 3600 5000 3600
 Wire Wire Line
-	5000 2850 3900 2850
+	5000 2850 3700 2850
 Wire Wire Line
 	5000 3100 5000 2850
 Wire Wire Line
@@ -184,7 +184,7 @@ Wire Wire Line
 Wire Wire Line
 	7150 3600 8500 3600
 Wire Wire Line
-	7200 2950 3700 2950
+	7200 2950 3500 2950
 Wire Wire Line
 	7200 3400 7200 2950
 Wire Wire Line
@@ -327,17 +327,17 @@ Wire Wire Line
 	11000 4100 10000 4100
 Wire Wire Line
 	11300 4100 11400 4100
-Text Notes 3250 2800 0    50   ~ 0
+Text Notes 3050 2800 0    50   ~ 0
 VCC
-Text Notes 3250 2900 0    50   ~ 0
+Text Notes 3050 2900 0    50   ~ 0
 GND
-Text Notes 3250 3000 0    50   ~ 0
+Text Notes 3050 3000 0    50   ~ 0
 SCL
-Text Notes 3250 3100 0    50   ~ 0
+Text Notes 3050 3100 0    50   ~ 0
 SDA
 Text Notes 6550 2650 2    50   ~ 0
 .tran 1e-4 100m\n* .dc V.XVHIIN1.V1 0 24 0.1
-Text Label 3350 3750 0    50   ~ 0
+Text Label 3150 3750 0    50   ~ 0
 VHI
 Text Label 3900 5000 2    50   ~ 0
 VHI
@@ -354,28 +354,28 @@ SWITCH
 $Comp
 L Connector:TestPoint VHIOUT1
 U 1 1 5E568303
-P 3300 3750
-F 0 "VHIOUT1" V 3300 3950 50  0000 L CNN
-F 1 "WIREPAD4,16O1,6" V 3200 3900 50  0001 C TNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3300 3750 50  0001 C CNN
-F 3 "~" H 3300 3750 50  0001 C CNN
-F 4 "N" V 3300 3750 50  0001 C CNN "Spice_Netlist_Enabled"
-	1    3300 3750
+P 3100 3750
+F 0 "VHIOUT1" V 3100 3950 50  0000 L CNN
+F 1 "WIREPAD4,16O1,6" V 3000 3900 50  0001 C TNN
+F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3100 3750 50  0001 C CNN
+F 3 "~" H 3100 3750 50  0001 C CNN
+F 4 "N" V 3100 3750 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    3100 3750
 	0    -1   1    0   
 $EndComp
 $Comp
 L Connector:TestPoint VHIIN1
 U 1 1 5E568302
-P 3500 3650
-F 0 "VHIIN1" V 3500 3850 50  0000 L CNN
-F 1 "WIREPAD4,16O1,6" V 3450 3650 50  0001 C BNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3500 3650 50  0001 C CNN
-F 3 "~" H 3500 3650 50  0001 C CNN
-F 4 "Y" V 3500 3650 50  0001 C CNN "Spice_Netlist_Enabled"
-F 5 "X" H 3500 3650 50  0001 C CNN "Spice_Primitive"
-F 6 "battery" H 3500 3650 50  0001 C CNN "Spice_Model"
-F 7 "PowerNode2_models.lib" H 3500 3650 50  0001 C CNN "Spice_Lib_File"
-	1    3500 3650
+P 3300 3650
+F 0 "VHIIN1" V 3300 3850 50  0000 L CNN
+F 1 "WIREPAD4,16O1,6" V 3250 3650 50  0001 C BNN
+F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3300 3650 50  0001 C CNN
+F 3 "~" H 3300 3650 50  0001 C CNN
+F 4 "Y" V 3300 3650 50  0001 C CNN "Spice_Netlist_Enabled"
+F 5 "X" H 3300 3650 50  0001 C CNN "Spice_Primitive"
+F 6 "battery" H 3300 3650 50  0001 C CNN "Spice_Model"
+F 7 "PowerNode2_models.lib" H 3300 3650 50  0001 C CNN "Spice_Lib_File"
+	1    3300 3650
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -548,12 +548,12 @@ $EndComp
 $Comp
 L Device:R R2
 U 1 1 5E58EDA4
-P 3500 4000
-F 0 "R2" V 3400 4000 50  0000 C CNN
-F 1 "43k" V 3500 4000 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 3500 4000 50  0001 C CNN
-F 3 "~" H 3500 4000 50  0001 C CNN
-	1    3500 4000
+P 3300 4000
+F 0 "R2" V 3200 4000 50  0000 C CNN
+F 1 "43k" V 3300 4000 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 3300 4000 50  0001 C CNN
+F 3 "~" H 3300 4000 50  0001 C CNN
+	1    3300 4000
 	-1   0    0    1   
 $EndComp
 $Comp
@@ -746,16 +746,16 @@ $EndComp
 $Comp
 L Connector:Screw_Terminal_01x04 INOUT1
 U 1 1 5E4A09A8
-P 3500 2850
-F 0 "INOUT1" H 3418 3167 50  0000 C CNN
-F 1 "W237-4" H 3418 3076 50  0000 C CNN
-F 2 "PowerNode2:W237-4" H 3500 2850 50  0001 C CNN
-F 3 "~" H 3500 2850 50  0001 C CNN
-F 4 "X" H 3500 2850 50  0001 C CNN "Spice_Primitive"
-F 5 "w237_4" H 3500 2850 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 3500 2850 50  0001 C CNN "Spice_Netlist_Enabled"
-F 7 "PowerNode2_models.lib" H 3500 2850 50  0001 C CNN "Spice_Lib_File"
-	1    3500 2850
+P 3300 2850
+F 0 "INOUT1" H 3218 3167 50  0000 C CNN
+F 1 "W237-4" H 3218 3076 50  0000 C CNN
+F 2 "PowerNode2:W237-4" H 3300 2850 50  0001 C CNN
+F 3 "~" H 3300 2850 50  0001 C CNN
+F 4 "X" H 3300 2850 50  0001 C CNN "Spice_Primitive"
+F 5 "w237_4" H 3300 2850 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 3300 2850 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 3300 2850 50  0001 C CNN "Spice_Lib_File"
+	1    3300 2850
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -776,16 +776,16 @@ $EndComp
 $Comp
 L PowerNode2:SW_DPDT S2
 U 1 1 5E582E15
-P 4250 3800
-F 0 "S2" H 4150 3900 50  0000 C CNN
-F 1 "SW_DPDT" H 4250 3993 50  0001 C CNN
-F 2 "OSx02011MS2Qx1:OS202011MS2Qx1" H 4250 3800 50  0001 C CNN
-F 3 "https://www.mouser.com/datasheet/2/60/os-1382783.pdf" H 4250 3800 50  0001 C CNN
-F 4 "X" H 4250 3800 50  0001 C CNN "Spice_Primitive"
-F 5 "swdpdt pos=0" H 4250 3800 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 4250 3800 50  0001 C CNN "Spice_Netlist_Enabled"
-F 7 "PowerNode2_models.lib" H 4250 3800 50  0001 C CNN "Spice_Lib_File"
-	1    4250 3800
+P 4150 3800
+F 0 "S2" H 4050 3900 50  0000 C CNN
+F 1 "SW_DPDT" H 4150 3993 50  0001 C CNN
+F 2 "OSx02011MS2Qx1:OS202011MS2Qx1" H 4150 3800 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/60/os-1382783.pdf" H 4150 3800 50  0001 C CNN
+F 4 "X" H 4150 3800 50  0001 C CNN "Spice_Primitive"
+F 5 "swdpdt pos=0" H 4150 3800 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 4150 3800 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 4150 3800 50  0001 C CNN "Spice_Lib_File"
+	1    4150 3800
 	-1   0    0    -1  
 $EndComp
 $Comp
