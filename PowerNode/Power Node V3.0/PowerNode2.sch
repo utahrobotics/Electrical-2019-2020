@@ -19,8 +19,9 @@ Comment8 ""
 Comment9 ""
 $EndDescr
 Connection ~ 3300 3750
-Connection ~ 3700 2850
-Connection ~ 3800 2750
+Connection ~ 3700 2750
+Connection ~ 3800 2850
+Connection ~ 4500 3600
 Connection ~ 4500 4800
 Connection ~ 4500 5200
 Connection ~ 5000 2850
@@ -58,19 +59,19 @@ Wire Wire Line
 Wire Wire Line
 	3300 4150 3300 4250
 Wire Wire Line
-	3500 2750 3800 2750
+	3500 2750 3700 2750
+Wire Wire Line
+	3500 2850 3800 2850
 Wire Wire Line
 	3500 3050 7100 3050
 Wire Wire Line
-	3700 2850 3500 2850
+	3700 2750 3700 3700
 Wire Wire Line
-	3700 2850 3700 3700
+	3700 2750 6000 2750
 Wire Wire Line
 	3700 3700 3850 3700
 Wire Wire Line
-	3800 2750 3800 3500
-Wire Wire Line
-	3800 2750 6000 2750
+	3800 2850 3800 3500
 Wire Wire Line
 	3800 3500 3850 3500
 Wire Wire Line
@@ -88,9 +89,15 @@ Wire Wire Line
 Wire Wire Line
 	4400 4800 4500 4800
 Wire Wire Line
-	4450 3600 4600 3600
+	4450 3600 4500 3600
 Wire Wire Line
 	4450 4000 5500 4000
+Wire Wire Line
+	4500 3600 4500 3900
+Wire Wire Line
+	4500 3600 4600 3600
+Wire Wire Line
+	4500 3900 8500 3900
 Wire Wire Line
 	4500 4800 4600 4800
 Wire Wire Line
@@ -106,7 +113,7 @@ Wire Wire Line
 Wire Wire Line
 	4900 3600 5000 3600
 Wire Wire Line
-	5000 2850 3700 2850
+	5000 2850 3800 2850
 Wire Wire Line
 	5000 3100 5000 2850
 Wire Wire Line
@@ -124,9 +131,9 @@ Wire Wire Line
 Wire Wire Line
 	5500 2850 5000 2850
 Wire Wire Line
-	5500 2850 5500 3600
+	5500 2850 5500 3100
 Wire Wire Line
-	5500 3900 5500 4000
+	5500 3400 5500 4000
 Wire Wire Line
 	5500 4000 6100 4000
 Wire Wire Line
@@ -166,9 +173,9 @@ Wire Wire Line
 Wire Wire Line
 	7000 2750 7500 2750
 Wire Wire Line
-	7000 3750 7000 3900
+	7000 3750 7000 3800
 Wire Wire Line
-	7000 3900 7400 3900
+	7000 3800 7400 3800
 Wire Wire Line
 	7000 5000 7000 5150
 Wire Wire Line
@@ -204,7 +211,7 @@ Wire Wire Line
 Wire Wire Line
 	7400 3300 8500 3300
 Wire Wire Line
-	7400 3900 7400 3300
+	7400 3800 7400 3300
 Wire Wire Line
 	7500 2750 7600 2750
 Wire Wire Line
@@ -235,8 +242,6 @@ Wire Wire Line
 	8100 2850 8200 2850
 Wire Wire Line
 	8100 3500 8500 3500
-Wire Wire Line
-	8400 3900 8500 3900
 Wire Wire Line
 	8400 4100 8500 4100
 Wire Wire Line
@@ -352,10 +357,10 @@ SCL
 Text Label 8100 3500 0    50   ~ 0
 SWITCH
 $Comp
-L Connector:TestPoint VHIOUT
+L Connector:TestPoint VHIOUT1
 U 1 1 5E568303
 P 3100 3750
-F 0 "VHIOUT" V 3100 3950 50  0000 L CNN
+F 0 "VHIOUT1" V 3100 3950 50  0000 L CNN
 F 1 "WIREPAD4,16O1,6" V 3000 3900 50  0001 C TNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3100 3750 50  0001 C CNN
 F 3 "~" H 3100 3750 50  0001 C CNN
@@ -364,10 +369,10 @@ F 4 "N" V 3100 3750 50  0001 C CNN "Spice_Netlist_Enabled"
 	0    -1   1    0   
 $EndComp
 $Comp
-L Connector:TestPoint VHIIN
+L Connector:TestPoint VHIIN1
 U 1 1 5E568302
 P 3300 3650
-F 0 "VHIIN" V 3300 3850 50  0000 L CNN
+F 0 "VHIIN1" V 3300 3850 50  0000 L CNN
 F 1 "WIREPAD4,16O1,6" V 3250 3650 50  0001 C BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3300 3650 50  0001 C CNN
 F 3 "~" H 3300 3650 50  0001 C CNN
@@ -379,10 +384,10 @@ F 7 "PowerNode2_models.lib" H 3300 3650 50  0001 C CNN "Spice_Lib_File"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:TestPoint GNDHIOUT
+L Connector:TestPoint GNDHIOUT1
 U 1 1 16E6194B
 P 4400 4800
-F 0 "GNDHIOUT" V 4400 5000 50  0000 L CNN
+F 0 "GNDHIOUT1" V 4400 5000 50  0000 L CNN
 F 1 "WIREPAD4,16O1,6" V 4300 4950 50  0001 C TNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 4400 4800 50  0001 C CNN
 F 3 "~" H 4400 4800 50  0001 C CNN
@@ -391,28 +396,16 @@ F 4 "N" V 4400 4800 50  0001 C CNN "Spice_Netlist_Enabled"
 	0    -1   1    0   
 $EndComp
 $Comp
-L Connector:TestPoint GNDHIIN
+L Connector:TestPoint GNDHIIN1
 U 1 1 9FE8900C
 P 4400 5200
-F 0 "GNDHIIN" V 4400 5400 50  0000 L CNN
+F 0 "GNDHIIN1" V 4400 5400 50  0000 L CNN
 F 1 "WIREPAD4,16O1,6" V 4350 5200 50  0001 C BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 4400 5200 50  0001 C CNN
 F 3 "~" H 4400 5200 50  0001 C CNN
 F 4 "N" V 4400 5200 50  0001 C CNN "Spice_Netlist_Enabled"
 	1    4400 5200
 	0    -1   -1   0   
-$EndComp
-$Comp
-L Connector:TestPoint PB2
-U 1 1 5E568308
-P 8400 3900
-F 0 "PB2" V 8400 4200 50  0000 C CNN
-F 1 "2,54_0,9" V 8500 3750 50  0001 L BNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 8400 3900 50  0001 C CNN
-F 3 "~" H 8400 3900 50  0001 C CNN
-F 4 "N" V 8400 3900 50  0001 C CNN "Spice_Netlist_Enabled"
-	1    8400 3900
-	0    -1   1    0   
 $EndComp
 $Comp
 L Connector:TestPoint LE*1
@@ -487,10 +480,10 @@ F 4 "N" V 8400 4700 50  0001 C CNN "Spice_Netlist_Enabled"
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Connector:TestPoint QH*
+L Connector:TestPoint QH*1
 U 1 1 5E568307
 P 8400 4900
-F 0 "QH*" V 8400 5100 50  0000 L CNN
+F 0 "QH*1" V 8400 5100 50  0000 L CNN
 F 1 "2,54_0,9" V 8500 4800 50  0001 L BNN
 F 2 "Connector_Wire:SolderWirePad_1x01_Drill1mm" H 8400 4900 50  0001 C CNN
 F 3 "~" H 8400 4900 50  0001 C CNN
@@ -570,12 +563,12 @@ $EndComp
 $Comp
 L Device:R R3
 U 1 1 5E595A07
-P 5500 3750
-F 0 "R3" V 5400 3750 50  0000 C CNN
-F 1 "10k" V 5500 3750 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 5500 3750 50  0001 C CNN
-F 3 "~" H 5500 3750 50  0001 C CNN
-	1    5500 3750
+P 5500 3250
+F 0 "R3" V 5400 3250 50  0000 C CNN
+F 1 "10k" V 5500 3250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 5500 3250 50  0001 C CNN
+F 3 "~" H 5500 3250 50  0001 C CNN
+	1    5500 3250
 	-1   0    0    1   
 $EndComp
 $Comp
@@ -667,10 +660,10 @@ F 3 "~" H 7000 5250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:LED 5V
+L Device:LED VDIV1
 U 1 1 5E5C7402
 P 4750 3600
-F 0 "5V" H 4750 3450 50  0000 C CNN
+F 0 "VDIV1" H 4750 3450 50  0000 C CNN
 F 1 "LED5MM" H 4750 3700 50  0000 C CNN
 F 2 "LED_THT:LED_D5.0mm" H 4750 3600 50  0001 C CNN
 F 3 "~" H 4750 3600 50  0001 C CNN
@@ -683,10 +676,10 @@ F 8 "2 1" V 4750 3600 50  0001 C CNN "Spice_Node_Sequence"
 	-1   0    0    1   
 $EndComp
 $Comp
-L Device:LED PWR
+L Device:LED PWR1
 U 1 1 5E56830F
 P 6000 4750
-F 0 "PWR" V 6039 4830 50  0000 L CNN
+F 0 "PWR1" V 6039 4830 50  0000 L CNN
 F 1 "LED5MM" V 5948 4830 50  0000 L CNN
 F 2 "LED_THT:LED_D5.0mm" H 6000 4750 50  0001 C CNN
 F 3 "~" H 6000 4750 50  0001 C CNN
@@ -699,10 +692,10 @@ F 8 "2 1" V 6000 4750 50  0001 C CNN "Spice_Node_Sequence"
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Device:LED VOLT
+L Device:LED VOLT1
 U 1 1 5E6349D4
 P 8350 2850
-F 0 "VOLT" H 8350 2700 50  0000 C CNN
+F 0 "VOLT1" H 8350 2700 50  0000 C CNN
 F 1 "LED5MM" H 8343 2976 50  0000 C CNN
 F 2 "LED_THT:LED_D5.0mm" H 8350 2850 50  0001 C CNN
 F 3 "~" H 8350 2850 50  0001 C CNN
@@ -744,10 +737,10 @@ F 6 "SIN(15 15 100)" V 4150 5400 50  0000 C CNN "Spice_Model"
 	0    -1   1    0   
 $EndComp
 $Comp
-L Connector:Screw_Terminal_01x04 INOUT
+L Connector:Screw_Terminal_01x04 INOUT1
 U 1 1 5E4A09A8
 P 3300 2850
-F 0 "INOUT" H 3218 3167 50  0000 C CNN
+F 0 "INOUT1" H 3218 3167 50  0000 C CNN
 F 1 "W237-4" H 3218 3076 50  0000 C CNN
 F 2 "PowerNode2:W237-4" H 3300 2850 50  0001 C CNN
 F 3 "~" H 3300 2850 50  0001 C CNN
@@ -843,7 +836,7 @@ F3 "GND" I L 8500 3300 50
 F4 "VMEAS" I L 8500 3700 50 
 F5 "DP2" O R 9900 5200 50 
 F6 "SWITCH" I L 8500 3500 50 
-F7 "PB2" I L 8500 3900 50 
+F7 "VDIV" I L 8500 3900 50 
 F8 "VCC" I L 8500 3200 50 
 F9 "IMEAS" I L 8500 3800 50 
 F10 "SCL" O L 8500 5100 50 
