@@ -341,7 +341,7 @@ SCL
 Text Notes 3050 3100 0    50   ~ 0
 SDA
 Text Notes 6550 2650 2    50   ~ 0
-.tran 1e-4 100m\n* .dc V.XVHIIN1.V1 0 24 0.1
+.param NT=100u\n.tran 1e-4 100m\n* .dc V.XVHIIN1.V1 0 24 0.1
 Text Label 3150 3750 0    50   ~ 0
 VHI
 Text Label 3900 5000 2    50   ~ 0
@@ -378,7 +378,7 @@ F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 3300 3650 50  0001 C CNN
 F 3 "~" H 3300 3650 50  0001 C CNN
 F 4 "Y" V 3300 3650 50  0001 C CNN "Spice_Netlist_Enabled"
 F 5 "X" H 3300 3650 50  0001 C CNN "Spice_Primitive"
-F 6 "battery" H 3300 3650 50  0001 C CNN "Spice_Model"
+F 6 "battery NT={NT}" H 3300 3650 50  0001 C CNN "Spice_Model"
 F 7 "PowerNode2_models.lib" H 3300 3650 50  0001 C CNN "Spice_Lib_File"
 	1    3300 3650
 	1    0    0    -1  
@@ -820,7 +820,7 @@ F 1 "ACS712xLCTR-30A" H 5000 5550 50  0000 C CNN
 F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 5100 4650 50  0001 L CIN
 F 3 "http://www.allegromicro.com/~/media/Files/Datasheets/ACS712-Datasheet.ashx?la=en" H 5000 5000 50  0001 C CNN
 F 4 "X" H 5000 5000 50  0001 C CNN "Spice_Primitive"
-F 5 "acs712elctr sens=0.066 NA=7m" H 5000 5000 50  0001 C CNN "Spice_Model"
+F 5 "acs712elctr sens=0.066 NA=7m NT={NT}" H 5000 5000 50  0001 C CNN "Spice_Model"
 F 6 "Y" H 5000 5000 50  0001 C CNN "Spice_Netlist_Enabled"
 F 7 "PowerNode2_models.lib" H 5000 5000 50  0001 C CNN "Spice_Lib_File"
 	1    5000 5000
