@@ -358,7 +358,7 @@ VMEAS
 Text HLabel 3600 4300 2    50   Output ~ 0
 DP2
 Text HLabel 3600 4500 2    50   Input ~ 0
-PB2
+VDIV
 Text HLabel 5100 4400 2    50   Input ~ 0
 SWITCH
 Text HLabel 6500 4500 2    50   Output ~ 0
