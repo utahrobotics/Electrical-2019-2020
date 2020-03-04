@@ -127,7 +127,7 @@ Wire Wire Line
 Wire Wire Line
 	5000 5500 5500 5500
 Wire Wire Line
-	5400 5000 6600 5000
+	5400 5000 7000 5000
 Wire Wire Line
 	5500 2850 5000 2850
 Wire Wire Line
@@ -166,8 +166,6 @@ Wire Wire Line
 	6500 4850 6500 5500
 Wire Wire Line
 	6500 5500 7000 5500
-Wire Wire Line
-	6900 5000 7000 5000
 Wire Wire Line
 	7000 2750 7000 3450
 Wire Wire Line
@@ -591,17 +589,6 @@ F 1 "10k" V 6250 4000 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 6250 4000 50  0001 C CNN
 F 3 "~" H 6250 4000 50  0001 C CNN
 	1    6250 4000
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Device:R R6
-U 1 1 5E56830B
-P 6750 5000
-F 0 "R6" V 6650 5000 50  0000 C CNN
-F 1 "10k" V 6750 5000 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 6750 5000 50  0001 C CNN
-F 3 "~" H 6750 5000 50  0001 C CNN
-	1    6750 5000
 	0    -1   -1   0   
 $EndComp
 $Comp
