@@ -738,9 +738,9 @@ L 74xx:74HC595 IC2
 U 1 1 5EB254CD
 P 6000 4000
 F 0 "IC2" H 5700 4600 50  0000 L TNN
-F 1 "74HC595N" H 6050 4600 50  0000 L TNN
+F 1 "74HC594N" H 6050 4600 50  0000 L TNN
 F 2 "Package_DIP:DIP-16_W7.62mm_LongPads" H 6000 4000 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf" H 6000 4000 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/sn74hc594.pdf" H 6000 4000 50  0001 C CNN
 F 4 "X" H 6000 4000 50  0001 C CNN "Spice_Primitive"
 F 5 "ti74hc595n" H 6000 4000 50  0001 C CNN "Spice_Model"
 F 6 "Y" H 6000 4000 50  0001 C CNN "Spice_Netlist_Enabled"
