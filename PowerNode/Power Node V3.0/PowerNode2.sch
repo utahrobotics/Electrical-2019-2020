@@ -19,8 +19,8 @@ Comment8 ""
 Comment9 ""
 $EndDescr
 Connection ~ 3300 3750
-Connection ~ 3700 2750
-Connection ~ 3800 2850
+Connection ~ 3700 2850
+Connection ~ 3800 2750
 Connection ~ 4500 3600
 Connection ~ 4500 4800
 Connection ~ 4500 5200
@@ -42,7 +42,7 @@ Connection ~ 7400 3300
 Connection ~ 7500 2750
 Connection ~ 7500 5500
 Connection ~ 8100 2850
-Connection ~ 9000 2850
+Connection ~ 10000 2850
 Connection ~ 10000 3900
 Connection ~ 10800 3800
 Connection ~ 10800 3900
@@ -59,19 +59,21 @@ Wire Wire Line
 Wire Wire Line
 	3300 4150 3300 4250
 Wire Wire Line
-	3500 2750 3700 2750
+	3500 2750 3800 2750
 Wire Wire Line
-	3500 2850 3800 2850
+	3500 2850 3700 2850
 Wire Wire Line
 	3500 3050 7100 3050
 Wire Wire Line
-	3700 2750 3700 3700
+	3700 2850 3700 3700
 Wire Wire Line
-	3700 2750 6000 2750
+	3700 2850 5000 2850
 Wire Wire Line
 	3700 3700 3850 3700
 Wire Wire Line
-	3800 2850 3800 3500
+	3800 2750 3800 3500
+Wire Wire Line
+	3800 2750 6000 2750
 Wire Wire Line
 	3800 3500 3850 3500
 Wire Wire Line
@@ -112,8 +114,6 @@ Wire Wire Line
 	4600 5200 4500 5200
 Wire Wire Line
 	4900 3600 5000 3600
-Wire Wire Line
-	5000 2850 3800 2850
 Wire Wire Line
 	5000 3100 5000 2850
 Wire Wire Line
@@ -199,9 +199,9 @@ Wire Wire Line
 Wire Wire Line
 	7300 3300 7300 2850
 Wire Wire Line
-	7400 2600 9000 2600
+	7400 2000 10000 2000
 Wire Wire Line
-	7400 2950 7400 2600
+	7400 2950 7400 2000
 Wire Wire Line
 	7400 2950 7400 3300
 Wire Wire Line
@@ -210,6 +210,8 @@ Wire Wire Line
 	7400 3300 8500 3300
 Wire Wire Line
 	7400 3800 7400 3300
+Wire Wire Line
+	7500 2650 7500 2750
 Wire Wire Line
 	7500 2750 7600 2750
 Wire Wire Line
@@ -235,9 +237,13 @@ Wire Wire Line
 Wire Wire Line
 	8000 5100 8500 5100
 Wire Wire Line
+	8100 2250 9650 2250
+Wire Wire Line
+	8100 2850 8100 2250
+Wire Wire Line
 	8100 2850 8100 3500
 Wire Wire Line
-	8100 2850 8200 2850
+	8100 2850 8950 2850
 Wire Wire Line
 	8100 3500 8500 3500
 Wire Wire Line
@@ -255,15 +261,19 @@ Wire Wire Line
 Wire Wire Line
 	8400 4900 8500 4900
 Wire Wire Line
-	8500 2850 8600 2850
-Wire Wire Line
 	8500 3700 7700 3700
 Wire Wire Line
 	8500 3800 7800 3800
 Wire Wire Line
-	9000 2600 9000 2850
+	8600 2650 7500 2650
 Wire Wire Line
-	9000 2850 8900 2850
+	8900 2650 8950 2650
+Wire Wire Line
+	9550 2850 9600 2850
+Wire Wire Line
+	9650 2250 9650 2650
+Wire Wire Line
+	9650 2650 9550 2650
 Wire Wire Line
 	9900 3200 10100 3200
 Wire Wire Line
@@ -297,6 +307,10 @@ Wire Wire Line
 Wire Wire Line
 	9900 5200 10100 5200
 Wire Wire Line
+	10000 2000 10000 2850
+Wire Wire Line
+	10000 2850 9900 2850
+Wire Wire Line
 	10000 3900 10100 3900
 Wire Wire Line
 	10000 4100 10000 3900
@@ -309,7 +323,7 @@ Wire Wire Line
 Wire Wire Line
 	10700 5200 10800 5200
 Wire Wire Line
-	10800 2850 9000 2850
+	10800 2850 10000 2850
 Wire Wire Line
 	10800 3800 10800 2850
 Wire Wire Line
@@ -592,14 +606,25 @@ F 3 "~" H 6250 4000 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
+L Device:R R6
+U 1 1 00000000
+P 8750 2650
+F 0 "R6" V 8850 2650 50  0000 C CNN
+F 1 "220" V 8750 2650 50  0000 C CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.42x1.75mm_HandSolder" V 8680 2650 50  0001 C CNN
+F 3 "~" H 8750 2650 50  0001 C CNN
+	1    8750 2650
+	0    1    -1   0   
+$EndComp
+$Comp
 L Device:R R8
 U 1 1 5E889EBB
-P 8750 2850
-F 0 "R8" V 8850 2850 50  0000 C CNN
-F 1 "220" V 8750 2850 50  0000 C CNN
-F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.42x1.75mm_HandSolder" V 8680 2850 50  0001 C CNN
-F 3 "~" H 8750 2850 50  0001 C CNN
-	1    8750 2850
+P 9750 2850
+F 0 "R8" V 9850 2850 50  0000 C CNN
+F 1 "220" V 9750 2850 50  0000 C CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.42x1.75mm_HandSolder" V 9680 2850 50  0001 C CNN
+F 3 "~" H 9750 2850 50  0001 C CNN
+	1    9750 2850
 	0    1    -1   0   
 $EndComp
 $Comp
@@ -647,12 +672,12 @@ F 3 "~" H 7000 5250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:LED VDIV1
+L Device:LED VPASS1
 U 1 1 5E5C7402
 P 4750 3600
-F 0 "VDIV1" H 4750 3450 50  0000 C CNN
-F 1 "LED5MM" H 4750 3700 50  0000 C CNN
-F 2 "LED_THT:LED_D5.0mm" H 4750 3600 50  0001 C CNN
+F 0 "VPASS1" H 4750 3450 50  0000 C CNN
+F 1 "LED" H 4750 3700 50  0000 C CNN
+F 2 "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 4750 3600 50  0001 C CNN
 F 3 "~" H 4750 3600 50  0001 C CNN
 F 4 "D" H 4750 3600 50  0001 C CNN "Spice_Primitive"
 F 5 "LedRed" H 4750 3600 50  0001 C CNN "Spice_Model"
@@ -667,8 +692,8 @@ L Device:LED PWR1
 U 1 1 5E56830F
 P 6000 4750
 F 0 "PWR1" V 6039 4830 50  0000 L CNN
-F 1 "LED5MM" V 5948 4830 50  0000 L CNN
-F 2 "LED_THT:LED_D5.0mm" H 6000 4750 50  0001 C CNN
+F 1 "LED" V 5948 4830 50  0000 L CNN
+F 2 "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 6000 4750 50  0001 C CNN
 F 3 "~" H 6000 4750 50  0001 C CNN
 F 4 "D" H 6000 4750 50  0001 C CNN "Spice_Primitive"
 F 5 "LedRed" H 6000 4750 50  0001 C CNN "Spice_Model"
@@ -677,22 +702,6 @@ F 7 "PowerNode2_models.lib" H 6000 4750 50  0001 C CNN "Spice_Lib_File"
 F 8 "2 1" V 6000 4750 50  0001 C CNN "Spice_Node_Sequence"
 	1    6000 4750
 	0    -1   -1   0   
-$EndComp
-$Comp
-L Device:LED VOLT1
-U 1 1 5E6349D4
-P 8350 2850
-F 0 "VOLT1" H 8350 2700 50  0000 C CNN
-F 1 "LED5MM" H 8343 2976 50  0000 C CNN
-F 2 "LED_THT:LED_D5.0mm" H 8350 2850 50  0001 C CNN
-F 3 "~" H 8350 2850 50  0001 C CNN
-F 4 "D" H 8350 2850 50  0001 C CNN "Spice_Primitive"
-F 5 "LedRed" H 8350 2850 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 8350 2850 50  0001 C CNN "Spice_Netlist_Enabled"
-F 7 "PowerNode2_models.lib" H 8350 2850 50  0001 C CNN "Spice_Lib_File"
-F 8 "2 1" H 8350 2850 50  0001 C CNN "Spice_Node_Sequence"
-	1    8350 2850
-	-1   0    0    1   
 $EndComp
 $Comp
 L Device:R_POT_US R7
@@ -752,6 +761,23 @@ F 6 "Y" H 7800 2850 50  0001 C CNN "Spice_Netlist_Enabled"
 F 7 "PowerNode2_models.lib" H 7800 2850 50  0001 C CNN "Spice_Lib_File"
 	1    7800 2850
 	-1   0    0    -1  
+$EndComp
+$Comp
+L PowerNode2:HSMF-C173 VOLT1
+U 1 1 00000000
+P 9250 2750
+F 0 "VOLT1" H 9250 3174 50  0000 C CNN
+F 1 "HSMF-C173" H 9250 3083 50  0000 C CNN
+F 2 "HSMFC173:HSMFC173" H 9850 3100 50  0001 L CNN
+F 3 "" H 9850 3000 50  0001 L CNN
+F 4 "Standard LEDs - SMD Chip,Biclr,Red/Grn" H 9850 2900 50  0001 L CNN "Description"
+F 5 "0.5" H 9850 2800 50  0001 L CNN "Height"
+F 6 "Avago Technologies" H 9850 2700 50  0001 L CNN "Manufacturer_Name"
+F 7 "HSMF-C173" H 9850 2600 50  0001 L CNN "Manufacturer_Part_Number"
+F 8 "630-HSMF-C173" H 9850 2500 50  0001 L CNN "Mouser Part Number"
+F 9 "https://www.mouser.com/Search/Refine.aspx?Keyword=630-HSMF-C173" H 9850 2400 50  0001 L CNN "Mouser Price/Stock"
+	1    9250 2750
+	1    0    0    -1  
 $EndComp
 $Comp
 L PowerNode2:SW_DPDT S1
