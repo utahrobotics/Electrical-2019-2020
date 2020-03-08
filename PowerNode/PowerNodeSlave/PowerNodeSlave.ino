@@ -18,8 +18,8 @@
 #define DS_pin 8
 #define latch_pin 10
 #define shift_pin 9
-#define currentmeasure A3 // define the Arduino pin A0 as voltage input (V in)
-#define voltagemeasure A5
+#define currentmeasure A5 // define the Arduino pin A0 as voltage input (V in)
+#define voltagemeasure A3
 #define switchpin 1
 #define potpin A7
 #define decpin 0

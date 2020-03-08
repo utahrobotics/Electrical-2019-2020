@@ -346,11 +346,11 @@ VCC
 Text HLabel 2500 5050 3    50   Input ~ 0
 GND
 Text HLabel 3600 3700 2    50   Input ~ 0
-IMEAS
+VMEAS
 Text HLabel 3600 3800 2    50   Output ~ 0
 SCL
 Text HLabel 3600 3900 2    50   Input ~ 0
-VMEAS
+IMEAS
 Text HLabel 3600 4000 2    50   Output ~ 0
 SDA
 Text HLabel 3600 4100 2    50   Input ~ 0
