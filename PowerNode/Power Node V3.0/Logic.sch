@@ -350,15 +350,15 @@ IMEAS
 Text HLabel 3600 3800 2    50   Output ~ 0
 SCL
 Text HLabel 3600 3900 2    50   Input ~ 0
-VPOT
+VMEAS
 Text HLabel 3600 4000 2    50   Output ~ 0
 SDA
 Text HLabel 3600 4100 2    50   Input ~ 0
-VMEAS
+VPOT
 Text HLabel 3600 4300 2    50   Output ~ 0
 DP2
 Text HLabel 3600 4500 2    50   Input ~ 0
-VDIV
+VPASS
 Text HLabel 5100 4400 2    50   Input ~ 0
 SWITCH
 Text HLabel 6500 4500 2    50   Output ~ 0
@@ -558,7 +558,7 @@ F 1 "220" H 9350 3850 50  0000 C CNN
 F 2 "PowerNode2:SOIC127P762X240-14N" H 9350 3925 50  0001 C CNN
 F 3 "https://www.mouser.com/datasheet/2/54/4800P-777115.pdf" V 9350 3450 50  0001 C CNN
 	1    9350 3450
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 $Comp
 L PowerNode2:R_Pack07 RN2
