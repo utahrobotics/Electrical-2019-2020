@@ -10,9 +10,6 @@
 // This sketch is for the ATTINY84 on-board a USR 2019-2020 Power Node V2.0. Upon request from a master device the ATTINY will take readings from the voltage divider
 // and ACS712 current sensor and send a total of four bytes (two for each integer reading, first current then voltage) to the master device.
 // The program also handles a shift register to display readings continuously. Use the slide switch to switch between displaying amps and volts
-//
-// By: Alex Charters
-// Last Updated: 2/23/2019 
 
 #define I2C_SLAVE_ADDRESS 0x5 // Address of the slave
 #define DS_pin 8
@@ -22,10 +19,15 @@
 #define voltagemeasure A3
 #define switchpin 1
 #define potpin A7
+#define vpasspin 5
 #define decpin 0
+
 
 const float VCC   = 5.0;// supply voltage is from 4.5 to 5.5V. Normally 5V.
 const int model = 1;   // enter the model number (see below)
+
+const float vscale = VCC / 1023.0;
+const float vdiv = 5.0; // how much the voltage is divided
 
 float cutOffLimit = 1.01;// set the current which below that value, doesn't matter. Or set 0.5
 
@@ -57,8 +59,9 @@ void setup()
     TinyWireS.onRequest(requestEvent);
  
     // Turn on LED when program starts
-    pinMode(currentmeasure, INPUT); //current
-    pinMode(voltagemeasure, INPUT); //voltage
+    pinMode(currentmeasure, INPUT); // current
+    pinMode(voltagemeasure, INPUT); // voltage
+    pinMode(vpasspin, INPUT); // pass through or divider
     
     pinMode(DS_pin, OUTPUT);
     pinMode(latch_pin, OUTPUT);
@@ -76,14 +79,14 @@ void loop()
     int desiredval = map(adjustval, 0, 255, -5, 5);
     if(digitalRead(switchpin)){
         //Robojax.com ACS712 Current Sensor 
-        float voltage_raw =  ((5.0 / 1023.0)* cur_val) + desiredval;// Read the voltage from sensor
+        float voltage_raw =  (vscale * cur_val) + desiredval;// Read the voltage from sensor
         voltage =  voltage_raw - QOV + 0.012 ;// 0.000 is a value to make voltage zero when there is no current
         float current = voltage / sensitivity[model];
     
         writeRegNum(current);
     }
     else{
-        float voltage = (volt_val * (5.0 / 1023.0))*5;
+        float voltage = volt_val * (digitalRead(vpasspin) ? vscale : vscale * vdiv);
         writeRegNum(voltage);
     }
 }
