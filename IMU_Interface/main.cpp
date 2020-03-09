@@ -1,5 +1,6 @@
 #include <ros.h>
 #include <sensor_msgs/Imu.h>
+#include <std_msgs/Int16MultiArray.h>
 #include "Arduino.h"
 
 #ifndef DEBUG
@@ -21,6 +22,9 @@ ros::NodeHandle nh;
 sensor_msgs::Imu imu_msg;
 ros::Publisher imu_pub("imu", &imu_msg);
 
+std_msgs::Int16MultiArray raw_msg;
+ros::Publisher raw_pub("imu_raw", &raw_msg);
+
 #define NO_CRC_CHECK
 
 #ifndef NO_CRC_CHECK
@@ -41,7 +45,7 @@ ros::Publisher imu_pub("imu", &imu_msg);
 #define SETREADY(v) digitalWriteFast(DataReady, v); ready = (bool) v
 
 double ts;
-uint16_t buffer[MAX_HDLC_FRAME_LENGTH];
+uint16_t buffer[MAX_HDLC_FRAME_LENGTH+4];
 uint16_t derBuffer = 0;
 uint16_t wordBuffer = 0;
 bool inFrame = false;
@@ -377,6 +381,10 @@ INLINE void fillImuMsg() {
                                       DELTA(z, angle) * ANGLE_SCALE)
                                * imu_msg.orientation;
 #endif
+    ((uint32_t*) &buffer[13])[0] = imu_msg.header.stamp.sec;
+    ((uint32_t*) &buffer[13])[1] = imu_msg.header.stamp.nsec;
+    raw_msg.data = (int16_t*) buffer;
+    raw_msg.data_length = 13 + 4;
 //    raw_imu_data1.print_data();
 }
 
@@ -407,6 +415,7 @@ void setup() {
 
     nh.initNode();
     nh.advertise(imu_pub);
+    nh.advertise(raw_pub);
 
 #ifdef PRINT_TIMES
     t1 = nanos();
@@ -460,6 +469,7 @@ void loop() {
         ts = seconds();
 #endif
         imu_pub.publish(&imu_msg);
+        raw_pub.publish(&raw_msg);
 #ifdef PRINT_TIMES
         t1 = seconds();
         Serial1.print("Publish nanos: ");
