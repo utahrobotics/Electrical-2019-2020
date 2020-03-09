@@ -16,7 +16,7 @@ ros::Publisher imu_pub("imu", &imu_msg);
 #define BADCHECKSUM 12
 #define IMUDataReady 19
 #define RxData 20
-#define SignalPin 13
+#define SignalPin 11
 #define DataReady 15
 #define ClkPin 6
 
