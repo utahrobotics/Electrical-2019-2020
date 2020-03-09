@@ -21,10 +21,17 @@ ros::NodeHandle nh;
 sensor_msgs::Imu imu_msg;
 ros::Publisher imu_pub("imu", &imu_msg);
 
+#define NO_CRC_CHECK
+
+#ifndef NO_CRC_CHECK
+#define BADCRC 11
+#endif
+
+#define BADCHECKSUM 12
 #define IMUDataReady 19
 #define RxData 20
 #define TxData 21
-#define SignalPin 13
+#define SignalPin 11
 #define DataReady 15
 #define ClkPin 6
 
@@ -132,9 +139,11 @@ void clk_ISR(void) {
 void set_ts(void) {
     ts = seconds();
     inFrame = false;
-    ready = false;
+    SETREADY(0);
     spin = false;
 }
+
+#ifndef NO_CRC_CHECK
 
 /*
  * The following code comes from RFC 1331.
@@ -197,12 +206,9 @@ INLINE uint16_t fcs(uint16_t fcs, const uint8_t* cp, size_t len) {
 /* My code again below */
 
 INLINE int crc_check(const uint16_t* data, size_t length) {
-#ifdef DEBUG
-    return 0;
-#else
     return (fcs(INITFCS, (uint8_t*) data, length * 2) - GOODFCS);
-#endif
 }
+#endif
 
 struct ImuData {
     double timestamp;
@@ -237,20 +243,18 @@ struct ImuData {
     {}
 
     int set_data(const uint16_t* data) {
+#ifndef NO_CRC_CHECK
         if (crc_check(data, 13)) {
+            digitalWriteFast(BADCRC, HIGH);
             return 1;
         }
+#endif
         uint16_t sum = 0;
         for (size_t i = 0; i < 12; i++) {
             sum += data[i];
         }
         if (((uint16_t) ~sum) ^ data[12]) {
-#ifdef DEBUG
-            Serial1.print("Bad sum: ");
-            Serial1.print(~sum, HEX);
-            Serial1.print("!=");
-            Serial1.println(data[12], HEX);
-#endif
+            digitalWriteFast(BADCHECKSUM, HIGH);
             return 2;
         }
         timestamp = ts;
@@ -268,6 +272,38 @@ struct ImuData {
         reserved3 = data[11];
         checksum = data[12];
         return 0;
+    }
+
+    void print_data() {
+        Serial1.print("timestamp: ");
+        Serial1.println(timestamp);
+        Serial1.print("x_delta_vel: ");
+        Serial1.println(x_delta_vel);
+        Serial1.print("y_delta_vel: ");
+        Serial1.println(y_delta_vel);
+        Serial1.print("z_delta_vel: ");
+        Serial1.println(z_delta_vel);
+        Serial1.print("x_delta_angle: ");
+        Serial1.println(x_delta_angle);
+        Serial1.print("y_delta_angle: ");
+        Serial1.println(y_delta_angle);
+        Serial1.print("z_delta_angle: ");
+        Serial1.println(z_delta_angle);
+        Serial1.print("imu_status_summary_word: ");
+        Serial1.println(imu_status_summary_word);
+        Serial1.print("mux_id: ");
+        Serial1.println(mux_id);
+        Serial1.print("multiplexed_data_word: ");
+        Serial1.println(multiplexed_data_word);
+        Serial1.print("reserved1: ");
+        Serial1.println(reserved1);
+        Serial1.print("reserved2: ");
+        Serial1.println(reserved2);
+        Serial1.print("reserved3: ");
+        Serial1.println(reserved3);
+        Serial1.print("checksum: ");
+        Serial1.println(checksum);
+        Serial1.println();
     }
 } raw_imu_data, raw_imu_data1;
 
@@ -309,12 +345,13 @@ INLINE Quaternion operator*(Quaternion q0, const Quaternion& q1) {
 #define DELTA(dir, q) (raw_imu_data1.dir##_delta_##q)
 #define DT (raw_imu_data1.timestamp - raw_imu_data.timestamp)
 #define DIFF(dir, q) (DELTA(dir, q) / DT)
-#define ANGLE_SCALE 2e-14
-#define VEL_SCALE 2e-19
+#define ANGLE_SCALE (1.0L / (1 << 19))
+#define VEL_SCALE (1.0L / (1 << 14))
 
 INLINE void fillImuMsg() {
     // TODO: double check
     struct ImuData pdata = raw_imu_data1;
+    // TODO: fix possible divide by zero issue
     if (!raw_imu_data1.set_data(buffer)) {
         raw_imu_data = pdata;
     }
@@ -340,18 +377,26 @@ INLINE void fillImuMsg() {
                                       DELTA(z, angle) * ANGLE_SCALE)
                                * imu_msg.orientation;
 #endif
+//    raw_imu_data1.print_data();
 }
 
 void setup() {
     Serial.begin(115200);
     Serial1.begin(115200);
 
+#ifndef NO_CRC_CHECK
+    pinMode(BADCRC, OUTPUT);
+    digitalWriteFast(BADCRC, LOW);
+#endif
+
+    pinMode(BADCHECKSUM, OUTPUT);
     pinMode(IMUDataReady, INPUT);
     pinMode(RxData, INPUT);
     pinMode(TxData, OUTPUT);
     pinMode(SignalPin, OUTPUT);
     pinMode(DataReady, OUTPUT);
 
+    digitalWriteFast(BADCHECKSUM, LOW);
     digitalWriteFast(SignalPin, inFrame);
     digitalWriteFast(DataReady, ready);
 
@@ -420,6 +465,10 @@ void loop() {
         Serial1.print("Publish nanos: ");
         Serial1.println((uint32_t) ((t1-t0)*1e9L));
 #endif
+#ifndef NO_CRC_CHECK
+        digitalWriteFast(BADCRC, LOW);
+#endif
+        digitalWriteFast(BADCHECKSUM, LOW);
         SETREADY(0);
         spin = true;
     }
@@ -429,7 +478,6 @@ void loop() {
         t0 = seconds();
 #endif
         nh.spinOnce();
-        delayMicroseconds(10);
 #ifdef PRINT_TIMES
         t1 = seconds();
         Serial1.print("Spin nanos: ");
