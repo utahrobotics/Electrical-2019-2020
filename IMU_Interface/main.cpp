@@ -243,6 +243,38 @@ struct ImuData {
         checksum = data[12];
         return 0;
     }
+
+    void print_data() {
+        Serial1.print("timestamp: ");
+        Serial1.println(timestamp);
+        Serial1.print("x_delta_vel: ");
+        Serial1.println(x_delta_vel);
+        Serial1.print("y_delta_vel: ");
+        Serial1.println(y_delta_vel);
+        Serial1.print("z_delta_vel: ");
+        Serial1.println(z_delta_vel);
+        Serial1.print("x_delta_angle: ");
+        Serial1.println(x_delta_angle);
+        Serial1.print("y_delta_angle: ");
+        Serial1.println(y_delta_angle);
+        Serial1.print("z_delta_angle: ");
+        Serial1.println(z_delta_angle);
+        Serial1.print("imu_status_summary_word: ");
+        Serial1.println(imu_status_summary_word);
+        Serial1.print("mux_id: ");
+        Serial1.println(mux_id);
+        Serial1.print("multiplexed_data_word: ");
+        Serial1.println(multiplexed_data_word);
+        Serial1.print("reserved1: ");
+        Serial1.println(reserved1);
+        Serial1.print("reserved2: ");
+        Serial1.println(reserved2);
+        Serial1.print("reserved3: ");
+        Serial1.println(reserved3);
+        Serial1.print("checksum: ");
+        Serial1.println(checksum);
+        Serial1.println();
+    }
 } raw_imu_data, raw_imu_data1;
 
 typedef geometry_msgs::Quaternion Quaternion;
@@ -289,6 +321,7 @@ inline Quaternion operator*(Quaternion q0, const Quaternion& q1) {
 inline void fillImuMsg() {
     // TODO: double check
     struct ImuData pdata = raw_imu_data1;
+    // TODO: fix possible divide by zero issue
     if (!raw_imu_data1.set_data(buffer)) {
         raw_imu_data = pdata;
     }
@@ -303,6 +336,7 @@ inline void fillImuMsg() {
                                       DELTA(y, angle) * ANGLE_SCALE,
                                       DELTA(z, angle) * ANGLE_SCALE)
                                * imu_msg.orientation;
+    raw_imu_data1.print_data();
 }
 
 void setup() {
