@@ -4,11 +4,11 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 2 2
-Title ""
-Date ""
-Rev ""
-Comp ""
-Comment1 ""
+Title "Power Node"
+Date "2020-03-11"
+Rev "3.1"
+Comp "Utah Student Robotics"
+Comment1 "Alex Charters and Jonathan Warner"
 Comment2 ""
 Comment3 ""
 Comment4 ""
