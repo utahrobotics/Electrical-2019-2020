@@ -182,12 +182,12 @@ inline int crc_check(const uint16_t* data, size_t length) {
 
 struct ImuData {
     double timestamp;
-    uint16_t x_delta_vel;
-    uint16_t y_delta_vel;
-    uint16_t z_delta_vel;
-    uint16_t x_delta_angle;
-    uint16_t y_delta_angle;
-    uint16_t z_delta_angle;
+    int16_t x_delta_vel;
+    int16_t y_delta_vel;
+    int16_t z_delta_vel;
+    int16_t x_delta_angle;
+    int16_t y_delta_angle;
+    int16_t z_delta_angle;
     uint16_t imu_status_summary_word;
     uint16_t mux_id;
     uint16_t multiplexed_data_word;
@@ -228,12 +228,12 @@ struct ImuData {
             return 2;
         }
         timestamp = ts;
-        x_delta_vel = data[0];
-        y_delta_vel = data[1];
-        z_delta_vel = data[2];
-        x_delta_angle = data[3];
-        y_delta_angle = data[4];
-        z_delta_angle = data[5];
+        x_delta_vel = (int16_t) data[0];
+        y_delta_vel = (int16_t) data[1];
+        z_delta_vel = (int16_t) data[2];
+        x_delta_angle = (int16_t) data[3];
+        y_delta_angle = (int16_t) data[4];
+        z_delta_angle = (int16_t) data[5];
         imu_status_summary_word = data[6];
         mux_id = data[7];
         multiplexed_data_word = data[8];
@@ -315,8 +315,8 @@ inline Quaternion operator*(Quaternion q0, const Quaternion& q1) {
 #define DELTA(dir, q) (raw_imu_data1.dir##_delta_##q)
 #define DT (raw_imu_data1.timestamp - raw_imu_data.timestamp)
 #define DIFF(dir, q) (DELTA(dir, q) / DT)
-#define ANGLE_SCALE (1.0L / (1 << 14))
-#define VEL_SCALE (1.0L / (1 << 19))
+#define ANGLE_EXP -19
+#define VEL_EXP -14
 
 inline void fillImuMsg() {
     // TODO: double check
@@ -326,17 +326,17 @@ inline void fillImuMsg() {
         raw_imu_data = pdata;
     }
     imu_msg.header.stamp.fromSec(raw_imu_data1.timestamp);
-    imu_msg.angular_velocity.x = DIFF(x, angle) * ANGLE_SCALE;
-    imu_msg.angular_velocity.y = DIFF(y, angle) * ANGLE_SCALE;
-    imu_msg.angular_velocity.z = DIFF(z, angle) * ANGLE_SCALE;
-    imu_msg.linear_acceleration.x = DIFF(x, vel) * VEL_SCALE;
-    imu_msg.linear_acceleration.y = DIFF(y, vel) * VEL_SCALE;
-    imu_msg.linear_acceleration.z = DIFF(z, vel) * VEL_SCALE;
-    imu_msg.orientation += 0.5 * q(0, DELTA(x, angle) * ANGLE_SCALE,
-                                      DELTA(y, angle) * ANGLE_SCALE,
-                                      DELTA(z, angle) * ANGLE_SCALE)
+    imu_msg.angular_velocity.x = ldexp(DIFF(x, angle), ANGLE_EXP);
+    imu_msg.angular_velocity.y = ldexp(DIFF(y, angle), ANGLE_EXP);
+    imu_msg.angular_velocity.z = ldexp(DIFF(z, angle), ANGLE_EXP);
+    imu_msg.linear_acceleration.x = ldexp(DIFF(x, vel), VEL_EXP);
+    imu_msg.linear_acceleration.y = ldexp(DIFF(y, vel), VEL_EXP);
+    imu_msg.linear_acceleration.z = ldexp(DIFF(z, vel), VEL_EXP);
+    imu_msg.orientation += 0.5 * q(0, ldexp((double) DELTA(x, angle), ANGLE_EXP),
+                                      ldexp((double) DELTA(y, angle), ANGLE_EXP),
+                                      ldexp((double) DELTA(z, angle), ANGLE_EXP))
                                * imu_msg.orientation;
-    raw_imu_data1.print_data();
+//    raw_imu_data1.print_data();
 }
 
 void setup() {
@@ -387,7 +387,6 @@ void loop() {
     }
     else if (spin) {
         nh.spinOnce();
-        delayMicroseconds(10);
     }
     else {
         attachInterrupt(digitalPinToInterrupt(ClkPin), clk_ISR, RISING);
