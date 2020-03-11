@@ -13,10 +13,11 @@ ros::Publisher imu_pub("imu", &imu_msg);
 #define BADCRC 11
 #endif
 
+/* pin definitions */
 #define BADCHECKSUM 12
 #define IMUDataReady 19
 #define RxData 20
-#define SignalPin 11
+#define InFrame 11
 #define DataReady 15
 #define ClkPin 6
 
@@ -25,7 +26,7 @@ ros::Publisher imu_pub("imu", &imu_msg);
 
 #define SETREADY(v) digitalWriteFast(DataReady, v); ready = (bool) v
 
-double ts;
+double ts; /* time stamp set when IMUDataReady drops */
 uint16_t buffer[MAX_HDLC_FRAME_LENGTH];
 uint16_t derBuffer = 0;
 uint16_t wordBuffer = 0;
@@ -35,6 +36,7 @@ bool spin = true;
 int bitCounter = 0;
 int idx = 0;
 
+/* used in bit reversal (input bits are big-endian) */
 static uint16_t rtab[256] = {
   0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,
   0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,
@@ -74,16 +76,19 @@ inline uint16_t reverse(uint16_t x) {
     return (rtab[x & 0xff] << 8) | rtab[x >> 8];
 }
 
+/* IMU clock interrupt */
 void clk_ISR(void) {
+    /* If we already have data, leave immediately */
     if (ready) {
         return;
     }
     register uint8_t rval = digitalReadFast(RxData);
     derBuffer <<= 1;
     derBuffer |= rval;
+    /* look for opening/closing flag */
     if ((derBuffer & 0xff) == OpeningFlag) {
         inFrame = !inFrame;
-        digitalWriteFast(SignalPin, inFrame);
+        digitalWriteFast(InFrame, inFrame);
         if (inFrame) {
             bitCounter = 0;
             idx = 0;
@@ -93,6 +98,7 @@ void clk_ISR(void) {
         }
         return;
     }
+    /* add bits to wordbuffer and store words to buffer */
     if ((idx == 0 && bitCounter < 5) || ((derBuffer & 0x3f) ^ 0x3e)) {
         wordBuffer <<= 1;
         wordBuffer |= rval;
@@ -106,6 +112,7 @@ void clk_ISR(void) {
     }
 }
 
+/* IMU data ready interrupt */
 void set_ts(void) {
     ts = seconds();
     inFrame = false;
@@ -212,6 +219,7 @@ struct ImuData {
                 checksum(0xffff)
     {}
 
+    /* assign data from the  buffer if CRC and checksum are good */
     int set_data(const uint16_t* data) {
 #ifndef NO_CRC_CHECK
         if (crc_check(data, 13)) {
@@ -243,40 +251,9 @@ struct ImuData {
         checksum = data[12];
         return 0;
     }
-
-    void print_data() {
-        Serial1.print("timestamp: ");
-        Serial1.println(timestamp);
-        Serial1.print("x_delta_vel: ");
-        Serial1.println(x_delta_vel);
-        Serial1.print("y_delta_vel: ");
-        Serial1.println(y_delta_vel);
-        Serial1.print("z_delta_vel: ");
-        Serial1.println(z_delta_vel);
-        Serial1.print("x_delta_angle: ");
-        Serial1.println(x_delta_angle);
-        Serial1.print("y_delta_angle: ");
-        Serial1.println(y_delta_angle);
-        Serial1.print("z_delta_angle: ");
-        Serial1.println(z_delta_angle);
-        Serial1.print("imu_status_summary_word: ");
-        Serial1.println(imu_status_summary_word);
-        Serial1.print("mux_id: ");
-        Serial1.println(mux_id);
-        Serial1.print("multiplexed_data_word: ");
-        Serial1.println(multiplexed_data_word);
-        Serial1.print("reserved1: ");
-        Serial1.println(reserved1);
-        Serial1.print("reserved2: ");
-        Serial1.println(reserved2);
-        Serial1.print("reserved3: ");
-        Serial1.println(reserved3);
-        Serial1.print("checksum: ");
-        Serial1.println(checksum);
-        Serial1.println();
-    }
 } raw_imu_data, raw_imu_data1;
 
+/* used in orientation calculation */
 typedef geometry_msgs::Quaternion Quaternion;
 
 inline Quaternion q(float w, float x, float y, float z) {
@@ -341,7 +318,6 @@ inline void fillImuMsg() {
 
 void setup() {
     Serial.begin(115200);
-    Serial1.begin(115200);
 
 #ifndef NO_CRC_CHECK
     pinMode(BADCRC, OUTPUT);
@@ -351,11 +327,11 @@ void setup() {
     pinMode(BADCHECKSUM, OUTPUT);
     pinMode(IMUDataReady, INPUT);
     pinMode(RxData, INPUT);
-    pinMode(SignalPin, OUTPUT);
+    pinMode(InFrame, OUTPUT);
     pinMode(DataReady, OUTPUT);
 
     digitalWriteFast(BADCHECKSUM, LOW);
-    digitalWriteFast(SignalPin, inFrame);
+    digitalWriteFast(InFrame, inFrame);
     digitalWriteFast(DataReady, ready);
 
     nh.initNode();
@@ -375,6 +351,7 @@ void setup() {
 
 void loop() {
     if (ready) {
+        /* when data is ready, detach interrupt and publish */
         detachInterrupt(digitalPinToInterrupt(ClkPin));
         fillImuMsg();
         imu_pub.publish(&imu_msg);
@@ -389,6 +366,7 @@ void loop() {
         nh.spinOnce();
     }
     else {
+        /* enable IMU clock interrupt and wait for interrupt */
         attachInterrupt(digitalPinToInterrupt(ClkPin), clk_ISR, RISING);
         asm("wfi");
     }
