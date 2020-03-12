@@ -1,4 +1,4 @@
-update=Wed 11 Mar 2020 06:01:39 PM MDT
+update=Thu 12 Mar 2020 11:08:31 AM MDT
 version=1
 last_client=pcbnew
 [general]
@@ -36,8 +36,6 @@ ERC_CheckBusToNetConflicts=1
 1=ab2ae7df-e5ed-4a51-8de5-2e8014db2feb:Sheetab2ae7df-e5ed-4a51-8de5-2e8014db2feb
 2=00000000-0000-0000-0000-00005e568305:Logic
 [PcbFrame]
-version=1
-[ModEditFrame]
 version=1
 [pcbnew]
 version=1
@@ -272,3 +270,5 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
+[ModEditFrame]
+version=1
