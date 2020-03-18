@@ -243,7 +243,7 @@ Wire Wire Line
 Wire Wire Line
 	6800 2850 6800 3500
 Wire Wire Line
-	6800 2850 7650 2850
+	6800 2850 7800 2850
 Wire Wire Line
 	6800 3500 7200 3500
 Wire Wire Line
@@ -267,13 +267,13 @@ Wire Wire Line
 Wire Wire Line
 	7300 2650 6200 2650
 Wire Wire Line
-	7600 2650 7650 2650
+	7600 2650 7800 2650
 Wire Wire Line
-	8250 2850 8300 2850
+	8100 2650 8350 2650
+Wire Wire Line
+	8100 2850 8300 2850
 Wire Wire Line
 	8350 2250 8350 2650
-Wire Wire Line
-	8350 2650 8250 2650
 Wire Wire Line
 	8600 3200 8800 3200
 Wire Wire Line
@@ -706,6 +706,38 @@ F 8 "2 1" V 4700 4750 50  0001 C CNN "Spice_Node_Sequence"
 	0    -1   -1   0   
 $EndComp
 $Comp
+L Device:LED VOLT1
+U 1 1 5E721B54
+P 7950 2650
+F 0 "VOLT1" H 7950 2500 50  0000 C CNN
+F 1 "LED" V 7900 2500 50  0001 C CNN
+F 2 "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 7950 2650 50  0001 C CNN
+F 3 "~" H 7950 2650 50  0001 C CNN
+F 4 "D" H 7950 2650 50  0001 C CNN "Spice_Primitive"
+F 5 "LedRed" H 7950 2650 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 7950 2650 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 7950 2650 50  0001 C CNN "Spice_Lib_File"
+F 8 "2 1" V 7950 2650 50  0001 C CNN "Spice_Node_Sequence"
+	1    7950 2650
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:LED CURR1
+U 1 1 5E733A0E
+P 7950 2850
+F 0 "CURR1" H 7950 2700 50  0000 C CNN
+F 1 "LED" V 7900 2700 50  0001 C CNN
+F 2 "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 7950 2850 50  0001 C CNN
+F 3 "~" H 7950 2850 50  0001 C CNN
+F 4 "D" H 7950 2850 50  0001 C CNN "Spice_Primitive"
+F 5 "LedRed" H 7950 2850 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 7950 2850 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 7950 2850 50  0001 C CNN "Spice_Lib_File"
+F 8 "2 1" V 7950 2850 50  0001 C CNN "Spice_Node_Sequence"
+	1    7950 2850
+	-1   0    0    -1  
+$EndComp
+$Comp
 L Device:R_POT_US R7
 U 1 1 5E5A8C67
 P 5700 3600
@@ -754,8 +786,8 @@ L Switch:SW_SPDT S2
 U 1 1 5E621B67
 P 6500 2850
 F 0 "S2" H 6450 2925 50  0000 R CNN
-F 1 "SW_SPDT" H 6525 2750 50  0001 R CNN
-F 2 "PowerNode2:OS102011MS2Qx1" H 6500 2850 50  0001 C CNN
+F 1 "JS102011SAQN" H 6525 2750 50  0001 R CNN
+F 2 "PowerNode2:JS102011SAQN" H 6500 2850 50  0001 C CNN
 F 3 "https://www.mouser.com/datasheet/2/60/os-1382783.pdf" H 6500 2850 50  0001 C CNN
 F 4 "X" H 6500 2850 50  0001 C CNN "Spice_Primitive"
 F 5 "swspdt" H 6500 2850 50  0001 C CNN "Spice_Model"
@@ -765,29 +797,12 @@ F 7 "PowerNode2_models.lib" H 6500 2850 50  0001 C CNN "Spice_Lib_File"
 	-1   0    0    -1  
 $EndComp
 $Comp
-L PowerNode2:HSMF-C173 VOLT1
-U 1 1 5E6A8C4C
-P 7950 2750
-F 0 "VOLT1" H 7950 3174 50  0000 C CNN
-F 1 "HSMF-C173" H 7950 3083 50  0000 C CNN
-F 2 "PowerNode2:HSMFC173" H 8550 3100 50  0001 L CNN
-F 3 "" H 8550 3000 50  0001 L CNN
-F 4 "Standard LEDs - SMD Chip,Biclr,Red/Grn" H 8550 2900 50  0001 L CNN "Description"
-F 5 "0.5" H 8550 2800 50  0001 L CNN "Height"
-F 6 "Avago Technologies" H 8550 2700 50  0001 L CNN "Manufacturer_Name"
-F 7 "HSMF-C173" H 8550 2600 50  0001 L CNN "Manufacturer_Part_Number"
-F 8 "630-HSMF-C173" H 8550 2500 50  0001 L CNN "Mouser Part Number"
-F 9 "https://www.mouser.com/Search/Refine.aspx?Keyword=630-HSMF-C173" H 8550 2400 50  0001 L CNN "Mouser Price/Stock"
-	1    7950 2750
-	1    0    0    -1  
-$EndComp
-$Comp
 L PowerNode2:SW_DPDT S1
 U 1 1 5E582E15
 P 2850 3800
 F 0 "S1" H 2850 4250 50  0000 C CNN
-F 1 "SW_DPDT" H 2850 3993 50  0001 C CNN
-F 2 "PowerNode2:OS202011MS2Qx1" H 2850 3800 50  0001 C CNN
+F 1 "JS202011CQN" H 2850 3993 50  0001 C CNN
+F 2 "PowerNode2:JS202011CQN" H 2850 3800 50  0001 C CNN
 F 3 "https://www.mouser.com/datasheet/2/60/os-1382783.pdf" H 2850 3800 50  0001 C CNN
 F 4 "X" H 2850 3800 50  0001 C CNN "Spice_Primitive"
 F 5 "swdpdt pos=0" H 2850 3800 50  0001 C CNN "Spice_Model"

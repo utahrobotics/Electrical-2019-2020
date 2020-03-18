@@ -1,4 +1,4 @@
-update=Thu 12 Mar 2020 11:08:31 AM MDT
+update=Tue 17 Mar 2020 08:38:19 PM MDT
 version=1
 last_client=pcbnew
 [general]
@@ -12,8 +12,6 @@ NetIExt=net
 version=1
 LibDir=
 [eeschema/libraries]
-[LibeditFrame]
-version=1
 [SchematicFrame]
 version=1
 [schematic_editor]
@@ -270,5 +268,7 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
+[LibeditFrame]
+version=1
 [ModEditFrame]
 version=1
