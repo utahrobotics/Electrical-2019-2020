@@ -1,5 +1,5 @@
 EESchema Schematic File Version 5
-EELAYER 30 0
+EELAYER 32 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -18,9 +18,7 @@ Comment7 ""
 Comment8 ""
 Comment9 ""
 $EndDescr
-Connection ~ 2000 3750
-Connection ~ 2400 2850
-Connection ~ 2500 2750
+Connection ~ 2000 4250
 Connection ~ 3200 3600
 Connection ~ 3200 4800
 Connection ~ 3200 5200
@@ -48,44 +46,46 @@ Connection ~ 9500 3800
 Connection ~ 9500 3900
 Connection ~ 9500 5100
 Connection ~ 9500 5200
+Connection ~ 2400 2750
+Connection ~ 2500 2850
 Wire Wire Line
-	2000 3650 2000 3750
+	2000 3850 2000 3750
 Wire Wire Line
-	2000 3750 1800 3750
+	2000 4250 1800 4250
 Wire Wire Line
-	2000 3750 2000 3850
+	2000 4250 2000 4150
 Wire Wire Line
-	2000 3750 2500 3750
+	2000 4250 2500 4250
 Wire Wire Line
-	2000 4150 2000 4250
+	2000 4350 2000 4250
 Wire Wire Line
-	2200 2750 2500 2750
+	2200 2750 2400 2750
 Wire Wire Line
-	2200 2850 2400 2850
+	2200 2850 2500 2850
 Wire Wire Line
 	2200 3050 5800 3050
 Wire Wire Line
-	2400 2850 2400 3700
+	2400 2750 2400 3700
 Wire Wire Line
-	2400 2850 3700 2850
+	2400 2750 4700 2750
 Wire Wire Line
 	2400 3700 2550 3700
 Wire Wire Line
-	2500 2750 2500 3500
+	2500 2850 2500 3500
 Wire Wire Line
-	2500 2750 4700 2750
+	2500 2850 3700 2850
 Wire Wire Line
 	2500 3500 2550 3500
 Wire Wire Line
-	2500 3750 2500 3900
+	2500 3750 2000 3750
 Wire Wire Line
-	2500 3900 2550 3900
+	2500 3900 2500 3750
 Wire Wire Line
-	2500 4100 2500 4250
+	2500 4100 2550 4100
 Wire Wire Line
-	2500 4250 2000 4250
+	2500 4250 2500 4100
 Wire Wire Line
-	2550 4100 2500 4100
+	2550 3900 2500 3900
 Wire Wire Line
 	3000 5000 3200 5000
 Wire Wire Line
@@ -354,7 +354,7 @@ Text Notes 1750 3100 0    50   ~ 0
 SDA
 Text Notes 5250 2650 2    50   ~ 0
 .param NT=100u\n.tran 1e-4 100m\n* .dc V.XVHIIN1.V1 0 24 0.1
-Text Label 1850 3750 0    50   ~ 0
+Text Label 1850 4250 0    50   ~ 0
 VHI
 Text Label 2600 5000 2    50   ~ 0
 VHI
@@ -373,29 +373,29 @@ SWITCH
 $Comp
 L Connector:TestPoint VHIOUT1
 U 1 1 5E568303
-P 1800 3750
-F 0 "VHIOUT1" V 1800 3950 50  0000 L CNN
-F 1 "WIREPAD4,16O1,6" V 1700 3900 50  0001 C TNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 1800 3750 50  0001 C CNN
-F 3 "~" H 1800 3750 50  0001 C CNN
-F 4 "N" V 1800 3750 50  0001 C CNN "Spice_Netlist_Enabled"
-	1    1800 3750
-	0    -1   1    0   
+P 1800 4250
+F 0 "VHIOUT1" V 1800 4450 50  0000 L CNN
+F 1 "WIREPAD4,16O1,6" V 1700 4400 50  0001 C TNN
+F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 1800 4250 50  0001 C CNN
+F 3 "~" H 1800 4250 50  0001 C CNN
+F 4 "N" V 1800 4250 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    1800 4250
+	0    -1   -1   0   
 $EndComp
 $Comp
 L Connector:TestPoint VHIIN1
 U 1 1 5E568302
-P 2000 3650
-F 0 "VHIIN1" V 2000 3850 50  0000 L CNN
-F 1 "WIREPAD4,16O1,6" V 1950 3650 50  0001 C BNN
-F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 2000 3650 50  0001 C CNN
-F 3 "~" H 2000 3650 50  0001 C CNN
-F 4 "Y" V 2000 3650 50  0001 C CNN "Spice_Netlist_Enabled"
-F 5 "X" H 2000 3650 50  0001 C CNN "Spice_Primitive"
-F 6 "battery NT={NT}" H 2000 3650 50  0001 C CNN "Spice_Model"
-F 7 "PowerNode2_models.lib" H 2000 3650 50  0001 C CNN "Spice_Lib_File"
-	1    2000 3650
-	1    0    0    -1  
+P 2000 4350
+F 0 "VHIIN1" V 2000 4550 50  0000 L CNN
+F 1 "WIREPAD4,16O1,6" V 1950 4350 50  0001 C BNN
+F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.5mm" H 2000 4350 50  0001 C CNN
+F 3 "~" H 2000 4350 50  0001 C CNN
+F 4 "Y" V 2000 4350 50  0001 C CNN "Spice_Netlist_Enabled"
+F 5 "X" H 2000 4350 50  0001 C CNN "Spice_Primitive"
+F 6 "battery NT={NT}" H 2000 4350 50  0001 C CNN "Spice_Model"
+F 7 "PowerNode2_models.lib" H 2000 4350 50  0001 C CNN "Spice_Lib_File"
+	1    2000 4350
+	1    0    0    1   
 $EndComp
 $Comp
 L Connector:TestPoint GNDHIOUT1
@@ -561,7 +561,7 @@ F 1 "43k" V 2000 4000 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 2000 4000 50  0001 C CNN
 F 3 "~" H 2000 4000 50  0001 C CNN
 	1    2000 4000
-	-1   0    0    1   
+	-1   0    0    -1  
 $EndComp
 $Comp
 L Device:R R2
@@ -587,7 +587,7 @@ F 3 "~" H 4200 3250 50  0001 C CNN
 $EndComp
 $Comp
 L Device:R R4
-U 1 1 00000000
+U 1 1 5E7E579F
 P 4700 5250
 F 0 "R4" V 4800 5250 50  0000 C CNN
 F 1 "220" V 4700 5250 50  0000 C CNN
@@ -769,17 +769,17 @@ $EndComp
 $Comp
 L Connector:Screw_Terminal_01x04 INOUT1
 U 1 1 5E4A09A8
-P 2000 2850
-F 0 "INOUT1" H 1918 3167 50  0000 C CNN
-F 1 "W237-4" H 1918 3076 50  0000 C CNN
-F 2 "PowerNode2:W237-4" H 2000 2850 50  0001 C CNN
-F 3 "~" H 2000 2850 50  0001 C CNN
-F 4 "X" H 2000 2850 50  0001 C CNN "Spice_Primitive"
-F 5 "w237_4" H 2000 2850 50  0001 C CNN "Spice_Model"
-F 6 "Y" H 2000 2850 50  0001 C CNN "Spice_Netlist_Enabled"
-F 7 "PowerNode2_models.lib" H 2000 2850 50  0001 C CNN "Spice_Lib_File"
-	1    2000 2850
-	-1   0    0    -1  
+P 2000 2950
+F 0 "INOUT1" H 1986 2550 50  0000 C CNN
+F 1 "W237-4" H 1986 2650 50  0000 C CNN
+F 2 "PowerNode2:W237-4" H 2000 2950 50  0001 C CNN
+F 3 "~" H 2000 2950 50  0001 C CNN
+F 4 "X" H 2000 2950 50  0001 C CNN "Spice_Primitive"
+F 5 "w237_4" H 2000 2950 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 2000 2950 50  0001 C CNN "Spice_Netlist_Enabled"
+F 7 "PowerNode2_models.lib" H 2000 2950 50  0001 C CNN "Spice_Lib_File"
+	1    2000 2950
+	-1   0    0    1   
 $EndComp
 $Comp
 L Switch:SW_SPDT S2

@@ -1,4 +1,4 @@
-update=Fri 27 Mar 2020 02:21:07 PM MDT
+update=Fri 27 Mar 2020 06:23:03 PM MDT
 version=1
 last_client=pcbnew
 [general]
@@ -30,13 +30,13 @@ ERC_CheckBusDriverConflicts=1
 ERC_CheckBusEntryConflicts=1
 ERC_CheckBusToBusConflicts=1
 ERC_CheckBusToNetConflicts=1
-[sheetnames]
-1=ab2ae7df-e5ed-4a51-8de5-2e8014db2feb:Sheetab2ae7df-e5ed-4a51-8de5-2e8014db2feb
-2=00000000-0000-0000-0000-00005e568305:Logic
 [PcbFrame]
 version=1
 [LibeditFrame]
 version=1
+[sheetnames]
+1=00000000-0000-0000-0000-00005e7e7400:
+2=00000000-0000-0000-0000-00005e568305:Logic
 [ModEditFrame]
 version=1
 [pcbnew]
