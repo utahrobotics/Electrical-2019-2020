@@ -1,6 +1,6 @@
-update=Fri 27 Mar 2020 06:23:03 PM MDT
+update=3/29/2020 5:52:21 AM
 version=1
-last_client=pcbnew
+last_client=kicad
 [general]
 version=1
 RootSch=
@@ -37,8 +37,6 @@ version=1
 [sheetnames]
 1=00000000-0000-0000-0000-00005e7e7400:
 2=00000000-0000-0000-0000-00005e568305:Logic
-[ModEditFrame]
-version=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -52,19 +50,19 @@ CopperLayerCount=2
 BoardThickness=1.6
 AllowMicroVias=0
 AllowBlindVias=0
-MinTrackWidth=0.2
-MinViaDiameter=0.4
-MinViaDrill=0.3
-MinMicroViaDiameter=0.2
-MinMicroViaDrill=0.09999999999999999
+MinTrackWidth=0.1524
+MinViaDiameter=0.6858
+MinViaDrill=0.3302
+MinMicroViaDiameter=0.6858
+MinMicroViaDrill=0.3302
 MinHoleToHole=0.25
 RequireCourtyardDefinitions=0
 ProhibitOverlappingCourtyards=1
 CopperEdgeClearance=0.01
-TrackWidth1=0.25
+TrackWidth1=0.254
 TrackWidth2=0.5
-ViaDiameter1=0.8
-ViaDrill1=0.4
+ViaDiameter1=0.762
+ViaDrill1=0.381
 dPairWidth1=0.2
 dPairGap1=0.25
 dPairViaGap1=0.25
@@ -93,7 +91,7 @@ DimensionPrecision=1
 SolderMaskClearance=0.051
 SolderMaskMinWidth=0.25
 SolderPasteClearance=0
-SolderPasteRatio=0
+SolderPasteRatio=-0
 [pcbnew/Layer.F.Cu]
 Name=Top
 Type=0
@@ -263,12 +261,14 @@ Enabled=0
 [pcbnew/Netclasses]
 [pcbnew/Netclasses/Default]
 Name=Default
-Clearance=0.1524
-TrackWidth=0.25
-ViaDiameter=0.8
-ViaDrill=0.4
-uViaDiameter=0.3
-uViaDrill=0.1
+Clearance=0.254
+TrackWidth=0.254
+ViaDiameter=0.762
+ViaDrill=0.381
+uViaDiameter=0.762
+uViaDrill=0.381
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
+[ModEditFrame]
+version=1
