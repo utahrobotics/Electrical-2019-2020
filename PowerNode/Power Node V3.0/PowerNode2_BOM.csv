@@ -1,0 +1,18 @@
+Item,Qty,Total Qty,Reference(s),Value,Footprint,Datasheet,Description,Status,Notes
+1,1,6,C1,1nF,Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm,~,Ceramic capacitor,Buy from stockroom,
+2,5,30,"C2, C3, C4, C5, C6",0.1uF,Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm,~,Ceramic capacitor,Buy from stockroom,
+3,1,6,IC1,ACS712xLCTR-30A,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,http://www.allegromicro.com/~/media/Files/Datasheets/ACS712-Datasheet.ashx?la=en,Current sense IC,Already in the lab,
+4,1,6,IC2,74HC594N,Package_DIP:DIP-16_W7.62mm_LongPads,http://www.ti.com/lit/ds/symlink/sn74hc594.pdf,Serial to parallel converter,Buy from stockroom,
+5,2,12,"IC3, IC4",CD4511B,Package_DIP:DIP-16_W7.62mm_LongPads,https://www.ti.com/lit/ds/symlink/cd4511b.pdf,LED driver,Buy from stockroom,
+6,1,6,INOUT1,W237-4,PowerNode2:W237-4,~,Screw terminal,Buy online,
+7,2,12,"LED1, LED2",LTS-4301P,Display_7Segment:Sx39-1xxxxx,https://www.datasheets360.com/pdf/-3279684472568245476,7 segment display,Buy from stockroom,Make sure they are common cathode
+8,2,12,"PWR1, VPASS1",LED,LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,SMD LED,Buy online,Check If<=20mA and Vf<=3.3V. Prefer amber/orange/red for VPASS1
+9,1,6,R1,43k,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,SMD resistor,Buy online,Check 0603 package
+10,6,36,"R2, R4, R6, R8-10",220,Resistor_SMD:R_1206_3216Metric_Pad1.42x1.75mm_HandSolder,~,SMD resistor,Buy online,Check 1206 package
+11,11,66,"R3, R5, R11-18, R26",10k,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,SMD resistor,Buy online,Check 0603 package
+12,1,6,R7,100k,Potentiometer_THT:Potentiometer_Vishay_T73YP_Vertical,~,100k potentiometer,Buy from stockroom?,Make sure it fits
+13,2,12,"RN1, RN2",220,PowerNode2:SOIC127P762X240-14N,https://www.mouser.com/datasheet/2/54/4800P-777115.pdf,SMD resistor network,Buy online,Cheaper than separate resistors and makes soldering easier
+14,1,6,S1,SW_DPDT,PowerNode2:OS202011MS2Qx1,https://www.mouser.com/datasheet/2/60/os-1382783.pdf,DPDT switch,Buy online,
+15,1,6,S2,SW_SPDT,PowerNode2:OS102011MS2Qx1,https://www.mouser.com/datasheet/2/60/os-1382783.pdf,SPDT switch,Buy online,
+16,1,6,U$1,ATtiny84-20PU,Package_DIP:DIP-14_W7.62mm,http://ww1.microchip.com/downloads/en/DeviceDoc/doc8006.pdf,ATTiny84 microcontroller,Already in lab?,
+17,1,6,VOLT1,HSMF-C173,PowerNode2:HSMFC173,https://docs.broadcom.com/docs/HSMF-C173-DS,SMD Bi-color LED,Buy online,Prefer colors different from VPASS1 and PWR1. Other similar package OK but tell me
