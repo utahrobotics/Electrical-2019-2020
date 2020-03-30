@@ -4,6 +4,10 @@ $CMP R_Pack07
 F https://www.mouser.com/datasheet/2/54/4800P-777115.pdf
 $ENDCMP
 #
+$CMP R_Pack07_2
+F https://www.mouser.com/datasheet/2/54/4800P-777115.pdf
+$ENDCMP
+#
 $CMP SW_DPDT
 D Slide Switches DPDT
 $ENDCMP

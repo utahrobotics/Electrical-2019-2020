@@ -1,5 +1,5 @@
 EESchema Schematic File Version 5
-EELAYER 32 0
+EELAYER 33 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -561,7 +561,7 @@ F 3 "https://www.mouser.com/datasheet/2/54/4800P-777115.pdf" V 9350 3450 50  000
 	-1   0    0    -1  
 $EndComp
 $Comp
-L PowerNode2:R_Pack07 RN2
+L PowerNode2:R_Pack07_2 RN2
 U 1 1 5E6A8C4E
 P 9350 4550
 F 0 "RN2" H 9350 4050 50  0000 C CNN

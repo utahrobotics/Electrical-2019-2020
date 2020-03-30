@@ -1,6 +1,6 @@
-update=3/29/2020 5:52:21 AM
+update=Mon 30 Mar 2020 01:12:34 PM MDT
 version=1
-last_client=kicad
+last_client=pcbnew
 [general]
 version=1
 RootSch=
@@ -32,11 +32,13 @@ ERC_CheckBusToBusConflicts=1
 ERC_CheckBusToNetConflicts=1
 [PcbFrame]
 version=1
-[LibeditFrame]
+[ModEditFrame]
 version=1
 [sheetnames]
-1=00000000-0000-0000-0000-00005e7e7400:
+1=00000000-0000-0000-0000-00005e82374c:
 2=00000000-0000-0000-0000-00005e568305:Logic
+[LibeditFrame]
+version=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -60,7 +62,7 @@ RequireCourtyardDefinitions=0
 ProhibitOverlappingCourtyards=1
 CopperEdgeClearance=0.01
 TrackWidth1=0.254
-TrackWidth2=0.5
+TrackWidth2=0.508
 ViaDiameter1=0.762
 ViaDrill1=0.381
 dPairWidth1=0.2
@@ -91,7 +93,7 @@ DimensionPrecision=1
 SolderMaskClearance=0.051
 SolderMaskMinWidth=0.25
 SolderPasteClearance=0
-SolderPasteRatio=-0
+SolderPasteRatio=0
 [pcbnew/Layer.F.Cu]
 Name=Top
 Type=0
@@ -270,5 +272,3 @@ uViaDrill=0.381
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
-[ModEditFrame]
-version=1
