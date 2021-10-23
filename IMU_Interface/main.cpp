@@ -25,6 +25,10 @@ ros::Publisher imu_pub("imu", &imu_msg);
 #define MAX_HDLC_FRAME_LENGTH 14
 
 #define SETREADY(v) digitalWriteFast(DataReady, v); ready = (bool) v
+#define DETACHCLK if (interrupt) {\
+    detachInterrupt(digitalPinToInterrupt(ClkPin));\
+    interrupt = false;\
+}
 
 double ts; /* time stamp set when IMUDataReady drops */
 uint16_t buffer[MAX_HDLC_FRAME_LENGTH];
@@ -33,6 +37,7 @@ uint16_t wordBuffer = 0;
 bool inFrame = false;
 bool ready = false;
 bool spin = true;
+bool interrupt = false;
 int bitCounter = 0;
 int idx = 0;
 
@@ -78,8 +83,10 @@ inline uint16_t reverse(uint16_t x) {
 
 /* IMU clock interrupt */
 void clk_ISR(void) {
-    /* If we already have data, leave immediately */
+    /* If we already have data, leave */
     if (ready) {
+        /* but first detach interrupt */
+        DETACHCLK
         return;
     }
     register uint8_t rval = digitalReadFast(RxData);
@@ -351,8 +358,8 @@ void setup() {
 
 void loop() {
     if (ready) {
-        /* when data is ready, detach interrupt and publish */
-        detachInterrupt(digitalPinToInterrupt(ClkPin));
+        DETACHCLK
+
         fillImuMsg();
         imu_pub.publish(&imu_msg);
 #ifndef NO_CRC_CHECK
@@ -365,9 +372,13 @@ void loop() {
     else if (spin) {
         nh.spinOnce();
     }
-    else {
-        /* enable IMU clock interrupt and wait for interrupt */
+    else if (!interrupt) {
+        /* enable IMU clock interrupt */
+        interrupt = true;
         attachInterrupt(digitalPinToInterrupt(ClkPin), clk_ISR, RISING);
+    }
+    else {
+        /* wait for interrupt */
         asm("wfi");
     }
 }
