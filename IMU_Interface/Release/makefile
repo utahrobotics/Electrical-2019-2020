@@ -48,6 +48,17 @@ endif
 
 -include ../makefile.defs
 
+OPTIONAL_TOOL_DEPS := \
+$(wildcard ../makefile.defs) \
+$(wildcard ../makefile.init) \
+$(wildcard ../makefile.targets) \
+
+
+BUILD_ARTIFACT_NAME := IMU_Interface
+BUILD_ARTIFACT_EXTENSION := elf
+BUILD_ARTIFACT_PREFIX :=
+BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
+
 # Add inputs and outputs from these tool invocations to the build variables 
 SECONDARY_FLASH += \
 IMU_Interface.hex \
@@ -57,23 +68,26 @@ IMU_Interface.siz \
 
 
 # All Target
-all: IMU_Interface.elf secondary-outputs
+all: main-build
+
+# Main-build Target
+main-build: IMU_Interface.elf secondary-outputs
 
 # Tool invocations
-IMU_Interface.elf: $(OBJS) $(USER_OBJS)
+IMU_Interface.elf: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C++ Linker'
 	arm-none-eabi-g++ -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g -T "/home/jonathan/git/Electrical-2019-2020/IMU_Interface/teensy4/imxrt1062.ld" -Xlinker --gc-sections -Wl,-Map,"IMU_Interface.map" -o "IMU_Interface.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-IMU_Interface.hex: IMU_Interface.elf
+IMU_Interface.hex: IMU_Interface.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Invoking: GNU ARM Cross Create Flash Image'
 	arm-none-eabi-objcopy -O ihex "IMU_Interface.elf"  "IMU_Interface.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-IMU_Interface.siz: IMU_Interface.elf
+IMU_Interface.siz: IMU_Interface.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Invoking: GNU ARM Cross Print Size'
 	arm-none-eabi-size --format=berkeley "IMU_Interface.elf"
 	@echo 'Finished building: $@'
@@ -86,6 +100,6 @@ clean:
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)
 
-.PHONY: all clean dependents
+.PHONY: all clean dependents main-build
 
 -include ../makefile.targets

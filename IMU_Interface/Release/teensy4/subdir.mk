@@ -148,24 +148,24 @@ CPP_DEPS += \
 
 
 # Each subdirectory must supply rules for building sources it contributes
-teensy4/%.o: ../teensy4/%.cpp
+teensy4/%.o: ../teensy4/%.cpp teensy4/subdir.mk
 	@echo 'Building file: $<'
 	@echo 'Invoking: GNU ARM Cross C++ Compiler'
-	arm-none-eabi-g++ -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g -D__IMXRT1062__ -DTEENSYDUINO=148 -DARDUINO=10810 -DF_CPU=600000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH -I"/home/jonathan/git/Electrical-2019-2020/IMU_Interface/teensy4" -I"/home/jonathan/git/Electrical-2019-2020/IMU_Interface/ros_lib" -std=gnu++14 -fabi-version=0 -fno-exceptions -fno-rtti -fno-threadsafe-statics -fpermissive -felide-constructors -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	arm-none-eabi-g++ -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g -D__IMXRT1062__ -DTEENSYDUINO=148 -DARDUINO=10810 -DF_CPU=600000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH -I"/home/jonathan/git/Electrical-2019-2020/IMU_Interface/teensy4" -I"/home/jonathan/git/Electrical-2019-2020/IMU_Interface/ros_lib" -std=gnu++14 -fabi-version=0 -fno-exceptions -fno-rtti -fno-threadsafe-statics -fpermissive -felide-constructors -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-teensy4/%.o: ../teensy4/%.c
+teensy4/%.o: ../teensy4/%.c teensy4/subdir.mk
 	@echo 'Building file: $<'
 	@echo 'Invoking: GNU ARM Cross C Compiler'
-	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g -D__IMXRT1062__ -DTEENSYDUINO=148 -DARDUINO=10810 -DF_CPU=600000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH -I"/home/jonathan/git/Electrical-2019-2020/IMU_Interface/teensy4" -I"/home/jonathan/git/Electrical-2019-2020/IMU_Interface/ros_lib" -std=gnu11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g -D__IMXRT1062__ -DTEENSYDUINO=148 -DARDUINO=10810 -DF_CPU=600000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH -I"/home/jonathan/git/Electrical-2019-2020/IMU_Interface/teensy4" -I"/home/jonathan/git/Electrical-2019-2020/IMU_Interface/ros_lib" -std=gnu11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-teensy4/%.o: ../teensy4/%.S
+teensy4/%.o: ../teensy4/%.S teensy4/subdir.mk
 	@echo 'Building file: $<'
 	@echo 'Invoking: GNU ARM Cross Assembler'
-	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g -x assembler-with-cpp -I"/home/jonathan/git/Electrical-2019-2020/IMU_Interface/teensy4" -I"/home/jonathan/git/Electrical-2019-2020/IMU_Interface/ros_lib" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -O2 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g -x assembler-with-cpp -I"/home/jonathan/git/Electrical-2019-2020/IMU_Interface/teensy4" -I"/home/jonathan/git/Electrical-2019-2020/IMU_Interface/ros_lib" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
