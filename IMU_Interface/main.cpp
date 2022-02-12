@@ -28,12 +28,13 @@ sensor_msgs::Imu imu_msg;
 
 double ts; /* time stamp set when IMUDataReady drops */
 uint16_t buffer[HDLC_FRAME_LENGTH];
+uint16_t derBuffer = 0;
 uint16_t wordBuffer = 0;
 bool inFrame = false;
 bool ready = false;
 bool spin = true;
 bool interrupt = false;
-int bitCounter = 16 * HDLC_FRAME_LENGTH;
+int bitCounter = 0;
 int idx = 0;
 
 /* IMU clock interrupt */
@@ -45,11 +46,10 @@ void clk_ISR(void) {
         return;
     }
     register uint8_t rval = digitalReadFast(RxData);
-    wordBuffer <<= 1;
-    wordBuffer |= rval;
-
+    derBuffer <<= 1;
+    derBuffer |= rval;
     /* look for opening/closing flag */
-    if ((wordBuffer & 0xff) == OpeningFlag) {
+    if ((derBuffer & 0xff) == OpeningFlag) {
         inFrame = !inFrame;
         digitalWriteFast(InFrame, inFrame);
         if (inFrame) {
@@ -61,10 +61,17 @@ void clk_ISR(void) {
         }
         return;
     }
-
-    /* store words to buffer */
-    if (bitCounter < 16 * HDLC_FRAME_LENGTH && ++bitCounter % 16 == 0) {
-        buffer[idx++] = wordBuffer;
+    /* add bits to wordbuffer and store words to buffer */
+    if ((idx == 0 && bitCounter < 5) || ((derBuffer & 0x3f) ^ 0x3e)) {
+        wordBuffer <<= 1;
+        wordBuffer |= rval;
+        if (++bitCounter == 16) {
+            bitCounter = 0;
+            if (idx > HDLC_FRAME_LENGTH) {
+                idx = 0;
+            }
+            buffer[idx++] = wordBuffer;
+        }
     }
 }
 
