@@ -1,11 +1,7 @@
-#include <ros.h>
 #include <sensor_msgs/Imu.h>
 #include "Arduino.h"
 
-ros::NodeHandle nh;
-
 sensor_msgs::Imu imu_msg;
-ros::Publisher imu_pub("imu", &imu_msg);
 
 #define NO_CRC_CHECK
 
@@ -273,7 +269,13 @@ inline void fillImuMsg() {
                                       ldexp((double) DELTA(y, angle), ANGLE_EXP),
                                       ldexp((double) DELTA(z, angle), ANGLE_EXP))
                                * imu_msg.orientation;
-//    raw_imu_data1.print_data();
+    Serial.printf("%f %f %f %f %f %f %f %f %f %f %f\n", raw_imu_data1.timestamp,
+                  imu_msg.angular_velocity.x, imu_msg.angular_velocity.y,
+                  imu_msg.angular_velocity.z, imu_msg.linear_acceleration.x,
+                  imu_msg.linear_acceleration.y, imu_msg.linear_acceleration.z,
+                  imu_msg.orientation.w, imu_msg.orientation.x,
+                  imu_msg.orientation.y, imu_msg.orientation.z);
+    Serial.flush();
 }
 
 void setup() {
@@ -289,13 +291,12 @@ void setup() {
     pinMode(RxData, INPUT);
     pinMode(InFrame, OUTPUT);
     pinMode(DataReady, OUTPUT);
+    pinMode(13, OUTPUT);
 
     digitalWriteFast(BADCHECKSUM, LOW);
     digitalWriteFast(InFrame, inFrame);
     digitalWriteFast(DataReady, ready);
-
-    nh.initNode();
-    nh.advertise(imu_pub);
+    digitalWriteFast(13, HIGH);
 
     imu_msg.orientation.w = 1; // zero angle
 
@@ -314,7 +315,6 @@ void loop() {
         DETACHCLK
 
         fillImuMsg();
-        imu_pub.publish(&imu_msg);
 #ifndef NO_CRC_CHECK
         digitalWriteFast(BADCRC, LOW);
 #endif
@@ -323,7 +323,7 @@ void loop() {
         spin = true;
     }
     else if (spin) {
-        nh.spinOnce();
+        delay(0);
     }
     else if (!interrupt) {
         /* enable IMU clock interrupt */
