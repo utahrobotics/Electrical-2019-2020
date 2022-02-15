@@ -187,7 +187,9 @@ struct ImuData {
     {}
 
     /* assign data from the  buffer if CRC and checksum are good */
+    /* otherwise only timestamp is updated */
     int set_data(const uint16_t* data) {
+        timestamp = ts;
 #ifndef NO_CRC_CHECK
         if (crc_check(data, 13)) {
             digitalWriteFast(BADCRC, HIGH);
@@ -202,7 +204,6 @@ struct ImuData {
             digitalWriteFast(BADCHECKSUM, HIGH);
             return 2;
         }
-        timestamp = ts;
         x_delta_vel = (int16_t) data[0];
         y_delta_vel = (int16_t) data[1];
         z_delta_vel = (int16_t) data[2];
