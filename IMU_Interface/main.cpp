@@ -4,8 +4,11 @@
 
 ros::NodeHandle nh;
 
+typedef geometry_msgs::Vector3 Vector3;
+
 sensor_msgs::Imu imu_msg;
 ros::Publisher imu_pub("imu", &imu_msg);
+Vector3 gravity;
 
 #define NO_CRC_CHECK
 
@@ -19,7 +22,7 @@ ros::Publisher imu_pub("imu", &imu_msg);
 #define DataReady 10
 #define SPin 11
 #define ClkIntEnabled 12
-#define LEDPin 13
+#define IMUInit 13 /* Orange LED indicates when IMU is ready */
 #define BADCHECKSUM 14
 #define BADDATA 15
 #define IMUDataReady 17
@@ -28,6 +31,7 @@ ros::Publisher imu_pub("imu", &imu_msg);
 #define OpeningFlag 0x7e
 #define HDLC_FRAME_LENGTH 14
 
+#define SETIMUINIT(v) digitalWriteFast(IMUInit, v); imuInit = (bool) v
 #define SETINFRAME(v) digitalWriteFast(InFrame, v); inFrame = (bool) v
 #define SETREADY(v) digitalWriteFast(DataReady, v); ready = (bool) v
 #define SETSPIN(v) digitalWriteFast(SPin, v); spin = (bool) v
@@ -41,6 +45,7 @@ double ts; /* time stamp set when IMUDataReady drops */
 uint16_t buffer[HDLC_FRAME_LENGTH];
 uint16_t derBuffer = 0;
 uint16_t wordBuffer = 0;
+bool imuInit = false;
 bool inFrame = false;
 bool ready = false;
 bool spin = true;
@@ -239,6 +244,17 @@ struct ImuData {
     }
 } raw_imu_data, raw_imu_data1;
 
+inline double magnitude(const Vector3 v) {
+    return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+}
+
+inline Vector3& operator-=(Vector3& v0, const Vector3 v1) {
+    v0.x -= v1.x;
+    v0.y -= v1.y;
+    v0.z -= v1.z;
+    return v0;
+}
+
 /* used in orientation calculation */
 typedef geometry_msgs::Quaternion Quaternion;
 
@@ -249,6 +265,18 @@ inline Quaternion q(float w, float x, float y, float z) {
     q.y = y;
     q.z = z;
     return q;
+}
+
+inline Quaternion v2q(const Vector3 v) {
+    return q(0, v.x, v.y, v.z);
+}
+
+inline Vector3 q2v(const Quaternion q) {
+    Vector3 v;
+    v.x = q.x;
+    v.y = q.y;
+    v.z = q.z;
+    return v;
 }
 
 inline Quaternion& operator+=(Quaternion& q0, const Quaternion q1) {
@@ -275,6 +303,17 @@ inline Quaternion operator*(Quaternion q0, const Quaternion& q1) {
     return q0;
 }
 
+inline Quaternion conj(Quaternion q) {
+    q.x = -q.x;
+    q.y = -q.y;
+    q.z = -q.z;
+    return q;
+}
+
+inline Vector3 crotate(Vector3 v, Quaternion q) {
+    return q2v(conj(q) * v2q(v) * q);
+}
+
 #define DELTA(dir, q) (raw_imu_data1.dir##_delta_##q)
 #define DT (raw_imu_data1.timestamp - raw_imu_data.timestamp)
 #define DIFF(dir, q) (DELTA(dir, q) / DT)
@@ -299,6 +338,24 @@ inline void fillImuMsg() {
                                       ldexp((double) DELTA(y, angle), ANGLE_EXP),
                                       ldexp((double) DELTA(z, angle), ANGLE_EXP))
                                * imu_msg.orientation;
+
+    // TODO: Possibly a better way to detect that IMU is initialized
+    if (!imuInit) {
+        double g = magnitude(imu_msg.angular_velocity);
+        if (9.75 < g && g < 9.85) {
+            SETIMUINIT(1);
+            gravity.x = imu_msg.angular_velocity.x;
+            gravity.y = imu_msg.angular_velocity.y;
+            gravity.z = imu_msg.angular_velocity.z;
+        }
+        else {/* If IMU is not initialized, do not publish data */
+            return;
+        }
+    }
+
+    /* Subtract off gravity */
+    imu_msg.angular_velocity -= crotate(gravity, imu_msg.orientation);
+
 //    raw_imu_data1.print_data();
 }
 
@@ -314,19 +371,19 @@ void setup() {
     pinMode(BADDATA, OUTPUT);
     pinMode(IMUDataReady, INPUT);
     pinMode(RxData, INPUT);
+    pinMode(IMUInit, OUTPUT);
     pinMode(InFrame, OUTPUT);
     pinMode(DataReady, OUTPUT);
     pinMode(SPin, OUTPUT);
     pinMode(ClkIntEnabled, OUTPUT);
-    pinMode(LEDPin, OUTPUT);
 
     digitalWriteFast(BADCHECKSUM, LOW);
     digitalWriteFast(BADDATA, LOW);
-    digitalWriteFast(InFrame, inFrame);
-    digitalWriteFast(DataReady, ready);
-    digitalWriteFast(SPin, spin);
+    SETIMUINIT(0);
+    SETINFRAME(0);
+    SETREADY(0);
+    SETSPIN(1);
     digitalWriteFast(ClkIntEnabled, interrupt);
-    digitalWriteFast(LEDPin, HIGH);
 
     nh.initNode();
     nh.advertise(imu_pub);
