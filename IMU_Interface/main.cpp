@@ -320,7 +320,7 @@ inline Vector3 crotate(Vector3 v, Quaternion q) {
 #define ANGLE_EXP -19
 #define VEL_EXP -14
 
-inline void fillImuMsg() {
+inline int fillImuMsg() {
     struct ImuData pdata = raw_imu_data1;
     // TODO: fix possible divide by zero issue
     uint16_t status = raw_imu_data1.set_data(buffer);
@@ -349,7 +349,7 @@ inline void fillImuMsg() {
             gravity.z = imu_msg.angular_velocity.z;
         }
         else {/* If IMU is not initialized, do not publish data */
-            return;
+            return 1;
         }
     }
 
@@ -357,6 +357,7 @@ inline void fillImuMsg() {
     imu_msg.angular_velocity -= crotate(gravity, imu_msg.orientation);
 
 //    raw_imu_data1.print_data();
+    return 0;
 }
 
 void setup() {
@@ -404,8 +405,9 @@ void loop() {
     if (ready) {
         DETACHCLK
 
-        fillImuMsg();
-        imu_pub.publish(&imu_msg);
+        if (!fillImuMsg()) {
+            imu_pub.publish(&imu_msg);
+        }
 #ifndef NO_CRC_CHECK
         digitalWriteFast(BADCRC, LOW);
 #endif
