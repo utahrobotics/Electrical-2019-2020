@@ -10,20 +10,27 @@ sensor_msgs::Imu imu_msg;
 #endif
 
 /* pin definitions */
-#define BADCHECKSUM 12
-#define IMUDataReady 19
-#define RxData 20
-#define InFrame 11
-#define DataReady 15
 #define ClkPin 6
+#define InFrame 9
+#define DataReady 10
+#define SPin 11
+#define ClkIntEnabled 12
+#define LEDPin 13
+#define BADCHECKSUM 14
+#define BADDATA 15
+#define IMUDataReady 17
+#define RxData 20
 
 #define OpeningFlag 0x7e
-#define HDLC_FRAME_LENGTH 13
+#define HDLC_FRAME_LENGTH 14
 
+#define SETINFRAME(v) digitalWriteFast(InFrame, v); inFrame = (bool) v
 #define SETREADY(v) digitalWriteFast(DataReady, v); ready = (bool) v
+#define SETSPIN(v) digitalWriteFast(SPin, v); spin = (bool) v
 #define DETACHCLK if (interrupt) {\
     detachInterrupt(digitalPinToInterrupt(ClkPin));\
     interrupt = false;\
+    digitalWriteFast(ClkIntEnabled, LOW);\
 }
 
 double ts; /* time stamp set when IMUDataReady drops */
@@ -57,17 +64,20 @@ void clk_ISR(void) {
             idx = 0;
         }
         else {
+            digitalWriteFast(BADDATA, (idx == HDLC_FRAME_LENGTH ? LOW : HIGH));
             SETREADY(1);
         }
         return;
     }
     /* add bits to wordbuffer and store words to buffer */
+    /* exclude padding bits */
     if ((idx == 0 && bitCounter < 5) || ((derBuffer & 0x3f) ^ 0x3e)) {
         wordBuffer <<= 1;
         wordBuffer |= rval;
         if (++bitCounter == 16) {
             bitCounter = 0;
-            if (idx > HDLC_FRAME_LENGTH) {
+            if (idx >= HDLC_FRAME_LENGTH) {
+                digitalWriteFast(BADDATA, HIGH);
                 idx = 0;
             }
             buffer[idx++] = wordBuffer;
@@ -77,10 +87,17 @@ void clk_ISR(void) {
 
 /* IMU data ready interrupt */
 void set_ts(void) {
+    /* set timestamp and prepare to receive data */
+    // TODO: use more accurate timing
     ts = seconds();
-    inFrame = false;
+    SETINFRAME(0);
     SETREADY(0);
-    spin = false;
+    SETSPIN(0);
+    digitalWriteFast(BADDATA, LOW);
+    digitalWriteFast(BADCHECKSUM, LOW);
+#ifndef NO_CRC_CHECK
+    digitalWriteFast(BADCRC, LOW);
+#endif
 }
 
 #ifndef NO_CRC_CHECK
@@ -184,7 +201,7 @@ struct ImuData {
 
     /* assign data from the  buffer if CRC and checksum are good */
     /* otherwise only timestamp is updated */
-    int set_data(const uint16_t* data) {
+    uint16_t set_data(const uint16_t* data) {
         timestamp = ts;
 #ifndef NO_CRC_CHECK
         if (crc_check(data, 13)) {
@@ -198,7 +215,7 @@ struct ImuData {
         }
         if (((uint16_t) ~sum) ^ data[12]) {
             digitalWriteFast(BADCHECKSUM, HIGH);
-            return 2;
+            return (uint16_t) ~sum;
         }
         x_delta_vel = (int16_t) data[0];
         y_delta_vel = (int16_t) data[1];
@@ -260,11 +277,18 @@ inline Quaternion operator*(Quaternion q0, const Quaternion& q1) {
 #define VEL_EXP -14
 
 inline void fillImuMsg() {
-    // TODO: double check
     struct ImuData pdata = raw_imu_data1;
     // TODO: fix possible divide by zero issue
-    if (!raw_imu_data1.set_data(buffer)) {
+    uint16_t status = raw_imu_data1.set_data(buffer);
+    if (!status) {
         raw_imu_data = pdata;
+    }
+    else {
+        for (int i = 0; i < 13; i++) {
+            Serial.printf("%04x ", buffer[i]);
+        }
+        Serial.printf("%04x\n", status);
+        return;
     }
     imu_msg.header.stamp.fromSec(raw_imu_data1.timestamp);
     imu_msg.angular_velocity.x = ldexp(DIFF(x, angle), ANGLE_EXP);
@@ -295,16 +319,22 @@ void setup() {
 #endif
 
     pinMode(BADCHECKSUM, OUTPUT);
+    pinMode(BADDATA, OUTPUT);
     pinMode(IMUDataReady, INPUT);
     pinMode(RxData, INPUT);
     pinMode(InFrame, OUTPUT);
     pinMode(DataReady, OUTPUT);
-    pinMode(13, OUTPUT);
+    pinMode(SPin, OUTPUT);
+    pinMode(ClkIntEnabled, OUTPUT);
+    pinMode(LEDPin, OUTPUT);
 
     digitalWriteFast(BADCHECKSUM, LOW);
+    digitalWriteFast(BADDATA, LOW);
     digitalWriteFast(InFrame, inFrame);
     digitalWriteFast(DataReady, ready);
-    digitalWriteFast(13, HIGH);
+    digitalWriteFast(SPin, spin);
+    digitalWriteFast(ClkIntEnabled, interrupt);
+    digitalWriteFast(LEDPin, HIGH);
 
     imu_msg.orientation.w = 1; // zero angle
 
@@ -328,7 +358,7 @@ void loop() {
 #endif
         digitalWriteFast(BADCHECKSUM, LOW);
         SETREADY(0);
-        spin = true;
+        SETSPIN(1);
     }
     else if (spin) {
         delay(0);
@@ -336,6 +366,7 @@ void loop() {
     else if (!interrupt) {
         /* enable IMU clock interrupt */
         interrupt = true;
+        digitalWriteFast(ClkIntEnabled, HIGH);
         attachInterrupt(digitalPinToInterrupt(ClkPin), clk_ISR, RISING);
     }
     else {
