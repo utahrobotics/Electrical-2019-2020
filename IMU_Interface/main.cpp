@@ -426,6 +426,8 @@ void loop() {
     }
     else {
         /* wait for interrupt */
-        asm("wfi");
+//        asm("wfi");
+        /* but keep running CPU clock */
+        asm("nop");
     }
 }
