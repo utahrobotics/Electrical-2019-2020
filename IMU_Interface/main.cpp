@@ -218,9 +218,10 @@ struct ImuData {
         for (size_t i = 0; i < 12; i++) {
             sum += data[i];
         }
-        if (((uint16_t) ~sum) ^ data[12]) {
+        uint16_t csdiff = ((uint16_t) ~sum) ^ data[12];
+        if (csdiff) {
             digitalWriteFast(BADCHECKSUM, HIGH);
-            return (uint16_t) ~sum;
+            return csdiff;
         }
         x_delta_vel = (int16_t) data[0];
         y_delta_vel = (int16_t) data[1];
@@ -315,19 +316,12 @@ inline Vector3 crotate(Vector3 v, Quaternion q) {
 #define ANGLE_EXP -19
 #define VEL_EXP -14
 
-inline void fillImuMsg() {
+inline int fillImuMsg() {
     struct ImuData pdata = raw_imu_data1;
     // TODO: fix possible divide by zero issue
     uint16_t status = raw_imu_data1.set_data(buffer);
     if (!status) {
         raw_imu_data = pdata;
-    }
-    else {
-        for (int i = 0; i < 13; i++) {
-            Serial.printf("%04x ", buffer[i]);
-        }
-        Serial.printf("%04x\n", status);
-        return;
     }
     imu_msg.header.stamp.fromSec(raw_imu_data1.timestamp);
     imu_msg.angular_velocity.x = ldexp(DIFF(x, angle), ANGLE_EXP);
@@ -351,22 +345,14 @@ inline void fillImuMsg() {
             gravity.z = imu_msg.angular_velocity.z;
         }
         else {/* If IMU is not initialized, do not publish data */
-            return;
+            return 1;
         }
     }
 
     /* Subtract off gravity */
-    if (imuInit) {
-        imu_msg.angular_velocity -= crotate(gravity, imu_msg.orientation);
-    }
+    imu_msg.angular_velocity -= crotate(gravity, imu_msg.orientation);
 
-    Serial.printf("%f %f %f %f %f %f %f %f %f %f %f\n", raw_imu_data1.timestamp,
-                  imu_msg.angular_velocity.x, imu_msg.angular_velocity.y,
-                  imu_msg.angular_velocity.z, imu_msg.linear_acceleration.x,
-                  imu_msg.linear_acceleration.y, imu_msg.linear_acceleration.z,
-                  imu_msg.orientation.w, imu_msg.orientation.x,
-                  imu_msg.orientation.y, imu_msg.orientation.z);
-    Serial.flush();
+    return 0;
 }
 
 void setup() {
@@ -412,6 +398,15 @@ void loop() {
         DETACHCLK
 
         fillImuMsg();
+        Serial.printf("%f %f %f %f %f %f %f %f %f %f %f\n", raw_imu_data1.timestamp,
+                      imu_msg.angular_velocity.x,
+                      imu_msg.angular_velocity.y, imu_msg.angular_velocity.z,
+                      imu_msg.linear_acceleration.x,
+                      imu_msg.linear_acceleration.y,
+                      imu_msg.linear_acceleration.z, imu_msg.orientation.w,
+                      imu_msg.orientation.x, imu_msg.orientation.y,
+                      imu_msg.orientation.z);
+        Serial.flush();
 #ifndef NO_CRC_CHECK
         digitalWriteFast(BADCRC, LOW);
 #endif
@@ -420,7 +415,7 @@ void loop() {
         SETSPIN(1);
     }
     else if (spin) {
-        delay(0);
+        asm("nop");
     }
     else if (!interrupt) {
         /* enable IMU clock interrupt */
