@@ -2,14 +2,6 @@
 #include <sensor_msgs/Imu.h>
 #include "Arduino.h"
 
-ros::NodeHandle nh;
-
-typedef geometry_msgs::Vector3 Vector3;
-
-sensor_msgs::Imu imu_msg;
-ros::Publisher imu_pub("imu", &imu_msg);
-Vector3 gravity;
-
 #define NO_CRC_CHECK
 
 #ifndef NO_CRC_CHECK
@@ -30,6 +22,7 @@ Vector3 gravity;
 
 #define OpeningFlag 0x7e
 #define HDLC_FRAME_LENGTH 14
+#define ACC_BUFFER_LENGTH 400
 
 #define SETIMUINIT(v) digitalWriteFast(IMUInit, v); imuInit = (bool) v
 #define SETINFRAME(v) digitalWriteFast(InFrame, v); inFrame = (bool) v
@@ -40,6 +33,21 @@ Vector3 gravity;
     interrupt = false;\
     digitalWriteFast(ClkIntEnabled, LOW);\
 }
+
+ros::NodeHandle nh;
+
+typedef geometry_msgs::Vector3 Vector3;
+
+sensor_msgs::Imu imu_msg;
+sensor_msgs::Imu imu_msg_na;
+// TODO: double check that this is always zero initialized
+static Vector3 accbuffer[ACC_BUFFER_LENGTH];
+int accidx = 0;
+int initidx = -1;
+Vector3 gravity;
+
+ros::Publisher imu_pub("imu", &imu_msg);
+ros::Publisher imu_na_pub("imu_norm", &imu_msg_na);
 
 double ts; /* time stamp set when IMUDataReady drops */
 uint16_t buffer[HDLC_FRAME_LENGTH];
@@ -52,6 +60,46 @@ bool spin = true;
 bool interrupt = false;
 int bitCounter = 0;
 int idx = 0;
+
+/* used in bit reversal (input bits are big-endian) */
+static uint16_t rtab[256] = {
+  0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,
+  0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,
+  0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8,
+  0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,
+  0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4,
+  0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,
+  0x0c, 0x8c, 0x4c, 0xcc, 0x2c, 0xac, 0x6c, 0xec,
+  0x1c, 0x9c, 0x5c, 0xdc, 0x3c, 0xbc, 0x7c, 0xfc,
+  0x02, 0x82, 0x42, 0xc2, 0x22, 0xa2, 0x62, 0xe2,
+  0x12, 0x92, 0x52, 0xd2, 0x32, 0xb2, 0x72, 0xf2,
+  0x0a, 0x8a, 0x4a, 0xca, 0x2a, 0xaa, 0x6a, 0xea,
+  0x1a, 0x9a, 0x5a, 0xda, 0x3a, 0xba, 0x7a, 0xfa,
+  0x06, 0x86, 0x46, 0xc6, 0x26, 0xa6, 0x66, 0xe6,
+  0x16, 0x96, 0x56, 0xd6, 0x36, 0xb6, 0x76, 0xf6,
+  0x0e, 0x8e, 0x4e, 0xce, 0x2e, 0xae, 0x6e, 0xee,
+  0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe,
+  0x01, 0x81, 0x41, 0xc1, 0x21, 0xa1, 0x61, 0xe1,
+  0x11, 0x91, 0x51, 0xd1, 0x31, 0xb1, 0x71, 0xf1,
+  0x09, 0x89, 0x49, 0xc9, 0x29, 0xa9, 0x69, 0xe9,
+  0x19, 0x99, 0x59, 0xd9, 0x39, 0xb9, 0x79, 0xf9,
+  0x05, 0x85, 0x45, 0xc5, 0x25, 0xa5, 0x65, 0xe5,
+  0x15, 0x95, 0x55, 0xd5, 0x35, 0xb5, 0x75, 0xf5,
+  0x0d, 0x8d, 0x4d, 0xcd, 0x2d, 0xad, 0x6d, 0xed,
+  0x1d, 0x9d, 0x5d, 0xdd, 0x3d, 0xbd, 0x7d, 0xfd,
+  0x03, 0x83, 0x43, 0xc3, 0x23, 0xa3, 0x63, 0xe3,
+  0x13, 0x93, 0x53, 0xd3, 0x33, 0xb3, 0x73, 0xf3,
+  0x0b, 0x8b, 0x4b, 0xcb, 0x2b, 0xab, 0x6b, 0xeb,
+  0x1b, 0x9b, 0x5b, 0xdb, 0x3b, 0xbb, 0x7b, 0xfb,
+  0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7,
+  0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,
+  0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef,
+  0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff
+};
+
+inline uint16_t reverse(uint16_t x) {
+    return (rtab[x & 0xff] << 8) | rtab[x >> 8];
+}
 
 /* IMU clock interrupt */
 void clk_ISR(void) {
@@ -89,7 +137,7 @@ void clk_ISR(void) {
                 digitalWriteFast(BADDATA, HIGH);
                 idx = 0;
             }
-            buffer[idx++] = wordBuffer;
+            buffer[idx++] = reverse(wordBuffer);
         }
     }
 }
@@ -248,11 +296,25 @@ inline double magnitude(const Vector3 v) {
     return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
-inline Vector3& operator-=(Vector3& v0, const Vector3 v1) {
+inline Vector3 operator-(Vector3 v0, const Vector3 v1) {
     v0.x -= v1.x;
     v0.y -= v1.y;
     v0.z -= v1.z;
     return v0;
+}
+
+inline Vector3 vavg(Vector3 *va, int start, int end, int length) {
+    Vector3 v;
+    for (int i = start; i < end; i++) {
+        int j = (i < 0 ? length + i : i);
+        v.x += va[j].x;
+        v.y += va[j].y;
+        v.z += va[j].z;
+    }
+    v.x /= end - start;
+    v.y /= end - start;
+    v.z /= end - start;
+    return v;
 }
 
 /* used in orientation calculation */
@@ -339,24 +401,40 @@ inline int fillImuMsg() {
                                       ldexp((double) DELTA(z, angle), ANGLE_EXP))
                                * imu_msg.orientation;
 
+    accbuffer[accidx++] = imu_msg.linear_acceleration;
+    if (accidx >= ACC_BUFFER_LENGTH) {
+        accidx = 0;
+    }
+
     // TODO: Possibly a better way to detect that IMU is initialized
-    if (!imuInit) {
-        double g = magnitude(imu_msg.angular_velocity);
-        if (9.75 < g && g < 9.85) {
-            SETIMUINIT(1);
-            gravity.x = imu_msg.angular_velocity.x;
-            gravity.y = imu_msg.angular_velocity.y;
-            gravity.z = imu_msg.angular_velocity.z;
+    if (initidx < 0) {
+        double g = magnitude(
+                vavg(accbuffer, accidx - 3, accidx, ACC_BUFFER_LENGTH));
+
+        if (9.6 < g && g < 10) {
+            initidx = accidx;
         }
-        else {/* If IMU is not initialized, do not publish data */
-            return 1;
+        /* If IMU is not initialized, do not publish data */
+        return 1;
+    }
+    else if (!imuInit) {
+        if (accidx == initidx) {
+            gravity = vavg(accbuffer, 0, ACC_BUFFER_LENGTH, ACC_BUFFER_LENGTH);
+            SETIMUINIT(1);
+        }
+        else {/* Initialized, but gravity not set */
+            return -1;
         }
     }
 
-    /* Subtract off gravity */
-    imu_msg.angular_velocity -= crotate(gravity, imu_msg.orientation);
+    imu_msg_na.header = imu_msg.header;
+    imu_msg_na.angular_velocity = imu_msg.angular_velocity;
+    imu_msg_na.orientation = imu_msg.orientation;
 
-//    raw_imu_data1.print_data();
+    /* Subtract off gravity */
+    imu_msg_na.linear_acceleration = imu_msg.linear_acceleration
+            - crotate(gravity, imu_msg.orientation);
+
     return 0;
 }
 
@@ -388,6 +466,7 @@ void setup() {
 
     nh.initNode();
     nh.advertise(imu_pub);
+    nh.advertise(imu_na_pub);
 
     imu_msg.orientation.w = 1; // zero angle
 
@@ -396,7 +475,11 @@ void setup() {
         imu_msg.angular_velocity_covariance[i] = 0;
         imu_msg.linear_acceleration_covariance[i] = 0;
         imu_msg.orientation_covariance[i] = 0;
+        imu_msg_na.angular_velocity_covariance[i] = 0;
+        imu_msg_na.linear_acceleration_covariance[i] = 0;
+        imu_msg_na.orientation_covariance[i] = 0;
     }
+
     delay(100);
     attachInterrupt(digitalPinToInterrupt(IMUDataReady), set_ts, FALLING);
 }
@@ -405,8 +488,12 @@ void loop() {
     if (ready) {
         DETACHCLK
 
-        if (!fillImuMsg()) {
+        int status = fillImuMsg();
+        if (status <= 0) {
             imu_pub.publish(&imu_msg);
+            if (!status) {/* Only publish if gravity is set */
+                imu_na_pub.publish(&imu_msg_na);
+            }
         }
 #ifndef NO_CRC_CHECK
         digitalWriteFast(BADCRC, LOW);
