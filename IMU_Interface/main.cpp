@@ -36,9 +36,11 @@
 typedef geometry_msgs::Vector3 Vector3;
 
 sensor_msgs::Imu imu_msg;
+sensor_msgs::Imu imu_msg_na;
 // TODO: double check that this is always zero initialized
 static Vector3 accbuffer[ACC_BUFFER_LENGTH];
 int accidx = 0;
+int initidx = -1;
 Vector3 gravity;
 
 double ts; /* time stamp set when IMUDataReady drops */
@@ -288,19 +290,20 @@ inline double magnitude(const Vector3 v) {
     return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
-inline Vector3& operator-=(Vector3& v0, const Vector3 v1) {
+inline Vector3 operator-(Vector3 v0, const Vector3 v1) {
     v0.x -= v1.x;
     v0.y -= v1.y;
     v0.z -= v1.z;
     return v0;
 }
 
-inline Vector3 vavg(Vector3 *va, int start, int end) {
+inline Vector3 vavg(Vector3 *va, int start, int end, int length) {
     Vector3 v;
     for (int i = start; i < end; i++) {
-        v.x += va[i].x;
-        v.y += va[i].y;
-        v.z += va[i].z;
+        int j = (i < 0 ? length + i : i);
+        v.x += va[j].x;
+        v.y += va[j].y;
+        v.z += va[j].z;
     }
     v.x /= end - start;
     v.y /= end - start;
@@ -392,31 +395,39 @@ inline int fillImuMsg() {
                                       ldexp((double) DELTA(z, angle), ANGLE_EXP))
                                * imu_msg.orientation;
 
-    accbuffer[accidx++] = imu_msg.angular_velocity;
+    accbuffer[accidx++] = imu_msg.linear_acceleration;
     if (accidx >= ACC_BUFFER_LENGTH) {
         accidx = 0;
     }
 
     // TODO: Possibly a better way to detect that IMU is initialized
-    if (!imuInit) {
-        Vector3 lavg3 = vavg(accbuffer, 0, 3);
-        Vector3 ravg3 = vavg(accbuffer, ACC_BUFFER_LENGTH - 3,
-                             ACC_BUFFER_LENGTH);
+    if (initidx < 0) {
+        double g = magnitude(
+                vavg(accbuffer, accidx - 3, accidx, ACC_BUFFER_LENGTH));
 
-        double m1 = magnitude(lavg3);
-        double m2 = magnitude(ravg3);
-
-        if (9.6 < m1 && m1 < 10 && 9.6 < m2 && m2 < 10) {
-            gravity = vavg(accbuffer, 0, ACC_BUFFER_LENGTH);
+        if (9.6 < g && g < 10) {
+            initidx = accidx;
+        }
+        /* If IMU is not initialized, do not publish data */
+        return 1;
+    }
+    else if (!imuInit) {
+        if (accidx == initidx) {
+            gravity = vavg(accbuffer, 0, ACC_BUFFER_LENGTH, ACC_BUFFER_LENGTH);
             SETIMUINIT(1);
         }
-        else {/* If IMU is not initialized, do not publish data */
-            return 1;
+        else {/* Initialized, but gravity not set */
+            return -1;
         }
     }
 
+    imu_msg_na.header = imu_msg.header;
+    imu_msg_na.angular_velocity = imu_msg.angular_velocity;
+    imu_msg_na.orientation = imu_msg.orientation;
+
     /* Subtract off gravity */
-    imu_msg.angular_velocity -= crotate(gravity, imu_msg.orientation);
+    imu_msg_na.linear_acceleration = imu_msg.linear_acceleration
+            - crotate(gravity, imu_msg.orientation);
 
     return 0;
 }
@@ -454,7 +465,11 @@ void setup() {
         imu_msg.angular_velocity_covariance[i] = 0;
         imu_msg.linear_acceleration_covariance[i] = 0;
         imu_msg.orientation_covariance[i] = 0;
+        imu_msg_na.angular_velocity_covariance[i] = 0;
+        imu_msg_na.linear_acceleration_covariance[i] = 0;
+        imu_msg_na.orientation_covariance[i] = 0;
     }
+
     delay(100);
     attachInterrupt(digitalPinToInterrupt(IMUDataReady), set_ts, FALLING);
 }
@@ -467,9 +482,9 @@ void loop() {
         Serial.printf("%f %f %f %f %f %f %f %f %f %f %f\n", raw_imu_data1.timestamp,
                       imu_msg.angular_velocity.x,
                       imu_msg.angular_velocity.y, imu_msg.angular_velocity.z,
-                      imu_msg.linear_acceleration.x,
-                      imu_msg.linear_acceleration.y,
-                      imu_msg.linear_acceleration.z, imu_msg.orientation.w,
+                      imu_msg_na.linear_acceleration.x,
+                      imu_msg_na.linear_acceleration.y,
+                      imu_msg_na.linear_acceleration.z, imu_msg.orientation.w,
                       imu_msg.orientation.x, imu_msg.orientation.y,
                       imu_msg.orientation.z);
         Serial.flush();
