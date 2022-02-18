@@ -1,11 +1,6 @@
 #include <sensor_msgs/Imu.h>
 #include "Arduino.h"
 
-typedef geometry_msgs::Vector3 Vector3;
-
-sensor_msgs::Imu imu_msg;
-Vector3 gravity;
-
 #define NO_CRC_CHECK
 
 #ifndef NO_CRC_CHECK
@@ -26,6 +21,7 @@ Vector3 gravity;
 
 #define OpeningFlag 0x7e
 #define HDLC_FRAME_LENGTH 14
+#define ACC_BUFFER_LENGTH 400
 
 #define SETIMUINIT(v) digitalWriteFast(IMUInit, v); imuInit = (bool) v
 #define SETINFRAME(v) digitalWriteFast(InFrame, v); inFrame = (bool) v
@@ -36,6 +32,14 @@ Vector3 gravity;
     interrupt = false;\
     digitalWriteFast(ClkIntEnabled, LOW);\
 }
+
+typedef geometry_msgs::Vector3 Vector3;
+
+sensor_msgs::Imu imu_msg;
+// TODO: double check that this is always zero initialized
+static Vector3 accbuffer[ACC_BUFFER_LENGTH];
+int accidx = 0;
+Vector3 gravity;
 
 double ts; /* time stamp set when IMUDataReady drops */
 uint16_t buffer[HDLC_FRAME_LENGTH];
@@ -291,6 +295,19 @@ inline Vector3& operator-=(Vector3& v0, const Vector3 v1) {
     return v0;
 }
 
+inline Vector3 vavg(Vector3 *va, int start, int end) {
+    Vector3 v;
+    for (int i = start; i < end; i++) {
+        v.x += va[i].x;
+        v.y += va[i].y;
+        v.z += va[i].z;
+    }
+    v.x /= end - start;
+    v.y /= end - start;
+    v.z /= end - start;
+    return v;
+}
+
 /* used in orientation calculation */
 typedef geometry_msgs::Quaternion Quaternion;
 
@@ -375,14 +392,23 @@ inline int fillImuMsg() {
                                       ldexp((double) DELTA(z, angle), ANGLE_EXP))
                                * imu_msg.orientation;
 
+    accbuffer[accidx++] = imu_msg.angular_velocity;
+    if (accidx >= ACC_BUFFER_LENGTH) {
+        accidx = 0;
+    }
+
     // TODO: Possibly a better way to detect that IMU is initialized
     if (!imuInit) {
-        double g = magnitude(imu_msg.angular_velocity);
-        if (9.75 < g && g < 9.85) {
+        Vector3 lavg3 = vavg(accbuffer, 0, 3);
+        Vector3 ravg3 = vavg(accbuffer, ACC_BUFFER_LENGTH - 3,
+                             ACC_BUFFER_LENGTH);
+
+        double m1 = magnitude(lavg3);
+        double m2 = magnitude(ravg3);
+
+        if (9.6 < m1 && m1 < 10 && 9.6 < m2 && m2 < 10) {
+            gravity = vavg(accbuffer, 0, ACC_BUFFER_LENGTH);
             SETIMUINIT(1);
-            gravity.x = imu_msg.angular_velocity.x;
-            gravity.y = imu_msg.angular_velocity.y;
-            gravity.z = imu_msg.angular_velocity.z;
         }
         else {/* If IMU is not initialized, do not publish data */
             return 1;
