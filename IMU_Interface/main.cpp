@@ -145,7 +145,7 @@ void clk_ISR(void) {
 /* IMU data ready interrupt */
 void set_ts(void) {
     /* set timestamp and prepare to receive data */
-    // TODO: use more accurate timing
+    // TODO: sync timing with main computer
     ts = seconds();
     SETINFRAME(0);
     SETREADY(0);
@@ -256,7 +256,7 @@ struct ImuData {
                 checksum(0xffff)
     {}
 
-    /* assign data from the  buffer if CRC and checksum are good */
+    /* assign data from the buffer if CRC and checksum are good */
     /* otherwise only timestamp is updated */
     uint16_t set_data(const uint16_t* data) {
         timestamp = ts;
@@ -303,7 +303,7 @@ inline Vector3 operator-(Vector3 v0, const Vector3 v1) {
     return v0;
 }
 
-inline Vector3 vavg(Vector3 *va, int start, int end, int length) {
+inline Vector3 vavg(Vector3* va, int start, int end, int length) {
     Vector3 v;
     for (int i = start; i < end; i++) {
         int j = (i < 0 ? length + i : i);
