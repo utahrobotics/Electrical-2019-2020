@@ -40,6 +40,7 @@ typedef geometry_msgs::Vector3 Vector3;
 
 sensor_msgs::Imu imu_msg;
 sensor_msgs::Imu imu_msg_na;
+
 // TODO: double check that this is always zero initialized
 static Vector3 accbuffer[ACC_BUFFER_LENGTH];
 int accidx = 0;
@@ -145,7 +146,6 @@ void clk_ISR(void) {
 /* IMU data ready interrupt */
 void set_ts(void) {
     /* set timestamp and prepare to receive data */
-    // TODO: sync timing with main computer
     ts = seconds();
     SETINFRAME(0);
     SETREADY(0);
@@ -390,6 +390,8 @@ inline int fillImuMsg() {
         raw_imu_data = pdata;
     }
     imu_msg.header.stamp.fromSec(raw_imu_data1.timestamp);
+    // TODO: find a less hacky way to do this
+    nh.adjustTime(&imu_msg.header.stamp);
     imu_msg.angular_velocity.x = ldexp(DIFF(x, angle), ANGLE_EXP);
     imu_msg.angular_velocity.y = ldexp(DIFF(y, angle), ANGLE_EXP);
     imu_msg.angular_velocity.z = ldexp(DIFF(z, angle), ANGLE_EXP);
@@ -465,6 +467,7 @@ void setup() {
     digitalWriteFast(ClkIntEnabled, interrupt);
 
     nh.initNode();
+    nh.setSpinTimeout(1); // 1 ms timeout on spin
     nh.advertise(imu_pub);
     nh.advertise(imu_na_pub);
 

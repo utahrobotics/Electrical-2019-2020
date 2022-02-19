@@ -389,6 +389,13 @@ public:
     last_sync_receive_time = hardware_.time();
   }
 
+  void adjustTime(Time* time)
+  {
+    time->sec += sec_offset;
+    time->nsec += nsec_offset;
+    normalizeSecNSec(time->sec, time->nsec);
+  }
+
   Time now()
   {
     uint32_t ms = hardware_.time();
