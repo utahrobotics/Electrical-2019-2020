@@ -1,5 +1,7 @@
 #include <ros.h>
+#include <geometry_msgs/TwistStamped.h>
 #include <sensor_msgs/Imu.h>
+#include <tf/transform_broadcaster.h>
 #include "Arduino.h"
 
 #define NO_CRC_CHECK
@@ -38,17 +40,32 @@ ros::NodeHandle nh;
 
 typedef geometry_msgs::Vector3 Vector3;
 
+/* Stores IMU data in the /imu frame. Includes gravity. */
+/* Note that imu_msg.orientation is always zero. */
+/* This is because in the /imu frame, the angle doesn't change. */
 sensor_msgs::Imu imu_msg;
-sensor_msgs::Imu imu_msg_na;
+/* Stores current positional and angular velocities in the /imu frame. */
+/* Offset for gravity. */
+geometry_msgs::TwistStamped vel_msg;
+/* This keeps track of IMU orientation and position. */
+/* Used to transform between /imu and /imu_base frames. */
+/* /imu_base frame is related to the world frame by a static transform. */
+geometry_msgs::TransformStamped transform;
 
 // TODO: double check that this is always zero initialized
 static Vector3 accbuffer[ACC_BUFFER_LENGTH];
 int accidx = 0;
 int initidx = -1;
+/* Gravity in /imu_base frame */
+Vector3 gravity_base;
+/* Gravity in /imu frame */
 Vector3 gravity;
+/* Velocity in /imu_base frame */
+Vector3 velocity;
 
 ros::Publisher imu_pub("imu", &imu_msg);
-ros::Publisher imu_na_pub("imu_norm", &imu_msg_na);
+ros::Publisher vel_pub("vel", &vel_msg);
+tf::TransformBroadcaster tfbroadcaster;
 
 double ts; /* time stamp set when IMUDataReady drops */
 uint16_t buffer[HDLC_FRAME_LENGTH];
@@ -296,6 +313,27 @@ inline double magnitude(const Vector3 v) {
     return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
+inline Vector3& operator+=(Vector3& v0, const Vector3 v1) {
+    v0.x += v1.x;
+    v0.y += v1.y;
+    v0.z += v1.z;
+    return v0;
+}
+
+inline Vector3 operator*(double c, Vector3 v) {
+    v.x *= c;
+    v.y *= c;
+    v.z *= c;
+    return v;
+}
+
+inline Vector3 operator+(Vector3 v0, const Vector3 v1) {
+    v0.x += v1.x;
+    v0.y += v1.y;
+    v0.z += v1.z;
+    return v0;
+}
+
 inline Vector3 operator-(Vector3 v0, const Vector3 v1) {
     v0.x -= v1.x;
     v0.y -= v1.y;
@@ -372,11 +410,17 @@ inline Quaternion conj(Quaternion q) {
     return q;
 }
 
+inline Vector3 rotate(Vector3 v, Quaternion q) {
+    return q2v(q * v2q(v) * conj(q));
+}
+
 inline Vector3 crotate(Vector3 v, Quaternion q) {
     return q2v(conj(q) * v2q(v) * q);
 }
 
 #define DELTA(dir, q) (raw_imu_data1.dir##_delta_##q)
+#define DTHETA(dir) ldexp((double) DELTA(dir, angle), ANGLE_EXP)
+#define DV(dir) ldexp((double) DELTA(dir, vel), VEL_EXP)
 #define DT (raw_imu_data1.timestamp - raw_imu_data.timestamp)
 #define DIFF(dir, q) (DELTA(dir, q) / DT)
 #define ANGLE_EXP -19
@@ -384,7 +428,6 @@ inline Vector3 crotate(Vector3 v, Quaternion q) {
 
 inline int fillImuMsg() {
     struct ImuData pdata = raw_imu_data1;
-    // TODO: fix possible divide by zero issue
     uint16_t status = raw_imu_data1.set_data(buffer);
     if (!status) {
         raw_imu_data = pdata;
@@ -392,16 +435,16 @@ inline int fillImuMsg() {
     imu_msg.header.stamp.fromSec(raw_imu_data1.timestamp);
     // TODO: find a less hacky way to do this
     nh.adjustTime(&imu_msg.header.stamp);
-    imu_msg.angular_velocity.x = ldexp(DIFF(x, angle), ANGLE_EXP);
-    imu_msg.angular_velocity.y = ldexp(DIFF(y, angle), ANGLE_EXP);
-    imu_msg.angular_velocity.z = ldexp(DIFF(z, angle), ANGLE_EXP);
-    imu_msg.linear_acceleration.x = ldexp(DIFF(x, vel), VEL_EXP);
-    imu_msg.linear_acceleration.y = ldexp(DIFF(y, vel), VEL_EXP);
-    imu_msg.linear_acceleration.z = ldexp(DIFF(z, vel), VEL_EXP);
-    imu_msg.orientation += 0.5 * q(0, ldexp((double) DELTA(x, angle), ANGLE_EXP),
-                                      ldexp((double) DELTA(y, angle), ANGLE_EXP),
-                                      ldexp((double) DELTA(z, angle), ANGLE_EXP))
-                               * imu_msg.orientation;
+
+    vel_msg.header.stamp = imu_msg.header.stamp;
+    transform.header.stamp = imu_msg.header.stamp;
+
+    Vector3 delta_angle(DTHETA(x), DTHETA(y), DTHETA(z));
+    Vector3 delta_vel(DV(x), DV(y), DV(z));
+
+    /* Estimate Dθ (ω) and Dv (a) using trapezoid rule */
+    imu_msg.angular_velocity = (2/DT) * delta_angle - imu_msg.angular_velocity;
+    imu_msg.linear_acceleration = (2/DT) * delta_vel - imu_msg.linear_acceleration;
 
     accbuffer[accidx++] = imu_msg.linear_acceleration;
     if (accidx >= ACC_BUFFER_LENGTH) {
@@ -421,21 +464,27 @@ inline int fillImuMsg() {
     }
     else if (!imuInit) {
         if (accidx == initidx) {
-            gravity = vavg(accbuffer, 0, ACC_BUFFER_LENGTH, ACC_BUFFER_LENGTH);
+            gravity_base = vavg(accbuffer, 0, ACC_BUFFER_LENGTH, ACC_BUFFER_LENGTH);
             SETIMUINIT(1);
         }
-        else {/* Initialized, but gravity not set */
+        else {/* Initialized, but gravity_base not set */
             return -1;
         }
     }
 
-    imu_msg_na.header = imu_msg.header;
-    imu_msg_na.angular_velocity = imu_msg.angular_velocity;
-    imu_msg_na.orientation = imu_msg.orientation;
+    Vector3 old_gravity = gravity;
+    transform.transform.rotation += 0.5 * transform.transform.rotation * v2q(delta_angle);
+    gravity = crotate(gravity_base, transform.transform.rotation);
 
-    /* Subtract off gravity */
-    imu_msg_na.linear_acceleration = imu_msg.linear_acceleration
-            - crotate(gravity, imu_msg.orientation);
+    vel_msg.twist.angular = imu_msg.angular_velocity;
+    /* Offset for gravity based on trapezoid rule */
+    vel_msg.twist.linear += delta_vel - (DT/2) * (old_gravity + gravity);
+
+    Vector3 old_velocity = velocity;
+    velocity = rotate(vel_msg.twist.linear, transform.transform.rotation);
+
+    /* Estimate ∫vdt using trapezoid rule */
+    transform.transform.translation += (DT/2) * (old_velocity + velocity);
 
     return 0;
 }
@@ -469,19 +518,23 @@ void setup() {
     nh.initNode();
     nh.setSpinTimeout(1); // 1 ms timeout on spin
     nh.advertise(imu_pub);
-    nh.advertise(imu_na_pub);
+    nh.advertise(vel_pub);
+    tfbroadcaster.init(nh);
 
+    imu_msg.header.frame_id = "/imu";
     imu_msg.orientation.w = 1; // zero angle
+    transform.transform.rotation.w = 1;
 
     // TODO: define known covariance
     for (size_t i = 0; i < 9; i++) {
         imu_msg.angular_velocity_covariance[i] = 0;
         imu_msg.linear_acceleration_covariance[i] = 0;
         imu_msg.orientation_covariance[i] = 0;
-        imu_msg_na.angular_velocity_covariance[i] = 0;
-        imu_msg_na.linear_acceleration_covariance[i] = 0;
-        imu_msg_na.orientation_covariance[i] = 0;
     }
+
+    vel_msg.header.frame_id = "/imu";
+    transform.header.frame_id = "/imu_base";
+    transform.child_frame_id = "/imu";
 
     delay(100);
     attachInterrupt(digitalPinToInterrupt(IMUDataReady), set_ts, FALLING);
@@ -495,7 +548,8 @@ void loop() {
         if (status <= 0) {
             imu_pub.publish(&imu_msg);
             if (!status) {/* Only publish if gravity is set */
-                imu_na_pub.publish(&imu_msg_na);
+                vel_pub.publish(&vel_msg);
+                tfbroadcaster.sendTransform(transform);
             }
         }
 #ifndef NO_CRC_CHECK
@@ -506,7 +560,9 @@ void loop() {
         SETSPIN(1);
     }
     else if (spin) {
+        /* Spin once, then wait for data ready */
         nh.spinOnce();
+        while (spin);
     }
     else if (!interrupt) {
         /* enable IMU clock interrupt */

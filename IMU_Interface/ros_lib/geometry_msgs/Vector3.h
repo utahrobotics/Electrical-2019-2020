@@ -26,6 +26,13 @@ namespace geometry_msgs
     {
     }
 
+    Vector3(_x_type x, _y_type y, _z_type z):
+      x(x),
+      y(y),
+      z(z)
+    {
+    }
+
     virtual int serialize(unsigned char *outbuffer) const
     {
       int offset = 0;
