@@ -31,7 +31,6 @@
 #define SETREADY(v) digitalWriteFast(DataReady, v); ready = (bool) v
 #define SETSPIN(v) digitalWriteFast(SPin, v); spin = (bool) v
 #define DETACHCLK if (interrupt) {\
-    detachInterrupt(digitalPinToInterrupt(ClkPin));\
     interrupt = false;\
     digitalWriteFast(ClkIntEnabled, LOW);\
 }
@@ -119,6 +118,52 @@ inline uint16_t reverse(uint16_t x) {
     return (rtab[x & 0xff] << 8) | rtab[x >> 8];
 }
 
+#define INITPACKETCOUNT 80
+#define STILLPACKETCOUNT 720
+#define RXPACKETCOUNT 0
+static uint16_t initwords[] = {0, 0x01ec, 0x01ec, 0x01ec, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+static uint16_t stillwords[] = {0, 0, 0, 0x0192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+static uint16_t rxwords[RXPACKETCOUNT][HDLC_FRAME_LENGTH+2];
+static int rxpacketidx = -1-(INITPACKETCOUNT+STILLPACKETCOUNT);
+static int rxidx = -1;
+static uint8_t rxbuffer = 0;
+
+inline void setchecksum(uint16_t* buffer) {
+    buffer[0] = OpeningFlag << 8u;
+    uint16_t sum = 0;
+    for (size_t i = 1; i < 13; i++) {
+        sum += buffer[i];
+    }
+    buffer[13] = (uint16_t) ~sum;
+    buffer[15] = OpeningFlag;
+}
+
+inline uint8_t readNextRxDataBit() {
+    uint16_t* wordbuffer;
+    if (rxpacketidx < -STILLPACKETCOUNT) {
+        wordbuffer = initwords;
+    }
+    else if (rxpacketidx < 0 || RXPACKETCOUNT == 0) {
+        wordbuffer = stillwords;
+    }
+    else {
+        wordbuffer = &rxwords[rxpacketidx][0];
+    }
+
+    if (++rxidx < 0) {
+        return 0;
+    }
+    rxbuffer <<= 1u;
+    rxbuffer |= (wordbuffer[rxidx / 16] >> (rxidx % 16)) & 1u;
+
+    /* Add padding bit if not in a flag word */
+    if (!((rxbuffer & 0x3f) ^ 0x3f) && rxidx >= 16 && rxidx < 16*15) {
+        rxidx--;
+        rxbuffer ^= 1u;
+    }
+    return rxbuffer & 1u;
+}
+
 /* IMU clock interrupt */
 void clk_ISR(void) {
     /* If we already have data, leave */
@@ -127,7 +172,7 @@ void clk_ISR(void) {
         DETACHCLK
         return;
     }
-    register uint8_t rval = digitalReadFast(RxData);
+    register uint8_t rval = readNextRxDataBit();
     derBuffer <<= 1;
     derBuffer |= rval;
     /* look for opening/closing flag */
@@ -489,6 +534,15 @@ inline int fillImuMsg() {
     return 0;
 }
 
+static uint32_t next_clk_nanos = 0;
+static uint32_t clk_period_nanos = (uint32_t) (1000 / 1.015L);
+
+inline void delayUntilClkInt() {
+    delayNanoseconds(next_clk_nanos - nanos());
+    next_clk_nanos += clk_period_nanos;
+    clk_ISR();
+}
+
 void setup() {
     Serial.begin(115200);
 
@@ -536,8 +590,13 @@ void setup() {
     transform.header.frame_id = "/imu_base";
     transform.child_frame_id = "/imu";
 
+    setchecksum(initwords);
+    setchecksum(stillwords);
+    for (size_t i = 0; i < RXPACKETCOUNT; i++) {
+        setchecksum(&rxwords[i][0]);
+    }
+
     delay(100);
-    attachInterrupt(digitalPinToInterrupt(IMUDataReady), set_ts, FALLING);
 }
 
 void loop() {
@@ -562,18 +621,24 @@ void loop() {
     else if (spin) {
         /* Spin once, then wait for data ready */
         nh.spinOnce();
-        while (spin);
+        delayNanoseconds((uint32_t) (1e9L*(ts+2.5e-3-seconds())));
+        set_ts();
     }
     else if (!interrupt) {
         /* enable IMU clock interrupt */
         interrupt = true;
         digitalWriteFast(ClkIntEnabled, HIGH);
-        attachInterrupt(digitalPinToInterrupt(ClkPin), clk_ISR, RISING);
+        if (++rxpacketidx >= RXPACKETCOUNT) {
+            rxpacketidx = 0;
+        }
+        rxidx = -200;
+        rxbuffer = 0;
+        next_clk_nanos = nanos() + clk_period_nanos;
     }
     else {
         /* wait for interrupt */
 //        asm("wfi");
         /* but keep running CPU clock */
-        asm("nop");
+        delayUntilClkInt();
     }
 }

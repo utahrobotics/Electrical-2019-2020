@@ -99,7 +99,7 @@ uint32_t nanos(void)
   } while ( __STREXW(1, &systick_safe_read));
     ccdelta = ARM_DWT_CYCCNT - scc;
     nsec = (ccdelta * 1000)/(F_CPU_ACTUAL/1000000);
-    return nsec;
+    return smc * 1000000U + nsec;
 }
 
 #if 0 // kept to compare test to cycle count micro()
