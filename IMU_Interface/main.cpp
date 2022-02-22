@@ -118,12 +118,7 @@ inline uint16_t reverse(uint16_t x) {
     return (rtab[x & 0xff] << 8) | rtab[x >> 8];
 }
 
-#define INITPACKETCOUNT 80
-#define STILLPACKETCOUNT 720
-#define RXPACKETCOUNT 0
-static uint16_t initwords[] = {0, 0x01ec, 0x01ec, 0x01ec, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-static uint16_t stillwords[] = {0, 0, 0, 0x0192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-static uint16_t rxwords[RXPACKETCOUNT][HDLC_FRAME_LENGTH+2];
+#include "RxData.h"
 static int rxpacketidx = -1-(INITPACKETCOUNT+STILLPACKETCOUNT);
 static int rxidx = -1;
 static uint8_t rxbuffer = 0;
@@ -141,10 +136,10 @@ inline void setchecksum(uint16_t* buffer) {
 inline uint8_t readNextRxDataBit() {
     uint16_t* wordbuffer;
     if (rxpacketidx < -STILLPACKETCOUNT) {
-        wordbuffer = initwords;
+        wordbuffer = &initwords[rxpacketidx+INITPACKETCOUNT+STILLPACKETCOUNT][0];
     }
-    else if (rxpacketidx < 0 || RXPACKETCOUNT == 0) {
-        wordbuffer = stillwords;
+    else if (rxpacketidx < 0) {
+        wordbuffer = &stillwords[rxpacketidx+STILLPACKETCOUNT][0];
     }
     else {
         wordbuffer = &rxwords[rxpacketidx][0];
@@ -590,8 +585,12 @@ void setup() {
     transform.header.frame_id = "/imu_base";
     transform.child_frame_id = "/imu";
 
-    setchecksum(initwords);
-    setchecksum(stillwords);
+    for (size_t i = 0; i < INITPACKETCOUNT; i++) {
+        setchecksum(&initwords[i][0]);
+    }
+    for (size_t i = 0; i < STILLPACKETCOUNT; i++) {
+        setchecksum(&stillwords[i][0]);
+    }
     for (size_t i = 0; i < RXPACKETCOUNT; i++) {
         setchecksum(&rxwords[i][0]);
     }
