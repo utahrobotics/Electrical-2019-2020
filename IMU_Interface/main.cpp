@@ -159,7 +159,9 @@ inline uint8_t readNextRxDataBit() {
         rxidx--;
         rxbuffer ^= 1u;
     }
-    return rxbuffer & 1u;
+    uint8_t value = rxbuffer & 1u;
+    digitalWriteFast(RxData, value);
+    return value;
 }
 
 static double tclk_ISR[1000];
@@ -473,11 +475,9 @@ inline Vector3 crotate(Vector3 v, Quaternion q) {
 #define VEL_EXP -14
 
 inline int fillImuMsg() {
-    struct ImuData pdata = raw_imu_data1;
+    raw_imu_data = raw_imu_data1;
     uint16_t status = raw_imu_data1.set_data(buffer);
-    if (!status) {
-        raw_imu_data = pdata;
-    }
+    // TODO: report if nonzero status
     imu_msg.header.stamp.fromSec(raw_imu_data1.timestamp);
     // TODO: find a less hacky way to do this
     nh.adjustTime(&imu_msg.header.stamp);
@@ -488,13 +488,11 @@ inline int fillImuMsg() {
     Vector3 delta_angle(DTHETA(x), DTHETA(y), DTHETA(z));
     Vector3 delta_vel(DV(x), DV(y), DV(z));
 
-    /* Estimate Dθ (ω) and Dv (a) using trapezoid rule */
-    imu_msg.angular_velocity = (2/DT) * delta_angle - imu_msg.angular_velocity;
-    imu_msg.linear_acceleration = (2/DT) * delta_vel - imu_msg.linear_acceleration;
-
-    accbuffer[accidx++] = imu_msg.linear_acceleration;
-    if (accidx >= ACC_BUFFER_LENGTH) {
-        accidx = 0;
+    if (!imuInit) {/* Not initialized, collect samples of gravity */
+        accbuffer[accidx++] = (1/DT) * delta_vel;
+        if (accidx >= ACC_BUFFER_LENGTH) {
+            accidx = 0;
+        }
     }
 
     // TODO: Possibly a better way to detect that IMU is initialized
@@ -511,12 +509,17 @@ inline int fillImuMsg() {
     else if (!imuInit) {
         if (accidx == initidx) {
             gravity_base = vavg(accbuffer, 0, ACC_BUFFER_LENGTH, ACC_BUFFER_LENGTH);
+            imu_msg.linear_acceleration = gravity_base;
             SETIMUINIT(1);
         }
         else {/* Initialized, but gravity_base not set */
             return -1;
         }
     }
+
+    /* Estimate Dθ (ω) and Dv (a) using trapezoid rule */
+    imu_msg.angular_velocity = (2/DT) * delta_angle - imu_msg.angular_velocity;
+    imu_msg.linear_acceleration = (2/DT) * delta_vel - imu_msg.linear_acceleration;
 
     Vector3 old_gravity = gravity;
     transform.transform.rotation += 0.5 * transform.transform.rotation * v2q(delta_angle);
@@ -563,7 +566,7 @@ void setup() {
     pinMode(BADCHECKSUM, OUTPUT);
     pinMode(BADDATA, OUTPUT);
     pinMode(IMUDataReady, INPUT);
-    pinMode(RxData, INPUT);
+    pinMode(RxData, OUTPUT);
     pinMode(IMUInit, OUTPUT);
     pinMode(InFrame, OUTPUT);
     pinMode(DataReady, OUTPUT);
@@ -622,13 +625,14 @@ void setup() {
     ts = seconds();
 }
 
-static double tspin = 0;
+static double tspin = 0, tfill = 0, tpdebug = 0, tpimu = 0, tpvel = 0, tptf = 0;
 
 void loop() {
     if (ready) {
         DETACHCLK
 
-        char debug_str[50];
+        double now = seconds();
+        char debug_str[200];
         if (abs(DT - data_period) > 10e-6) {
             snprintf(debug_str, 50, "Last timestamp diff: %.3f ms", DT*1e3);
             debug_msg.data = debug_str;
@@ -652,19 +656,47 @@ void loop() {
             }
         }
 
-        if (tdiffmax > 0.5e-6) {
+        if (tdiffmax > clk_period) {
             snprintf(debug_str, 50, "clk_ISR times: (%.3f us, %.3f us)",
                      tdiffmin*1e6, tdiffmax*1e6);
             debug_msg.data = debug_str;
             debug_pub.publish(&debug_msg);
         }
 
+        if (tfill > 1e-3) {
+            snprintf(debug_str, 50, "Last fill: %.3f ms", tfill*1e3);
+            debug_msg.data = debug_str;
+            debug_pub.publish(&debug_msg);
+        }
+
+        if (tpdebug+tpimu+tpvel+tptf > 1e-3) {
+            snprintf(debug_str, 200,
+                     "Publish times:\n"
+                     "    Debug: %.3f ms\n"
+                     "    IMU: %.3f ms\n"
+                     "    Twist: %.3f ms\n"
+                     "    Transform: %.3f ms",
+                     tpdebug*1e3, tpimu*1e3,
+                     tpvel*1e3, tptf*1e3);
+            debug_msg.data = debug_str;
+            debug_pub.publish(&debug_msg);
+        }
+        tpdebug = seconds() - now;
+
+        now = seconds();
         int status = fillImuMsg();
+        tfill = seconds() - now;
         if (status <= 0) {
+            now = seconds();
             imu_pub.publish(&imu_msg);
+            tpimu = seconds() - now;
             if (!status) {/* Only publish if gravity is set */
+                now = seconds();
                 vel_pub.publish(&vel_msg);
+                tpvel = seconds() - now;
+                now += tpvel;
                 tfbroadcaster.sendTransform(transform);
+                tptf = seconds() - now;
             }
         }
 #ifndef NO_CRC_CHECK
