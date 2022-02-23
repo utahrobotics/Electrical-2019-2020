@@ -1,4 +1,5 @@
 #include <ros.h>
+#include <std_msgs/String.h>
 #include <geometry_msgs/TwistStamped.h>
 #include <sensor_msgs/Imu.h>
 #include <tf/transform_broadcaster.h>
@@ -39,6 +40,7 @@ ros::NodeHandle nh;
 
 typedef geometry_msgs::Vector3 Vector3;
 
+std_msgs::String debug_msg;
 /* Stores IMU data in the /imu frame. Includes gravity. */
 /* Note that imu_msg.orientation is always zero. */
 /* This is because in the /imu frame, the angle doesn't change. */
@@ -62,6 +64,7 @@ Vector3 gravity;
 /* Velocity in /imu_base frame */
 Vector3 velocity;
 
+ros::Publisher debug_pub("debug", &debug_msg);
 ros::Publisher imu_pub("imu", &imu_msg);
 ros::Publisher vel_pub("vel", &vel_msg);
 tf::TransformBroadcaster tfbroadcaster;
@@ -158,6 +161,9 @@ inline uint8_t readNextRxDataBit() {
     }
     return rxbuffer & 1u;
 }
+
+static double tclk_ISR[1000];
+static int tclk_ISRidx = 0;
 
 /* IMU clock interrupt */
 void clk_ISR(void) {
@@ -529,13 +535,21 @@ inline int fillImuMsg() {
     return 0;
 }
 
-static uint32_t next_clk_nanos = 0;
-static uint32_t clk_period_nanos = (uint32_t) (1000 / 1.015L);
+static double data_period = 2.5e-3;
+static double next_clk_ts = 0;
+static double clk_period = 1 / 1.015e6;
 
 inline void delayUntilClkInt() {
-    delayNanoseconds(next_clk_nanos - nanos());
-    next_clk_nanos += clk_period_nanos;
+    double ndelay = 1e9*(next_clk_ts-seconds());
+    if (ndelay > 0) {
+        delayNanoseconds((uint32_t) ndelay);
+    }
+    next_clk_ts += clk_period;
+    double now = seconds();
     clk_ISR();
+    double diff = seconds() - now;
+    tclk_ISR[tclk_ISRidx++] = diff;
+    tclk_ISRidx %= 1000;
 }
 
 void setup() {
@@ -566,6 +580,7 @@ void setup() {
 
     nh.initNode();
     nh.setSpinTimeout(1); // 1 ms timeout on spin
+    nh.advertise(debug_pub);
     nh.advertise(imu_pub);
     nh.advertise(vel_pub);
     tfbroadcaster.init(nh);
@@ -595,12 +610,54 @@ void setup() {
         setchecksum(&rxwords[i][0]);
     }
 
-    delay(100);
+    /* wait for connection before starting work */
+    while (!nh.connected()) {
+        nh.spinOnce();
+    }
+
+    debug_msg.data = "Finished setup";
+    debug_pub.publish(&debug_msg);
+    nh.spinOnce();
+
+    ts = seconds();
 }
+
+static double tspin = 0;
 
 void loop() {
     if (ready) {
         DETACHCLK
+
+        char debug_str[50];
+        if (abs(DT - data_period) > 10e-6) {
+            snprintf(debug_str, 50, "Last timestamp diff: %.3f ms", DT*1e3);
+            debug_msg.data = debug_str;
+            debug_pub.publish(&debug_msg);
+        }
+
+        if (tspin > 1e-3) {
+            snprintf(debug_str, 50, "Last spin: %.3f ms", tspin*1e3);
+            debug_msg.data = debug_str;
+            debug_pub.publish(&debug_msg);
+        }
+
+        double tdiffmin = 1, tdiffmax = 0;
+        for (int i = 0; i < tclk_ISRidx; i++) {
+            double tdiff = tclk_ISR[i];
+            if (tdiff < tdiffmin) {
+                tdiffmin = tdiff;
+            }
+            if (tdiff > tdiffmax) {
+                tdiffmax = tdiff;
+            }
+        }
+
+        if (tdiffmax > 0.5e-6) {
+            snprintf(debug_str, 50, "clk_ISR times: (%.3f us, %.3f us)",
+                     tdiffmin*1e6, tdiffmax*1e6);
+            debug_msg.data = debug_str;
+            debug_pub.publish(&debug_msg);
+        }
 
         int status = fillImuMsg();
         if (status <= 0) {
@@ -619,11 +676,17 @@ void loop() {
     }
     else if (spin) {
         /* Spin once, then wait for data ready */
+        double now = seconds();
         nh.spinOnce();
-        delayNanoseconds((uint32_t) (1e9L*(ts+2.5e-3-seconds())));
+        tspin = seconds() - now;
+        double udelay = 1e6*(ts+data_period-seconds());
+        if (udelay > 0) {
+            delayMicroseconds((uint32_t) udelay);
+        }
         set_ts();
     }
     else if (!interrupt) {
+        tclk_ISRidx = 0;
         /* enable IMU clock interrupt */
         interrupt = true;
         digitalWriteFast(ClkIntEnabled, HIGH);
@@ -632,7 +695,7 @@ void loop() {
         }
         rxidx = -200;
         rxbuffer = 0;
-        next_clk_nanos = nanos() + clk_period_nanos;
+        next_clk_ts = seconds() + clk_period;
     }
     else {
         /* wait for interrupt */
