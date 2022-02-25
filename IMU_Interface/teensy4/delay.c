@@ -73,7 +73,7 @@ double seconds(void)
         scc = systick_cycle_count;
   } while ( __STREXW(1, &systick_safe_read));
     ccdelta = ARM_DWT_CYCCNT - scc;
-    return smc / 1e3L + ccdelta / (double) F_CPU_ACTUAL;
+    return smc / (double) 1000 + ccdelta / (double) F_CPU_ACTUAL;
 }
 
 uint32_t micros(void)

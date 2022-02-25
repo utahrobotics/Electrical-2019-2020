@@ -1,4 +1,5 @@
 #include <ros.h>
+#include <std_msgs/String.h>
 #include <geometry_msgs/TwistStamped.h>
 #include <sensor_msgs/Imu.h>
 #include <tf/transform_broadcaster.h>
@@ -40,6 +41,7 @@ ros::NodeHandle nh;
 
 typedef geometry_msgs::Vector3 Vector3;
 
+std_msgs::String debug_msg;
 /* Stores IMU data in the /imu frame. Includes gravity. */
 /* Note that imu_msg.orientation is always zero. */
 /* This is because in the /imu frame, the angle doesn't change. */
@@ -63,6 +65,7 @@ Vector3 gravity;
 /* Velocity in /imu_base frame */
 Vector3 velocity;
 
+ros::Publisher debug_pub("debug", &debug_msg);
 ros::Publisher imu_pub("imu", &imu_msg);
 ros::Publisher vel_pub("vel", &vel_msg);
 tf::TransformBroadcaster tfbroadcaster;
@@ -489,6 +492,8 @@ inline int fillImuMsg() {
     return 0;
 }
 
+static double data_period = 2.5e-3;
+
 void setup() {
     Serial.begin(115200);
 
@@ -499,6 +504,7 @@ void setup() {
 
     pinMode(BADCHECKSUM, OUTPUT);
     pinMode(BADDATA, OUTPUT);
+    pinMode(ClkPin, INPUT);
     pinMode(IMUDataReady, INPUT);
     pinMode(RxData, INPUT);
     pinMode(IMUInit, OUTPUT);
@@ -517,6 +523,7 @@ void setup() {
 
     nh.initNode();
     nh.setSpinTimeout(1); // 1 ms timeout on spin
+    nh.advertise(debug_pub);
     nh.advertise(imu_pub);
     nh.advertise(vel_pub);
     tfbroadcaster.init(nh);
@@ -536,22 +543,86 @@ void setup() {
     transform.header.frame_id = "/imu_base";
     transform.child_frame_id = "/imu";
 
+    /* wait for connection before starting work */
+    while (!nh.connected()) {
+        nh.spinOnce();
+    }
+
+    debug_msg.data = "Finished setup";
+    debug_pub.publish(&debug_msg);
+    nh.spinOnce();
+
+    ts = seconds();
+
     delay(100);
     attachInterrupt(digitalPinToInterrupt(IMUDataReady), set_ts, FALLING);
 }
+
+static double tspin, tfill, tpdebug, tpimu, tpvel, tptf, tptotal;
+static int lmsgdebug, lmsgimu, lmsgvel, lmsgtf, lmsgtotal;
 
 void loop() {
     if (ready) {
         DETACHCLK
 
+        int lmsgdbg = 0;
+
+        double now = seconds();
+        char debug_str[999];
+        if (abs(DT - data_period) > 10e-6) {
+            sprintf(debug_str, "Last timestamp diff: %.3f ms", DT*1e3);
+            debug_msg.data = debug_str;
+            lmsgdbg += debug_pub.publish(&debug_msg);
+        }
+
+        if (tspin > 1e-3) {
+            sprintf(debug_str, "Last spin: %.3f ms", tspin*1e3);
+            debug_msg.data = debug_str;
+            lmsgdbg += debug_pub.publish(&debug_msg);
+        }
+
+        if (tfill > 1e-3) {
+            sprintf(debug_str, "Last fill: %.3f ms", tfill*1e3);
+            debug_msg.data = debug_str;
+            lmsgdbg += debug_pub.publish(&debug_msg);
+        }
+
+        tptotal = tpdebug + tpimu + tpvel + tptf;
+        if (tptotal > 1e-3) {
+            sprintf(debug_str,
+                    "Last publish times:\n"
+                    "    Debug (%d): %.3f ms\n"
+                    "    IMU (%d): %.3f ms\n"
+                    "    Twist (%d): %.3f ms\n"
+                    "    Transform (%d): %.3f ms\n"
+                    "    Total (%d): %.3f ms",
+                    lmsgdebug, tpdebug*1e3, lmsgimu, tpimu*1e3,
+                    lmsgvel, tpvel*1e3, lmsgtf, tptf*1e3,
+                    lmsgtotal, tptotal*1e3);
+            debug_msg.data = debug_str;
+            lmsgdbg += debug_pub.publish(&debug_msg);
+        }
+        tpdebug = seconds() - now;
+
+        now = seconds();
         int status = fillImuMsg();
+        tfill = seconds() - now;
         if (status <= 0) {
-            imu_pub.publish(&imu_msg);
+            now = seconds();
+            lmsgimu = imu_pub.publish(&imu_msg);
+            tpimu = seconds() - now;
             if (!status) {/* Only publish if gravity is set */
-                vel_pub.publish(&vel_msg);
-                tfbroadcaster.sendTransform(transform);
+                now = seconds();
+                lmsgvel = vel_pub.publish(&vel_msg);
+                tpvel = seconds() - now;
+                now += tpvel;
+                lmsgtf = tfbroadcaster.sendTransform(transform);
+                tptf = seconds() - now;
             }
         }
+
+        lmsgdebug = lmsgdbg;
+        lmsgtotal = lmsgdebug + lmsgimu + lmsgvel + lmsgtf;
 #ifndef NO_CRC_CHECK
         digitalWriteFast(BADCRC, LOW);
 #endif
@@ -561,7 +632,9 @@ void loop() {
     }
     else if (spin) {
         /* Spin once, then wait for data ready */
+        double now = seconds();
         nh.spinOnce();
+        tspin = seconds() - now;
         while (spin);
     }
     else if (!interrupt) {
