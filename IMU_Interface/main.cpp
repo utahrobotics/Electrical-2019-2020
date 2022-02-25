@@ -8,7 +8,7 @@
 #define NO_CRC_CHECK
 
 #ifndef NO_CRC_CHECK
-#define BADCRC 11
+#define BADCRC 16
 #endif
 
 /* pin definitions */
@@ -155,8 +155,12 @@ void clk_ISR(void) {
         if (++bitCounter == 16) {
             bitCounter = 0;
             if (idx >= HDLC_FRAME_LENGTH) {
+                /* Too much data, return what we have */
+                /* Don't want to get stuck in the clock interrupt */
+                /* Assume error in the opening/closing flag */
                 digitalWriteFast(BADDATA, HIGH);
-                idx = 0;
+                SETREADY(1);
+                return;
             }
             buffer[idx++] = reverse(wordBuffer);
         }
@@ -223,8 +227,8 @@ static uint16_t fcstab[256] = {
   0x7bc7, 0x6a4e, 0x58d5, 0x495c, 0x3de3, 0x2c6a, 0x1ef1, 0x0f78
 };
 
-#define INITFCS 0xffff  /* Initial FCS value */
-#define GOODFCS 0xf0b8  /* Good final FCS value */
+#define INITFCS 0xffffu  /* Initial FCS value */
+#define GOODFCS 0xf0b8u  /* Good final FCS value */
 
 /*
 * Calculate a new fcs given the current fcs and the new data.
@@ -239,8 +243,8 @@ inline uint16_t fcs(uint16_t fcs, const uint8_t* cp, size_t len) {
 
 /* My code again below */
 
-inline int crc_check(const uint16_t* data, size_t length) {
-    return (fcs(INITFCS, (uint8_t*) data, length * 2) - GOODFCS);
+inline uint16_t crc_check(const uint16_t* data, size_t length) {
+    return (fcs(INITFCS, (uint8_t*) data, length * 2) ^ GOODFCS);
 }
 #endif
 
@@ -278,19 +282,22 @@ struct ImuData {
 
     /* assign data from the buffer if CRC and checksum are good */
     /* otherwise only timestamp is updated */
-    uint16_t set_data(const uint16_t* data) {
+    /* negative rv if CRC is wrong, positive if data sum is wrong */
+    int set_data(const uint16_t* data) {
         timestamp = ts;
+        uint16_t csdiff;
 #ifndef NO_CRC_CHECK
-        if (crc_check(data, 13)) {
+        csdiff = crc_check(data, 13);
+        if (csdiff) {
             digitalWriteFast(BADCRC, HIGH);
-            return 1;
+            return -((int) csdiff);
         }
 #endif
         uint16_t sum = 0;
         for (size_t i = 0; i < 12; i++) {
             sum += data[i];
         }
-        uint16_t csdiff = ((uint16_t) ~sum) ^ data[12];
+        csdiff = ((uint16_t) ~sum) ^ data[12];
         if (csdiff) {
             digitalWriteFast(BADCHECKSUM, HIGH);
             return csdiff;
@@ -430,11 +437,9 @@ inline Vector3 crotate(Vector3 v, Quaternion q) {
 #define VEL_EXP -14
 
 inline int fillImuMsg() {
-    struct ImuData pdata = raw_imu_data1;
-    uint16_t status = raw_imu_data1.set_data(buffer);
-    if (!status) {
-        raw_imu_data = pdata;
-    }
+    raw_imu_data = raw_imu_data1;
+    int status = raw_imu_data1.set_data(buffer);
+    // TODO: report if nonzero status
     imu_msg.header.stamp.fromSec(raw_imu_data1.timestamp);
     // TODO: find a less hacky way to do this
     nh.adjustTime(&imu_msg.header.stamp);
@@ -445,13 +450,11 @@ inline int fillImuMsg() {
     Vector3 delta_angle(DTHETA(x), DTHETA(y), DTHETA(z));
     Vector3 delta_vel(DV(x), DV(y), DV(z));
 
-    /* Estimate Dθ (ω) and Dv (a) using trapezoid rule */
-    imu_msg.angular_velocity = (2/DT) * delta_angle - imu_msg.angular_velocity;
-    imu_msg.linear_acceleration = (2/DT) * delta_vel - imu_msg.linear_acceleration;
-
-    accbuffer[accidx++] = imu_msg.linear_acceleration;
-    if (accidx >= ACC_BUFFER_LENGTH) {
-        accidx = 0;
+    if (!imuInit) {/* Not initialized, collect samples of gravity */
+        accbuffer[accidx++] = (1/DT) * delta_vel;
+        if (accidx >= ACC_BUFFER_LENGTH) {
+            accidx = 0;
+        }
     }
 
     // TODO: Possibly a better way to detect that IMU is initialized
@@ -468,12 +471,17 @@ inline int fillImuMsg() {
     else if (!imuInit) {
         if (accidx == initidx) {
             gravity_base = vavg(accbuffer, 0, ACC_BUFFER_LENGTH, ACC_BUFFER_LENGTH);
+            imu_msg.linear_acceleration = gravity_base;
             SETIMUINIT(1);
         }
         else {/* Initialized, but gravity_base not set */
             return -1;
         }
     }
+
+    /* Estimate Dθ (ω) and Dv (a) using trapezoid rule */
+    imu_msg.angular_velocity = (2/DT) * delta_angle - imu_msg.angular_velocity;
+    imu_msg.linear_acceleration = (2/DT) * delta_vel - imu_msg.linear_acceleration;
 
     Vector3 old_gravity = gravity;
     transform.transform.rotation += 0.5 * transform.transform.rotation * v2q(delta_angle);
