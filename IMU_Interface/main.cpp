@@ -548,9 +548,11 @@ inline void delayUntilClkInt() {
         delayNanoseconds((uint32_t) ndelay);
     }
     next_clk_ts += clk_period;
+    digitalWriteFast(ClkPin, HIGH);
     double now = seconds();
     clk_ISR();
     double diff = seconds() - now;
+    digitalWriteFast(ClkPin, LOW);
     tclk_ISR[tclk_ISRidx++] = diff;
     tclk_ISRidx %= 1000;
 }
@@ -565,7 +567,8 @@ void setup() {
 
     pinMode(BADCHECKSUM, OUTPUT);
     pinMode(BADDATA, OUTPUT);
-    pinMode(IMUDataReady, INPUT);
+    pinMode(ClkPin, OUTPUT);
+    pinMode(IMUDataReady, OUTPUT);
     pinMode(RxData, OUTPUT);
     pinMode(IMUInit, OUTPUT);
     pinMode(InFrame, OUTPUT);
@@ -580,6 +583,8 @@ void setup() {
     SETREADY(0);
     SETSPIN(1);
     digitalWriteFast(ClkIntEnabled, interrupt);
+    digitalWriteFast(ClkPin, LOW);
+    digitalWriteFast(IMUDataReady, HIGH);
 
     nh.initNode();
     nh.setSpinTimeout(1); // 1 ms timeout on spin
@@ -724,7 +729,10 @@ void loop() {
         if (udelay > 0) {
             delayMicroseconds((uint32_t) udelay);
         }
+        digitalWriteFast(IMUDataReady, LOW);
         set_ts();
+        delayMicroseconds(10);
+        digitalWriteFast(IMUDataReady, HIGH);
     }
     else if (!interrupt) {
         tclk_ISRidx = 0;
