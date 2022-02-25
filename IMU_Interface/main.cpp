@@ -625,24 +625,27 @@ void setup() {
     ts = seconds();
 }
 
-static double tspin = 0, tfill = 0, tpdebug = 0, tpimu = 0, tpvel = 0, tptf = 0;
+static double tspin, tfill, tpdebug, tpimu, tpvel, tptf, tptotal;
+static int lmsgdebug, lmsgimu, lmsgvel, lmsgtf, lmsgtotal;
 
 void loop() {
     if (ready) {
         DETACHCLK
 
+        int lmsgdbg = 0;
+
         double now = seconds();
-        char debug_str[200];
+        char debug_str[999];
         if (abs(DT - data_period) > 10e-6) {
-            snprintf(debug_str, 50, "Last timestamp diff: %.3f ms", DT*1e3);
+            sprintf(debug_str, "Last timestamp diff: %.3f ms", DT*1e3);
             debug_msg.data = debug_str;
-            debug_pub.publish(&debug_msg);
+            lmsgdbg += debug_pub.publish(&debug_msg);
         }
 
         if (tspin > 1e-3) {
-            snprintf(debug_str, 50, "Last spin: %.3f ms", tspin*1e3);
+            sprintf(debug_str, "Last spin: %.3f ms", tspin*1e3);
             debug_msg.data = debug_str;
-            debug_pub.publish(&debug_msg);
+            lmsgdbg += debug_pub.publish(&debug_msg);
         }
 
         double tdiffmin = 1, tdiffmax = 0;
@@ -657,29 +660,32 @@ void loop() {
         }
 
         if (tdiffmax > clk_period) {
-            snprintf(debug_str, 50, "clk_ISR times: (%.3f us, %.3f us)",
+            sprintf(debug_str, "clk_ISR times: (%.3f us, %.3f us)",
                      tdiffmin*1e6, tdiffmax*1e6);
             debug_msg.data = debug_str;
-            debug_pub.publish(&debug_msg);
+            lmsgdbg += debug_pub.publish(&debug_msg);
         }
 
         if (tfill > 1e-3) {
-            snprintf(debug_str, 50, "Last fill: %.3f ms", tfill*1e3);
+            sprintf(debug_str, "Last fill: %.3f ms", tfill*1e3);
             debug_msg.data = debug_str;
-            debug_pub.publish(&debug_msg);
+            lmsgdbg += debug_pub.publish(&debug_msg);
         }
 
-        if (tpdebug+tpimu+tpvel+tptf > 1e-3) {
-            snprintf(debug_str, 200,
-                     "Publish times:\n"
-                     "    Debug: %.3f ms\n"
-                     "    IMU: %.3f ms\n"
-                     "    Twist: %.3f ms\n"
-                     "    Transform: %.3f ms",
-                     tpdebug*1e3, tpimu*1e3,
-                     tpvel*1e3, tptf*1e3);
+        tptotal = tpdebug + tpimu + tpvel + tptf;
+        if (tptotal > 1e-3) {
+            sprintf(debug_str,
+                    "Last publish times:\n"
+                    "    Debug (%d): %.3f ms\n"
+                    "    IMU (%d): %.3f ms\n"
+                    "    Twist (%d): %.3f ms\n"
+                    "    Transform (%d): %.3f ms\n"
+                    "    Total (%d): %.3f ms",
+                    lmsgdebug, tpdebug*1e3, lmsgimu, tpimu*1e3,
+                    lmsgvel, tpvel*1e3, lmsgtf, tptf*1e3,
+                    lmsgtotal, tptotal*1e3);
             debug_msg.data = debug_str;
-            debug_pub.publish(&debug_msg);
+            lmsgdbg += debug_pub.publish(&debug_msg);
         }
         tpdebug = seconds() - now;
 
@@ -688,17 +694,20 @@ void loop() {
         tfill = seconds() - now;
         if (status <= 0) {
             now = seconds();
-            imu_pub.publish(&imu_msg);
+            lmsgimu = imu_pub.publish(&imu_msg);
             tpimu = seconds() - now;
             if (!status) {/* Only publish if gravity is set */
                 now = seconds();
-                vel_pub.publish(&vel_msg);
+                lmsgvel = vel_pub.publish(&vel_msg);
                 tpvel = seconds() - now;
                 now += tpvel;
-                tfbroadcaster.sendTransform(transform);
+                lmsgtf = tfbroadcaster.sendTransform(transform);
                 tptf = seconds() - now;
             }
         }
+
+        lmsgdebug = lmsgdbg;
+        lmsgtotal = lmsgdebug + lmsgimu + lmsgvel + lmsgtf;
 #ifndef NO_CRC_CHECK
         digitalWriteFast(BADCRC, LOW);
 #endif

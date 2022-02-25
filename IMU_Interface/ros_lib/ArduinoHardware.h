@@ -101,8 +101,13 @@ class ArduinoHardware {
 
     int read(){return iostream->read();};
     void write(uint8_t* data, int length){
-      for(int i=0; i<length; i++)
-        iostream->write(data[i]);
+        iostream->write(data, length);
+//      for(int i=0; i<length; i++)
+//        iostream->write(data[i]);
+    }
+
+    void flush(){
+        iostream->flush();
     }
 
     unsigned long time(){return millis();}
