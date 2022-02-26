@@ -64,7 +64,7 @@
 
 class ArduinoHardware {
   public:
-    ArduinoHardware(SERIAL_CLASS* io , long baud= 115200){
+    ArduinoHardware(SERIAL_CLASS* io , long baud= 57600){
       iostream = io;
       baud_ = baud;
     }
@@ -78,11 +78,15 @@ class ArduinoHardware {
 #else
       iostream = &Serial;
 #endif
-      baud_ = 115200;
+      baud_ = 57600;
     }
     ArduinoHardware(ArduinoHardware& h){
       this->iostream = h.iostream;
       this->baud_ = h.baud_;
+    }
+
+    void setPort(SERIAL_CLASS* io){
+      this->iostream = io;
     }
   
     void setBaud(long baud){
@@ -101,13 +105,7 @@ class ArduinoHardware {
 
     int read(){return iostream->read();};
     void write(uint8_t* data, int length){
-        iostream->write(data, length);
-//      for(int i=0; i<length; i++)
-//        iostream->write(data[i]);
-    }
-
-    void flush(){
-        iostream->flush();
+      iostream->write(data, length);
     }
 
     unsigned long time(){return millis();}
