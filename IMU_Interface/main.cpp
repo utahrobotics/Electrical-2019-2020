@@ -357,6 +357,14 @@ struct ImuData {
     }
 } raw_imu_data, raw_imu_data1;
 
+inline Vector3 v3(double x, double y, double z) {
+    Vector3 v;
+    v.x = x;
+    v.y = y;
+    v.z = z;
+    return v;
+}
+
 inline double magnitude(const Vector3 v) {
     return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 }
@@ -478,15 +486,13 @@ inline int fillImuMsg() {
     raw_imu_data = raw_imu_data1;
     uint16_t status = raw_imu_data1.set_data(buffer);
     // TODO: report if nonzero status
-    imu_msg.header.stamp.fromSec(raw_imu_data1.timestamp);
-    // TODO: find a less hacky way to do this
-    nh.adjustTime(&imu_msg.header.stamp);
+    imu_msg.header.stamp = nh.then(raw_imu_data1.timestamp);
 
     vel_msg.header.stamp = imu_msg.header.stamp;
     transform.header.stamp = imu_msg.header.stamp;
 
-    Vector3 delta_angle(DTHETA(x), DTHETA(y), DTHETA(z));
-    Vector3 delta_vel(DV(x), DV(y), DV(z));
+    Vector3 delta_angle = v3(DTHETA(x), DTHETA(y), DTHETA(z));
+    Vector3 delta_vel = v3(DV(x), DV(y), DV(z));
 
     if (!imuInit) {/* Not initialized, collect samples of gravity */
         accbuffer[accidx++] = (1/DT) * delta_vel;
