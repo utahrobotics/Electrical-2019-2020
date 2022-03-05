@@ -321,10 +321,9 @@ inline int fillImuMsg() {
         }
     }
 
-    // TODO: rethink using reverse trapezoid rule
-    /* Estimate Dθ (ω) and Dv (a) using trapezoid rule */
-    imu_msg.angular_velocity = (2/DT) * delta_angle - imu_msg.angular_velocity;
-    imu_msg.linear_acceleration = (2/DT) * delta_vel - imu_msg.linear_acceleration;
+    /* Estimate Dθ (ω) and Dv (a) */
+    imu_msg.angular_velocity = (1/DT) * delta_angle;
+    imu_msg.linear_acceleration = (1/DT) * delta_vel;
 
     Vector3 old_gravity = gravity;
     transform.transform.rotation += 0.5 * transform.transform.rotation * v2q(delta_angle);
