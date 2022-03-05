@@ -70,6 +70,8 @@ tf::TransformBroadcaster tfbroadcaster;
 
 double ts; /* time stamp set when IMUDataReady drops */
 uint16_t buffer[HDLC_FRAME_LENGTH];
+uint16_t buffer2[HDLC_FRAME_LENGTH+1];
+uint16_t rawbuffer[17];
 uint16_t derBuffer = 0;
 uint16_t wordBuffer = 0;
 bool imuInit = false;
@@ -78,6 +80,7 @@ bool ready = false;
 bool spin = true;
 bool interrupt = false;
 int bitCounter = 0;
+int rawBitCounter = 0;
 int idx = HDLC_FRAME_LENGTH;
 
 #include "RxData.h"
@@ -95,8 +98,10 @@ inline void setchecksum(uint16_t* buffer) {
     buffer[15] = OpeningFlag;
 }
 
+uint16_t* wordbuffer;
+
 inline uint8_t readNextRxDataBit() {
-    uint16_t* wordbuffer;
+//    uint16_t* wordbuffer;
     if (rxpacketidx < -STILLPACKETCOUNT) {
         wordbuffer = &initwords[rxpacketidx+INITPACKETCOUNT+STILLPACKETCOUNT][0];
     }
@@ -114,9 +119,9 @@ inline uint8_t readNextRxDataBit() {
     rxbuffer |= (wordbuffer[rxidx / 16] >> (rxidx % 16)) & 1u;
 
     /* Add padding bit if not in a flag word */
-    if (!((rxbuffer & 0x3f) ^ 0x3f) && rxidx >= 16 && rxidx < 16*15) {
+    if (!((rxbuffer & 0x3e) ^ 0x3e) && rxidx >= 16 && rxidx < 16*15) {
         rxidx--;
-        rxbuffer ^= 1u;
+        rxbuffer &= ~1u;
     }
     uint8_t value = rxbuffer & 1u;
     digitalWriteFast(RxData, value);
@@ -142,6 +147,7 @@ void clk_ISR(void) {
         inFrame = !inFrame;
         digitalWriteFast(InFrame, inFrame);
         if (inFrame) {
+            rawBitCounter = 0;
             bitCounter = 0;
             idx = 0;
         }
@@ -151,6 +157,15 @@ void clk_ISR(void) {
         }
         return;
     }
+
+    if (!inFrame) {
+        return;
+    }
+    else {
+        rawbuffer[rawBitCounter / 16] <<= 1;
+        rawbuffer[rawBitCounter++ / 16] |= rval;
+    }
+
     /* add bits to wordbuffer and store words to buffer */
     /* exclude padding bits */
     if ((idx == 0 && bitCounter < 5) || ((derBuffer & 0x3f) ^ 0x3e)) {
@@ -158,6 +173,7 @@ void clk_ISR(void) {
         wordBuffer |= rval;
         if (++bitCounter == 16) {
             bitCounter = 0;
+            buffer2[idx] = reverse(wordBuffer);
             if (idx >= HDLC_FRAME_LENGTH) {
                 /* Too much data, return what we have */
                 /* Don't want to get stuck in the clock interrupt */
@@ -432,6 +448,51 @@ void loop() {
 
         double now = seconds();
         char debug_str[999];
+        char buffer2_str[99];
+        char wordbuffer_str[99];
+
+        int off = 0;
+        for (int i = 0; i < HDLC_FRAME_LENGTH; i++) {
+            off += sprintf(&buffer2_str[off], "%04x", reverse(buffer2[i]));
+        }
+
+        off = 0;
+        for (int i = 0; i < HDLC_FRAME_LENGTH;) {
+            off += sprintf(&wordbuffer_str[off], "%04x", reverse(wordbuffer[++i]));
+        }
+
+        if (strcmp(buffer2_str, wordbuffer_str)) {
+            sprintf(debug_str, "Sent: %s\nReceived: %s", wordbuffer_str, buffer2_str);
+            debug_msg.data = debug_str;
+            lmsgdbg += debug_pub.publish(&debug_msg);
+        }
+
+        if (buffer2[HDLC_FRAME_LENGTH]) {
+            sprintf(debug_str, "idx: %d\nbitCounter: %d",
+                    idx, bitCounter);
+            debug_msg.data = debug_str;
+            lmsgdbg += debug_pub.publish(&debug_msg);
+            int off = sprintf(debug_str, "buffer2:   ");
+            for (int i = 0; i <= HDLC_FRAME_LENGTH; i++) {
+                off += sprintf(&debug_str[off], "%04x", reverse(buffer2[i]));
+            }
+            debug_msg.data = debug_str;
+            lmsgdbg += debug_pub.publish(&debug_msg);
+            off = sprintf(debug_str, "wordbuffer:");
+            for (int i = 0; i <= HDLC_FRAME_LENGTH;) {
+                off += sprintf(&debug_str[off], "%04x", reverse(wordbuffer[++i]));
+            }
+            debug_msg.data = debug_str;
+            lmsgdbg += debug_pub.publish(&debug_msg);
+            off = sprintf(debug_str, "rawbuffer: ");
+            for (int i = 0; i < 17; i++) {
+                off += sprintf(&debug_str[off], "%04x", rawbuffer[i]);
+                rawbuffer[i] = 0;
+            }
+            debug_msg.data = debug_str;
+            lmsgdbg += debug_pub.publish(&debug_msg);
+            buffer2[HDLC_FRAME_LENGTH] = 0;
+        }
 
         if (abs(DT - data_period) > 10e-6) {
             sprintf(debug_str, "Last timestamp diff: %.3f ms", DT*1e3);
