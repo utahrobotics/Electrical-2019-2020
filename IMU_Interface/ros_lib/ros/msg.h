@@ -48,20 +48,8 @@ class Msg
 public:
   virtual int serialize(unsigned char *outbuffer) const = 0;
   virtual int deserialize(unsigned char *data) = 0;
-    const virtual char* getType() = 0;
-    const virtual char* getMD5() = 0;
-
-  static int serializeDouble(unsigned char* outbuffer, const double f)
-  {
-    *((double*) outbuffer) = f;
-    return sizeof(double);
-  }
-
-  static int deserializeDouble(const unsigned char* inbuffer, double* f)
-  {
-    *f = *((double*) inbuffer);
-    return sizeof(double);
-  }
+  virtual const char * getType() = 0;
+  virtual const char * getMD5() = 0;
 
   /**
    * @brief This tricky function handles promoting a 32bit float to a 64bit
